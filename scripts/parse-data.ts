@@ -1,6 +1,6 @@
 import { readdirSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
-import { parseCsv } from './parse-csv.js';
+import { parseResultsJson } from './parse-results-json.js';
 import { parseTotalResultsCsv } from './parse-total-results-csv.js';
 import type { AppData, RaceEvent, Season, Session, SessionType, GroupLetter } from '../src/types/index.js';
 
@@ -19,8 +19,8 @@ function parseDirDate(dirName: string): string | null {
 }
 
 function parseFilename(filename: string): { group: GroupLetter; type: SessionType } | null {
-  // e.g. group_a_qualifications.csv, group_b_race.csv
-  const match = filename.match(/^group_([a-z])_(qualifications|race)\.csv$/i);
+  // e.g. group_a_qualifications_results.json, group_b_race_results.json
+  const match = filename.match(/^group_([a-z])_(qualifications|race)_results\.json$/i);
   if (!match) return null;
   return {
     group: match[1]!.toLowerCase(),
@@ -49,16 +49,16 @@ function main() {
     }
 
     const dirPath = join(RACES_DIR, dirName);
-    const csvFiles = readdirSync(dirPath).filter((f: string) => f.endsWith('.csv'));
+    const jsonFiles = readdirSync(dirPath).filter((f: string) => f.endsWith('_results.json'));
     const sessions: Session[] = [];
 
-    for (const csvFile of csvFiles) {
-      const parsed = parseFilename(csvFile);
+    for (const jsonFile of jsonFiles) {
+      const parsed = parseFilename(jsonFile);
       if (!parsed) {
-        console.warn(`Skipping unrecognized CSV filename: ${csvFile}`);
+        console.warn(`Skipping unrecognized JSON filename: ${jsonFile}`);
         continue;
       }
-      const session = parseCsv(join(dirPath, csvFile), parsed.group, parsed.type);
+      const session = parseResultsJson(join(dirPath, jsonFile), parsed.group, parsed.type);
       sessions.push(session);
     }
 

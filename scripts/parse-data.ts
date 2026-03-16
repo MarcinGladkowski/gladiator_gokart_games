@@ -19,13 +19,12 @@ function parseDirDate(dirName: string): string | null {
 }
 
 function parseFilename(filename: string): { group: GroupLetter; type: SessionType } | null {
-  // e.g. group_a_qualifications_results.json, group_b_race_results.json
-  const match = filename.match(/^group_([a-z])_(qualifications|race)_results\.json$/i);
+  // e.g. group_a_race_results.json, group_b_qualifications_results.json, group_a_qalifications_result.json
+  const match = filename.match(/^group_([a-z])_(race|qual[a-z]*)_results?\.json$/i);
   if (!match) return null;
-  return {
-    group: match[1]!.toLowerCase(),
-    type: match[2]!.toLowerCase() as SessionType,
-  };
+  const rawType = match[2]!.toLowerCase();
+  const type: SessionType = rawType === 'race' ? 'race' : 'qualifications';
+  return { group: match[1]!.toLowerCase(), type };
 }
 
 function main() {
@@ -49,7 +48,7 @@ function main() {
     }
 
     const dirPath = join(RACES_DIR, dirName);
-    const jsonFiles = readdirSync(dirPath).filter((f: string) => f.endsWith('_results.json'));
+    const jsonFiles = readdirSync(dirPath).filter((f: string) => /_results?\.json$/.test(f));
     const sessions: Session[] = [];
 
     for (const jsonFile of jsonFiles) {

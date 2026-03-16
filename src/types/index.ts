@@ -10,7 +10,7 @@ export interface QualificationEntry {
   laps: number;
   bestLap: LapTime;
   gap: string | null;
-  avgLap: LapTime;
+  avgLap?: LapTime;
 }
 
 export interface RaceEntry {

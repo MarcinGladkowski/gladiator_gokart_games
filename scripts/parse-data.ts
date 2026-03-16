@@ -32,7 +32,7 @@ function main() {
   // Parse race events
   const eventsByDate = new Map<string, RaceEvent>();
 
-  const dateDirs = readdirSync(RACES_DIR).filter((name) => {
+  const dateDirs = readdirSync(RACES_DIR).filter((name: string) => {
     const fullPath = join(RACES_DIR, name);
     try {
       return readdirSync(fullPath) !== null;
@@ -49,7 +49,7 @@ function main() {
     }
 
     const dirPath = join(RACES_DIR, dirName);
-    const csvFiles = readdirSync(dirPath).filter((f) => f.endsWith('.csv'));
+    const csvFiles = readdirSync(dirPath).filter((f: string) => f.endsWith('.csv'));
     const sessions: Session[] = [];
 
     for (const csvFile of csvFiles) {
@@ -91,7 +91,7 @@ function main() {
     }));
 
   // Parse total results CSV
-  let totalResults = [];
+  let totalResults: ReturnType<typeof parseTotalResultsCsv> = [];
   try {
     totalResults = parseTotalResultsCsv(TOTAL_CSV_PATH);
     console.log(`Parsed ${totalResults.length} total result entries from CSV`);

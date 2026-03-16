@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useSession } from '../hooks/useResults'
-import type { QualificationEntry, RaceEntry, SessionType } from '../types'
+import type { QualificationEntry, RaceEntry } from '../types'
 import { QualificationsTable } from '../components/tables/QualificationsTable'
 import { RaceTable } from '../components/tables/RaceTable'
 
@@ -49,5 +49,3 @@ export function GroupSessionPage() {
   )
 }
 
-// Satisfy unused type import needed for SessionType reference in types
-export type { SessionType }

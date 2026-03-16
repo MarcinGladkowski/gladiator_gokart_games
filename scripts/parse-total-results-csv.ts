@@ -5,7 +5,7 @@ export function parseTotalResultsCsv(filePath: string): TotalResultEntry[] {
   let raw = readFileSync(filePath, 'utf-8');
   raw = raw.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-  const lines = raw.split('\n').filter((l) => l.trim().length > 0);
+  const lines = raw.split('\n').filter((l: string) => l.trim().length > 0);
   if (lines.length < 2) return [];
 
   const headers = lines[0]!.split(';');

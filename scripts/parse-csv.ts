@@ -31,7 +31,7 @@ function findHeader(headers: string[], fieldAliases: string[]): number {
 function toTitleCase(s: string): string {
   return s
     .toLowerCase()
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+    .replace(/\b\w/g, (c: string) => c.toUpperCase());
 }
 
 export function parseCsv(
@@ -45,13 +45,13 @@ export function parseCsv(
   // Normalize line endings
   raw = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-  const lines = raw.split('\n').filter((l) => l.trim().length > 0);
+  const lines = raw.split('\n').filter((l: string) => l.trim().length > 0);
   if (lines.length === 0) throw new Error(`Empty CSV: ${filePath}`);
 
   const headerLine = lines[0]!;
   const headers = headerLine.split(';');
 
-  const isQualification = headers.some((h) =>
+  const isQualification = headers.some((h: string) =>
     ALIASES['avg']!.some((a) => normalize(a) === normalize(h)),
   );
 

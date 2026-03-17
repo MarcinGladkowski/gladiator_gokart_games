@@ -25,7 +25,7 @@ export function AppShell() {
     <div className="min-h-screen flex flex-col">
       {/* Top bar (mobile) */}
       <header className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b border-gray-700 md:hidden">
-        <span className="text-white font-bold text-lg">🏁 Gladiator Gokart</span>
+        <span className="text-white font-bold text-lg">Gladiator Gokart Games</span>
         <button
           onClick={() => setSidebarOpen((o) => !o)}
           className="text-gray-300 hover:text-white"
@@ -68,8 +68,8 @@ export function AppShell() {
             <Outlet />
           </div>
           <footer className="mt-8 pt-4 border-t border-gray-800 text-xs text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
-            <span>Author: <a href="https://marcingladkowski.pl" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">marcingladkowski.pl</a></span>
-            <span><a href="mailto:contact@marcingladkowski.pl" className="hover:text-gray-400 transition-colors">contact@marcingladkowski.pl</a></span>
+            <span>Author: <a href="https://marcingladkowski.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">marcingladkowski.com</a></span>
+            <span><a href="mailto:contact@marcingladkowski.com" className="hover:text-gray-400 transition-colors">contact@marcingladkowski.com</a></span>
           </footer>
         </main>
       </div>

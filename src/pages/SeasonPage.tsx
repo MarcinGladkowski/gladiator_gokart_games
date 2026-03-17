@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useSeason } from '../hooks/useResults'
+import { daysLeft } from '../utils/daysLeft'
 
 export function SeasonPage() {
   const { year } = useParams<{ year: string }>()
@@ -24,7 +25,12 @@ export function SeasonPage() {
               </Link>
             </h2>
             {event.upcoming ? (
-              <p className="text-sm text-gray-600">Race not yet available.</p>
+              <p className="text-sm">
+                {daysLeft(event.date) === 0
+                  ? <strong className="text-white">Today!</strong>
+                  : <span className="text-gray-600">{daysLeft(event.date)} days left</span>
+                }
+              </p>
             ) : (
               <div className="flex flex-wrap gap-2">
                 {event.sessions.map((session) => (

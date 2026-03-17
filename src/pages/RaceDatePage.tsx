@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
+import { daysLeft } from '../utils/daysLeft'
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
@@ -20,7 +21,12 @@ export function RaceDatePage() {
       </div>
       <h1 className="text-2xl font-bold text-white mb-6">{event.label}</h1>
       {event.upcoming ? (
-        <p className="text-gray-500">Race not yet available.</p>
+        <p className="text-lg">
+          {daysLeft(event.date) === 0
+            ? <strong className="text-white">Today!</strong>
+            : <span className="text-gray-500">{daysLeft(event.date)} days left</span>
+          }
+        </p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
           {event.sessions.map((session) => {

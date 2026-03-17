@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "GP - Závod, sk. A",
+    "date": "2025-10-16",
+    "time_range": "18:26 - 18:31",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 4,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:11.000"
+    },
+    {
+      "rank": 2,
+      "kart_number": 9,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "0.169",
+      "best_lap_time": "1:10.817"
+    },
+    {
+      "rank": 3,
+      "kart_number": 7,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "5.915",
+      "best_lap_time": "1:11.039"
+    },
+    {
+      "rank": 4,
+      "kart_number": 6,
+      "driver": "PILSON",
+      "laps": 12,
+      "difference_to_leader": "6.222",
+      "best_lap_time": "1:11.290"
+    },
+    {
+      "rank": 5,
+      "kart_number": 1,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "6.568",
+      "best_lap_time": "1:11.561"
+    },
+    {
+      "rank": 6,
+      "kart_number": 5,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "10.086",
+      "best_lap_time": "1:11.623"
+    },
+    {
+      "rank": 7,
+      "kart_number": 2,
+      "driver": "LUCKY LUKE",
+      "laps": 12,
+      "difference_to_leader": "12.341",
+      "best_lap_time": "1:11.689"
+    },
+    {
+      "rank": 8,
+      "kart_number": 11,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "12.729",
+      "best_lap_time": "1:11.911"
+    },
+    {
+      "rank": 9,
+      "kart_number": 13,
+      "driver": "PAWELTGB",
+      "laps": 12,
+      "difference_to_leader": "13.345",
+      "best_lap_time": "1:11.612"
+    },
+    {
+      "rank": 10,
+      "kart_number": 14,
+      "driver": "SEBA01",
+      "laps": 12,
+      "difference_to_leader": "13.700",
+      "best_lap_time": "1:10.910"
+    },
+    {
+      "rank": 11,
+      "kart_number": 12,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "14.845",
+      "best_lap_time": "1:11.785"
+    },
+    {
+      "rank": 12,
+      "kart_number": 8,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "19.660",
+      "best_lap_time": "1:12.527"
+    },
+    {
+      "rank": 13,
+      "kart_number": 15,
+      "driver": "BODEK",
+      "laps": 12,
+      "difference_to_leader": "29.851",
+      "best_lap_time": "1:13.199"
+    }
+  ]
+}

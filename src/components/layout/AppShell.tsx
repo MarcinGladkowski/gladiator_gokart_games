@@ -47,7 +47,7 @@ export function AppShell() {
         >
           {/* Sidebar header */}
           <div className="hidden md:flex items-center px-4 py-4 border-b border-gray-700">
-            <span className="text-white font-bold text-lg">🏁 Gladiator Gokart</span>
+            <span className="text-white font-bold text-lg">Gladiator Gokart Games</span>
           </div>
           <div className="flex-1 overflow-y-auto py-4">
             <NavTree onNavigate={() => setSidebarOpen(false)} />
@@ -70,6 +70,7 @@ export function AppShell() {
           <footer className="mt-8 pt-4 border-t border-gray-800 text-xs text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
             <span>Author: <a href="https://marcingladkowski.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">marcingladkowski.com</a></span>
             <span><a href="mailto:contact@marcingladkowski.com" className="hover:text-gray-400 transition-colors">contact@marcingladkowski.com</a></span>
+            <span><a href="mailto:gladiatorgokartgames@gmail.com" className="hover:text-gray-400 transition-colors">gladiatorgokartgames@gmail.com</a></span>
           </footer>
         </main>
       </div>

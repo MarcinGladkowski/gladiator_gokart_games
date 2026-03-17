@@ -35,3 +35,14 @@
 * file name: @resource/races/{date}
     * group_{group_name}_race.csv
     * group_{group_name}_qualifications.csv
+
+
+### Data processing 
+
+Quickest way — OAuth 2.0 Playground (no code)
+
+1. Go to developers.google.com/oauthplayground
+2. Find Gmail API v1 → select https://www.googleapis.com/auth/gmail.readonly
+3. Click Authorize APIs → sign in with your Google account
+4. Click Exchange authorization code for tokens
+5. Copy the Access token — that's your Bearer token

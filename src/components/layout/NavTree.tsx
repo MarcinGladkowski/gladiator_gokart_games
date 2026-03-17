@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSeasons } from '../../hooks/useResults'
+import statuteUrl from '../../assets/statute.pdf?url'
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
@@ -48,9 +49,14 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
       <NavLink to="/total" className={linkClass} onClick={onNavigate}>
         Total Results
       </NavLink>
-      <NavLink to="/statute" className={linkClass} onClick={onNavigate}>
+      <a
+        href={statuteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block px-3 py-1.5 rounded text-sm transition-colors text-gray-400 hover:text-gray-100 hover:bg-gray-800"
+      >
         Statute 2026
-      </NavLink>
+      </a>
 
       {seasons.map((season) => (
         <div key={season.year}>

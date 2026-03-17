@@ -4,7 +4,6 @@ import { TotalResultsPage } from './pages/TotalResultsPage'
 import { SeasonPage } from './pages/SeasonPage'
 import { RaceDatePage } from './pages/RaceDatePage'
 import { GroupSessionPage } from './pages/GroupSessionPage'
-import { StatutePage } from './pages/StatutePage'
 
 export function AppRouter() {
   return (
@@ -13,7 +12,6 @@ export function AppRouter() {
         <Route element={<AppShell />}>
           <Route index element={<Navigate to="/total" replace />} />
           <Route path="total" element={<TotalResultsPage />} />
-          <Route path="statute" element={<StatutePage />} />
           <Route path="season/:year" element={<SeasonPage />} />
           <Route path="season/:year/:date" element={<RaceDatePage />} />
           <Route path="season/:year/:date/:group/:type" element={<GroupSessionPage />} />

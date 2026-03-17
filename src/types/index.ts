@@ -32,6 +32,7 @@ export interface RaceEvent {
   date: IsoDate;
   label: string;
   sessions: Session[];
+  upcoming?: boolean;
 }
 
 export interface Season {

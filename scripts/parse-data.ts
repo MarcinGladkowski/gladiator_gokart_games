@@ -4,6 +4,18 @@ import { parseResultsJson } from './parse-results-json.js';
 import { parseTotalResultsCsv } from './parse-total-results-csv.js';
 import type { AppData, RaceEvent, Season, Session, SessionType, GroupLetter } from '../src/types/index.js';
 
+// Full season schedule — used to add upcoming races that have no data directory yet
+const SCHEDULE: Array<{ raceNum: number; isoDate: string }> = [
+  { raceNum: 1, isoDate: '2026-03-12' },
+  { raceNum: 2, isoDate: '2026-04-23' },
+  { raceNum: 3, isoDate: '2026-05-14' },
+  { raceNum: 4, isoDate: '2026-06-18' },
+  { raceNum: 5, isoDate: '2026-07-16' },
+  { raceNum: 6, isoDate: '2026-08-13' },
+  { raceNum: 7, isoDate: '2026-09-17' },
+  { raceNum: 8, isoDate: '2026-10-15' },
+];
+
 const ROOT = new URL('..', import.meta.url).pathname;
 const RACES_DIR = join(ROOT, 'resource', 'races');
 const TOTAL_CSV_PATH = join(ROOT, 'resource', 'total_results.csv');
@@ -72,6 +84,16 @@ function main() {
     });
 
     eventsByDate.set(isoDate, { date: isoDate, label, sessions });
+  }
+
+  // Add upcoming races from the schedule that have no data directory yet
+  const today = new Date().toISOString().slice(0, 10);
+  for (const { raceNum, isoDate } of SCHEDULE) {
+    if (!eventsByDate.has(isoDate)) {
+      const [yyyy, mm, dd] = isoDate.split('-');
+      const label = `Race ${raceNum} - ${dd}/${mm}/${yyyy}`;
+      eventsByDate.set(isoDate, { date: isoDate, label, sessions: [], upcoming: isoDate > today });
+    }
   }
 
   // Group events by year into seasons

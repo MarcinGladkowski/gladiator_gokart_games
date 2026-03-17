@@ -23,18 +23,22 @@ export function SeasonPage() {
                 {event.label}
               </Link>
             </h2>
-            <div className="flex flex-wrap gap-2">
-              {event.sessions.map((session) => (
-                <Link
-                  key={`${session.group}-${session.type}`}
-                  to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
-                  className="px-3 py-1.5 rounded bg-gray-800 text-sm text-gray-300 hover:bg-red-900/40 hover:text-red-400 transition-colors"
-                >
-                  {session.type === 'qualifications' ? 'Qualifications' : 'Race'}{' '}
-                  {session.group.toUpperCase()}
-                </Link>
-              ))}
-            </div>
+            {event.upcoming ? (
+              <p className="text-sm text-gray-600">Race not yet available.</p>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {event.sessions.map((session) => (
+                  <Link
+                    key={`${session.group}-${session.type}`}
+                    to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
+                    className="px-3 py-1.5 rounded bg-gray-800 text-sm text-gray-300 hover:bg-red-900/40 hover:text-red-400 transition-colors"
+                  >
+                    {session.type === 'qualifications' ? 'Qualifications' : 'Race'}{' '}
+                    {session.group.toUpperCase()}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -61,35 +61,52 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
 
           {openSeasons.has(season.year) && (
             <div className="ml-4 space-y-0.5">
-              {season.events.map((event) => (
-                <div key={event.date}>
-                  <button
-                    onClick={() => toggleDate(event.date)}
-                    className="flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800 transition-colors"
+              {season.events.map((event) =>
+                event.upcoming ? (
+                  <NavLink
+                    key={event.date}
+                    to={`/season/${season.year}/${event.date}`}
+                    className={({ isActive }) =>
+                      `block px-3 py-1.5 rounded text-sm transition-colors ${
+                        isActive
+                          ? 'bg-red-900/40 text-red-400 font-medium'
+                          : 'text-gray-600 hover:text-gray-400 hover:bg-gray-800'
+                      }`
+                    }
+                    onClick={onNavigate}
                   >
-                    <ChevronIcon open={openDates.has(event.date)} />
-                    <span>{event.label}</span>
-                  </button>
+                    {event.label}
+                  </NavLink>
+                ) : (
+                  <div key={event.date}>
+                    <button
+                      onClick={() => toggleDate(event.date)}
+                      className="flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800 transition-colors"
+                    >
+                      <ChevronIcon open={openDates.has(event.date)} />
+                      <span>{event.label}</span>
+                    </button>
 
-                  {openDates.has(event.date) && (
-                    <div className="ml-4 space-y-0.5">
-                      {event.sessions.map((session) => {
-                        const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
-                        return (
-                          <NavLink
-                            key={`${session.group}-${session.type}`}
-                            to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
-                            className={linkClass}
-                            onClick={onNavigate}
-                          >
-                            {label}
-                          </NavLink>
-                        )
-                      })}
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {openDates.has(event.date) && (
+                      <div className="ml-4 space-y-0.5">
+                        {event.sessions.map((session) => {
+                          const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
+                          return (
+                            <NavLink
+                              key={`${session.group}-${session.type}`}
+                              to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
+                              className={linkClass}
+                              onClick={onNavigate}
+                            >
+                              {label}
+                            </NavLink>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
             </div>
           )}
         </div>

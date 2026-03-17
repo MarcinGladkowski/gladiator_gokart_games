@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "mGP (2 sk.) - Závod, sk. B",
+    "date": "2026-03-12",
+    "time_range": "18:36 - 18:54",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 4,
+      "driver": "NORMAN POWER",
+      "laps": 10,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:23.752"
+    },
+    {
+      "rank": 2,
+      "kart_number": 1,
+      "driver": "QUNIO",
+      "laps": 10,
+      "difference_to_leader": "10.178",
+      "best_lap_time": "1:24.255"
+    },
+    {
+      "rank": 3,
+      "kart_number": 11,
+      "driver": "ADMICH",
+      "laps": 10,
+      "difference_to_leader": "24.046",
+      "best_lap_time": "1:25.829"
+    },
+    {
+      "rank": 4,
+      "kart_number": 7,
+      "driver": "BALU",
+      "laps": 10,
+      "difference_to_leader": "24.432",
+      "best_lap_time": "1:25.194"
+    },
+    {
+      "rank": 5,
+      "kart_number": 12,
+      "driver": "ZGUD",
+      "laps": 10,
+      "difference_to_leader": "43.446",
+      "best_lap_time": "1:26.030"
+    },
+    {
+      "rank": 6,
+      "kart_number": 13,
+      "driver": "DOBRA PIANA",
+      "laps": 10,
+      "difference_to_leader": "48.281",
+      "best_lap_time": "1:27.234"
+    },
+    {
+      "rank": 7,
+      "kart_number": 5,
+      "driver": "SHEEPEK",
+      "laps": 10,
+      "difference_to_leader": "48.447",
+      "best_lap_time": "1:26.225"
+    },
+    {
+      "rank": 8,
+      "kart_number": 10,
+      "driver": "PAWELTGB",
+      "laps": 10,
+      "difference_to_leader": "48.496",
+      "best_lap_time": "1:27.243"
+    },
+    {
+      "rank": 9,
+      "kart_number": 14,
+      "driver": "KOCZI",
+      "laps": 10,
+      "difference_to_leader": "52.277",
+      "best_lap_time": "1:25.799"
+    },
+    {
+      "rank": 10,
+      "kart_number": 15,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 10,
+      "difference_to_leader": "56.046",
+      "best_lap_time": "1:25.107"
+    },
+    {
+      "rank": 11,
+      "kart_number": 2,
+      "driver": "PASEK MARCIN",
+      "laps": 10,
+      "difference_to_leader": "58.799",
+      "best_lap_time": "1:26.439"
+    },
+    {
+      "rank": 12,
+      "kart_number": 9,
+      "driver": "MARCINBTM",
+      "laps": 10,
+      "difference_to_leader": "1:12.896",
+      "best_lap_time": "1:26.909"
+    },
+    {
+      "rank": 13,
+      "kart_number": 8,
+      "driver": "PIOTR KAMIŃSKI",
+      "laps": 9,
+      "difference_to_leader": "1 lap",
+      "best_lap_time": "1:32.866"
+    }
+  ]
+}

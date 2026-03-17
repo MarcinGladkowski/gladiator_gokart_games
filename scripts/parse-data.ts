@@ -10,12 +10,15 @@ const TOTAL_CSV_PATH = join(ROOT, 'resource', 'total_results.csv');
 const OUT_DIR = join(ROOT, 'src', 'data');
 const OUT_FILE = join(OUT_DIR, 'results.json');
 
-function parseDirDate(dirName: string): string | null {
-  // Expect DD_MM_YYYY
-  const match = dirName.match(/^(\d{2})_(\d{2})_(\d{4})$/);
+function parseDirDate(dirName: string): { isoDate: string; label: string } | null {
+  // Expect race_{number}_{DD}_{MM}_{YYYY}
+  const match = dirName.match(/^race_(\d+)_(\d{2})_(\d{2})_(\d{4})$/);
   if (!match) return null;
-  const [, dd, mm, yyyy] = match;
-  return `${yyyy}-${mm}-${dd}`;
+  const [, raceNum, dd, mm, yyyy] = match;
+  return {
+    isoDate: `${yyyy}-${mm}-${dd}`,
+    label: `Race ${raceNum} - ${dd}/${mm}/${yyyy}`,
+  };
 }
 
 function parseFilename(filename: string): { group: GroupLetter; type: SessionType } | null {
@@ -41,11 +44,12 @@ function main() {
   });
 
   for (const dirName of dateDirs) {
-    const isoDate = parseDirDate(dirName);
-    if (!isoDate) {
+    const parsed = parseDirDate(dirName);
+    if (!parsed) {
       console.warn(`Skipping directory with unrecognized name format: ${dirName}`);
       continue;
     }
+    const { isoDate, label } = parsed;
 
     const dirPath = join(RACES_DIR, dirName);
     const jsonFiles = readdirSync(dirPath).filter((f: string) => /_results?\.json$/.test(f));
@@ -66,9 +70,6 @@ function main() {
       if (a.type !== b.type) return a.type === 'qualifications' ? -1 : 1;
       return a.group.localeCompare(b.group);
     });
-
-    const [yyyy, mm, dd] = isoDate.split('-');
-    const label = `${dd}.${mm}.${yyyy}`;
 
     eventsByDate.set(isoDate, { date: isoDate, label, sessions });
   }

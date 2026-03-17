@@ -98,7 +98,8 @@ async function downloadMessage(id, index, total) {
   const from = getHeader(headers, 'from')
   const date = getHeader(headers, 'date')
 
-  const body = extractHtml(msg.payload) ?? extractText(msg.payload) ?? '<p>(no body)</p>'
+  const rawBody = extractHtml(msg.payload) ?? extractText(msg.payload) ?? '<p>(no body)</p>'
+  const body = rawBody.replace(/<([a-z][a-z0-9]*)\s[^>]*?(\/?)>/gi, '<$1$2>')
 
   const html = `<!DOCTYPE html>
 <html lang="en">

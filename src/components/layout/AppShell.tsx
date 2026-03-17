@@ -63,8 +63,14 @@ export function AppShell() {
         )}
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8">
-          <Outlet />
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col">
+          <div className="flex-1">
+            <Outlet />
+          </div>
+          <footer className="mt-8 pt-4 border-t border-gray-800 text-xs text-gray-600 flex flex-wrap gap-x-4 gap-y-1">
+            <span>Author: <a href="https://marcingladkowski.pl" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">marcingladkowski.pl</a></span>
+            <span><a href="mailto:contact@marcingladkowski.pl" className="hover:text-gray-400 transition-colors">contact@marcingladkowski.pl</a></span>
+          </footer>
         </main>
       </div>
     </div>

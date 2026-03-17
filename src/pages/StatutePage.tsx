@@ -1,15 +1,10 @@
+import { useEffect } from 'react'
 import statuteUrl from '../assets/statute.pdf?url'
 
 export function StatutePage() {
-  return (
-    <div className="flex flex-col h-full">
-      <h1 className="text-2xl font-bold text-white mb-4">Statute 2026</h1>
-      <iframe
-        src={statuteUrl}
-        className="flex-1 w-full rounded-lg border border-gray-700"
-        style={{ minHeight: '80vh' }}
-        title="Gladiators Gokart Games 2026 - Statute"
-      />
-    </div>
-  )
+  useEffect(() => {
+    window.location.href = statuteUrl
+  }, [])
+
+  return <p className="text-gray-500">Opening statute...</p>
 }

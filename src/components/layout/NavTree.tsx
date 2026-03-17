@@ -48,6 +48,9 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
       <NavLink to="/total" className={linkClass} onClick={onNavigate}>
         Total Results
       </NavLink>
+      <NavLink to="/statute" className={linkClass} onClick={onNavigate}>
+        Statute 2026
+      </NavLink>
 
       {seasons.map((season) => (
         <div key={season.year}>

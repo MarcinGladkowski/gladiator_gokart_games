@@ -33,7 +33,7 @@ export function RaceDatePage() {
               <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
               <div className="rounded-lg overflow-hidden border border-gray-700">
                 <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSeY5sO3TXK8fDVz-TQbN67C9yTmAe8C6Uhifr1ip5J45q-drQ/viewform?embedded=true"
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
                   width="100%"
                   height="900"
                   style={{ border: 0 }}

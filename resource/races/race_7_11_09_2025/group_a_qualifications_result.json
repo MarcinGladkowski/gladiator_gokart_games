@@ -1,0 +1,114 @@
+{
+  "session_details": {
+    "name": "GP - Měřák, sk. A",
+    "date": "2025-09-11",
+    "time_range": "18:00 - 18:00",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 6,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 8,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:04.676"
+    },
+    {
+      "rank": 2,
+      "kart_number": 2,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 7,
+      "difference_to_leader": "0.167",
+      "best_lap_time": "1:04.843"
+    },
+    {
+      "rank": 3,
+      "kart_number": 4,
+      "driver": "BIEG KAROL",
+      "laps": 8,
+      "difference_to_leader": "0.448",
+      "best_lap_time": "1:05.124"
+    },
+    {
+      "rank": 4,
+      "kart_number": 9,
+      "driver": "NORMAN POWER",
+      "laps": 7,
+      "difference_to_leader": "0.845",
+      "best_lap_time": "1:05.521"
+    },
+    {
+      "rank": 5,
+      "kart_number": 3,
+      "driver": "NIEMIEC",
+      "laps": 7,
+      "difference_to_leader": "0.944",
+      "best_lap_time": "1:05.620"
+    },
+    {
+      "rank": 6,
+      "kart_number": 5,
+      "driver": "WIKTOR KALUZA",
+      "laps": 7,
+      "difference_to_leader": "1.233",
+      "best_lap_time": "1:05.909"
+    },
+    {
+      "rank": 7,
+      "kart_number": 12,
+      "driver": "CHLEBEK",
+      "laps": 7,
+      "difference_to_leader": "1.235",
+      "best_lap_time": "1:05.911"
+    },
+    {
+      "rank": 8,
+      "kart_number": 10,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 7,
+      "difference_to_leader": "1.277",
+      "best_lap_time": "1:05.953"
+    },
+    {
+      "rank": 9,
+      "kart_number": 7,
+      "driver": "HONKI",
+      "laps": 7,
+      "difference_to_leader": "1.291",
+      "best_lap_time": "1:05.967"
+    },
+    {
+      "rank": 10,
+      "kart_number": 14,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 7,
+      "difference_to_leader": "1.331",
+      "best_lap_time": "1:06.007"
+    },
+    {
+      "rank": 11,
+      "kart_number": 15,
+      "driver": "KREWETA",
+      "laps": 8,
+      "difference_to_leader": "1.480",
+      "best_lap_time": "1:06.156"
+    },
+    {
+      "rank": 12,
+      "kart_number": 13,
+      "driver": "WASEK",
+      "laps": 7,
+      "difference_to_leader": "1.592",
+      "best_lap_time": "1:06.268"
+    },
+    {
+      "rank": 13,
+      "kart_number": 1,
+      "driver": "QUNIO",
+      "laps": 7,
+      "difference_to_leader": "1.741",
+      "best_lap_time": "1:06.417"
+    }
+  ]
+}

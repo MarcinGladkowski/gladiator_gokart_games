@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "GP - Závod, sk. B",
+    "date": "2025-08-21",
+    "time_range": "18:50 - 18:59",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 15,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:05.066"
+    },
+    {
+      "rank": 2,
+      "kart_number": 4,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "10.116",
+      "best_lap_time": "1:05.232"
+    },
+    {
+      "rank": 3,
+      "kart_number": 6,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "12.519",
+      "best_lap_time": "1:05.272"
+    },
+    {
+      "rank": 4,
+      "kart_number": 9,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "21.904",
+      "best_lap_time": "1:05.513"
+    },
+    {
+      "rank": 5,
+      "kart_number": 7,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "26.740",
+      "best_lap_time": "1:06.468"
+    },
+    {
+      "rank": 6,
+      "kart_number": 8,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "28.660",
+      "best_lap_time": "1:06.797"
+    },
+    {
+      "rank": 7,
+      "kart_number": 5,
+      "driver": "WOJT",
+      "laps": 12,
+      "difference_to_leader": "29.455",
+      "best_lap_time": "1:07.066"
+    },
+    {
+      "rank": 8,
+      "kart_number": 13,
+      "driver": "WIDUCHKACPER",
+      "laps": 12,
+      "difference_to_leader": "35.742",
+      "best_lap_time": "1:06.528"
+    },
+    {
+      "rank": 9,
+      "kart_number": 2,
+      "driver": "MATEUSZ OTRĘBA",
+      "laps": 12,
+      "difference_to_leader": "35.827",
+      "best_lap_time": "1:05.849"
+    },
+    {
+      "rank": 10,
+      "kart_number": 11,
+      "driver": "ZGUD",
+      "laps": 12,
+      "difference_to_leader": "42.232",
+      "best_lap_time": "1:06.656"
+    },
+    {
+      "rank": 11,
+      "kart_number": 1,
+      "driver": "SIZAR",
+      "laps": 12,
+      "difference_to_leader": "51.170",
+      "best_lap_time": "1:07.026"
+    },
+    {
+      "rank": 12,
+      "kart_number": 14,
+      "driver": "NIKODEM OLSZOWSKI",
+      "laps": 12,
+      "difference_to_leader": "51.641",
+      "best_lap_time": "1:06.469"
+    },
+    {
+      "rank": 13,
+      "kart_number": 3,
+      "driver": "MARCINBTM",
+      "laps": 12,
+      "difference_to_leader": "52.652",
+      "best_lap_time": "1:07.063"
+    }
+  ]
+}

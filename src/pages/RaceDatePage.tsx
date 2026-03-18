@@ -8,11 +8,15 @@ import config from '../data/config.json'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
 const GRID_SIZE = 26
-const staffSet = new Set(config.staff)
+const staffSet = new Set(config.staff.map((s) => s.trim().toLowerCase()))
+
+function normalize(name: string): string {
+  return name.trim().toLowerCase()
+}
 
 function partitionDrivers(drivers: string[]): { grid: string[]; reserve: string[] } {
-  const staff = drivers.filter((d) => staffSet.has(d))
-  const nonStaff = drivers.filter((d) => !staffSet.has(d))
+  const staff = drivers.filter((d) => staffSet.has(normalize(d)))
+  const nonStaff = drivers.filter((d) => !staffSet.has(normalize(d)))
   const remainingSpots = Math.max(0, GRID_SIZE - staff.length)
   return {
     grid: [...staff, ...nonStaff.slice(0, remainingSpots)],

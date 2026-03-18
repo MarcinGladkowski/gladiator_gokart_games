@@ -26,6 +26,12 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
 export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
   const seasons = useSeasons()
   const [openSeasons, setOpenSeasons] = useState<Set<number>>(new Set(seasons.map((s) => s.year)))
+
+  const nextRaceDate = seasons
+    .flatMap((s) => s.events)
+    .filter((e) => e.upcoming)
+    .map((e) => e.date)
+    .sort()[0] ?? null
   const [openDates, setOpenDates] = useState<Set<string>>(new Set())
 
   function toggleSeason(year: number) {
@@ -96,15 +102,22 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
                       key={event.date}
                       to={`/season/${season.year}/${event.date}`}
                       className={({ isActive }) =>
-                        `block px-3 py-1.5 rounded text-sm transition-colors ${
+                        `flex items-center gap-2 px-3 py-1.5 rounded text-sm transition-colors ${
                           isActive
                             ? 'bg-red-900/40 text-red-400 font-medium'
-                            : 'text-gray-600 hover:text-gray-400 hover:bg-gray-800'
+                            : event.date === nextRaceDate
+                              ? 'text-white font-semibold hover:bg-gray-800'
+                              : 'text-gray-600 hover:text-gray-400 hover:bg-gray-800'
                         }`
                       }
                       onClick={onNavigate}
                     >
-                      {event.label}
+                      <span>{event.label}</span>
+                      {event.date === nextRaceDate && (
+                        <span className="ml-auto text-xs font-normal px-1.5 py-0.5 rounded bg-red-900/50 text-red-400">
+                          next
+                        </span>
+                      )}
                     </NavLink>
                   ) : (
                     <div key={event.date}>

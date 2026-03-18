@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
+import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
-import { GoogleSheetTable, parseCsv } from '../components/GoogleSheetTable'
+import { GoogleSheetTable } from '../components/GoogleSheetTable'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
 
@@ -10,26 +11,12 @@ export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
   const [refreshKey, setRefreshKey] = useState(0)
-  const [drivers, setDrivers] = useState<string[] | null>(null)
+  const drivers = useRegisteredDrivers(REGISTRATIONS_CSV, refreshKey)
 
   useEffect(() => {
     const id = setInterval(() => setRefreshKey((k) => k + 1), 20_000)
     return () => clearInterval(id)
   }, [])
-
-  useEffect(() => {
-    fetch(REGISTRATIONS_CSV)
-      .then((r) => r.text())
-      .then((text) => {
-        const [header, ...rows] = parseCsv(text)
-        const col = header.indexOf('Zawodnik')
-        if (col === -1) return
-        const names = rows.map((r) => r[col]).filter(Boolean)
-        names.sort((a, b) => a.localeCompare(b, 'pl'))
-        setDrivers(names)
-      })
-      .catch(console.error)
-  }, [refreshKey])
 
   if (!event) {
     return <p className="text-gray-500">Event {date} not found.</p>

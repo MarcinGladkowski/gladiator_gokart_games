@@ -53,3 +53,18 @@ export interface AppData {
   totalResults: TotalResultEntry[];
   seasons: Season[];
 }
+
+export interface RaceScore {
+  date: IsoDate;
+  group: GroupLetter;
+  points: number;
+  counted: boolean;
+}
+
+export interface ClassificationEntry {
+  position: number;
+  driver: string;
+  totalPoints: number;
+  racesCount: number;
+  raceScores: RaceScore[];
+}

@@ -70,6 +70,15 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
 
           {openSeasons.has(season.year) && (
             <div className="ml-4 space-y-0.5">
+              {season.year === 2026 && (
+                <NavLink
+                  to={`/season/${season.year}/classification`}
+                  className={linkClass}
+                  onClick={onNavigate}
+                >
+                  General Classification
+                </NavLink>
+              )}
               {season.events.map((event) =>
                 event.upcoming ? (
                   <NavLink

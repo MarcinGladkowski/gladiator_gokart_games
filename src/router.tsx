@@ -1,5 +1,6 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
+import { HomePage } from './pages/HomePage'
 import { TotalResultsPage } from './pages/TotalResultsPage'
 import { SeasonPage } from './pages/SeasonPage'
 import { RaceDatePage } from './pages/RaceDatePage'
@@ -11,7 +12,7 @@ export function AppRouter() {
     <HashRouter>
       <Routes>
         <Route element={<AppShell />}>
-          <Route index element={<Navigate to="/total" replace />} />
+          <Route index element={<HomePage />} />
           <Route path="total" element={<TotalResultsPage />} />
           <Route path="season/:year" element={<SeasonPage />} />
           <Route path="season/:year/classification" element={<GeneralClassificationPage />} />

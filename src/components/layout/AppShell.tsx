@@ -25,7 +25,7 @@ export function AppShell() {
     <div className="min-h-screen flex flex-col">
       {/* Top bar (mobile) */}
       <header className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b border-gray-700 md:hidden">
-        <span className="text-white font-bold text-lg">Gladiator Gokart Games</span>
+        <span className="text-white font-bold text-lg"><a href="/">Gladiator Gokart Games</a></span>
         <button
           onClick={() => setSidebarOpen((o) => !o)}
           className="text-gray-300 hover:text-white"
@@ -47,7 +47,7 @@ export function AppShell() {
         >
           {/* Sidebar header */}
           <div className="hidden md:flex items-center px-4 py-4 border-b border-gray-700">
-            <span className="text-white font-bold text-lg">Gladiator Gokart Games</span>
+            <span className="text-white font-bold text-lg"><a href="/">Gladiator Gokart Games</a></span>
           </div>
           <div className="flex-1 overflow-y-auto py-4">
             <NavTree onNavigate={() => setSidebarOpen(false)} />

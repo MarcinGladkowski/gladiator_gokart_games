@@ -10,7 +10,7 @@ export function RaceDatePage() {
   const [refreshKey, setRefreshKey] = useState(0)
 
   useEffect(() => {
-    const id = setInterval(() => setRefreshKey((k) => k + 1), 10_000)
+    const id = setInterval(() => setRefreshKey((k) => k + 1), 20_000)
     return () => clearInterval(id)
   }, [])
 

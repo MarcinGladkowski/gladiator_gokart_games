@@ -47,7 +47,7 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="space-y-1 px-2">
       <NavLink to="/total" className={linkClass} onClick={onNavigate}>
-        Total Results
+        Total Classification
       </NavLink>
       <a
         href={statuteUrl}
@@ -58,77 +58,89 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
         Statute 2026
       </a>
 
-      {[...seasons].reverse().map((season) => (
-        <div key={season.year}>
-          <button
-            onClick={() => toggleSeason(season.year)}
-            className="flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm text-gray-300 hover:text-gray-100 hover:bg-gray-800 transition-colors"
-          >
-            <ChevronIcon open={openSeasons.has(season.year)} />
-            <span>{season.year}</span>
-          </button>
-
-          {openSeasons.has(season.year) && (
-            <div className="ml-4 space-y-0.5">
-              {season.year === 2026 && (
-                <NavLink
-                  to={`/season/${season.year}/classification`}
-                  className={linkClass}
-                  onClick={onNavigate}
-                >
-                  General Classification
-                </NavLink>
+      {[...seasons].reverse().map((season) => {
+        const isCurrent = season.year === 2026
+        return (
+          <div key={season.year}>
+            <button
+              onClick={() => toggleSeason(season.year)}
+              className={`flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm transition-colors ${
+                isCurrent
+                  ? 'text-white font-semibold hover:bg-gray-800'
+                  : 'text-gray-300 hover:text-gray-100 hover:bg-gray-800'
+              }`}
+            >
+              <ChevronIcon open={openSeasons.has(season.year)} />
+              <span>{season.year}</span>
+              {isCurrent && (
+                <span className="ml-auto text-xs font-normal px-1.5 py-0.5 rounded bg-red-900/50 text-red-400">
+                  current
+                </span>
               )}
-              {season.events.map((event) =>
-                event.upcoming ? (
+            </button>
+
+            {openSeasons.has(season.year) && (
+              <div className="ml-4 space-y-0.5">
+                {isCurrent && (
                   <NavLink
-                    key={event.date}
-                    to={`/season/${season.year}/${event.date}`}
-                    className={({ isActive }) =>
-                      `block px-3 py-1.5 rounded text-sm transition-colors ${
-                        isActive
-                          ? 'bg-red-900/40 text-red-400 font-medium'
-                          : 'text-gray-600 hover:text-gray-400 hover:bg-gray-800'
-                      }`
-                    }
+                    to={`/season/${season.year}/classification`}
+                    className={linkClass}
                     onClick={onNavigate}
                   >
-                    {event.label}
+                    General Classification
                   </NavLink>
-                ) : (
-                  <div key={event.date}>
-                    <button
-                      onClick={() => toggleDate(event.date)}
-                      className="flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800 transition-colors"
+                )}
+                {season.events.map((event) =>
+                  event.upcoming ? (
+                    <NavLink
+                      key={event.date}
+                      to={`/season/${season.year}/${event.date}`}
+                      className={({ isActive }) =>
+                        `block px-3 py-1.5 rounded text-sm transition-colors ${
+                          isActive
+                            ? 'bg-red-900/40 text-red-400 font-medium'
+                            : 'text-gray-600 hover:text-gray-400 hover:bg-gray-800'
+                        }`
+                      }
+                      onClick={onNavigate}
                     >
-                      <ChevronIcon open={openDates.has(event.date)} />
-                      <span>{event.label}</span>
-                    </button>
+                      {event.label}
+                    </NavLink>
+                  ) : (
+                    <div key={event.date}>
+                      <button
+                        onClick={() => toggleDate(event.date)}
+                        className="flex items-center gap-2 w-full px-3 py-1.5 rounded text-sm text-gray-400 hover:text-gray-100 hover:bg-gray-800 transition-colors"
+                      >
+                        <ChevronIcon open={openDates.has(event.date)} />
+                        <span>{event.label}</span>
+                      </button>
 
-                    {openDates.has(event.date) && (
-                      <div className="ml-4 space-y-0.5">
-                        {event.sessions.map((session) => {
-                          const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
-                          return (
-                            <NavLink
-                              key={`${session.group}-${session.type}`}
-                              to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
-                              className={linkClass}
-                              onClick={onNavigate}
-                            >
-                              {label}
-                            </NavLink>
-                          )
-                        })}
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+                      {openDates.has(event.date) && (
+                        <div className="ml-4 space-y-0.5">
+                          {event.sessions.map((session) => {
+                            const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
+                            return (
+                              <NavLink
+                                key={`${session.group}-${session.type}`}
+                                to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
+                                className={linkClass}
+                                onClick={onNavigate}
+                              >
+                                {label}
+                              </NavLink>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        )
+      })}
     </nav>
   )
 }

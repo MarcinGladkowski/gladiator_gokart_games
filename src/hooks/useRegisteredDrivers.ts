@@ -1,16 +1,9 @@
 import { useState, useEffect } from 'react'
 import { parseCsv } from '../components/GoogleSheetTable'
 
-type SortFn = (a: string, b: string) => number
-
-export function sortAlphabetically(a: string, b: string): number {
-  return a.localeCompare(b, 'pl')
-}
-
 export function useRegisteredDrivers(
   csvUrl: string,
   refreshKey: number,
-  sortFns: SortFn[] = [sortAlphabetically],
 ): string[] | null {
   const [drivers, setDrivers] = useState<string[] | null>(null)
 

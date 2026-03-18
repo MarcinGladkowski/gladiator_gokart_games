@@ -58,7 +58,7 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
         Statute 2026
       </a>
 
-      {seasons.map((season) => (
+      {[...seasons].reverse().map((season) => (
         <div key={season.year}>
           <button
             onClick={() => toggleSeason(season.year)}

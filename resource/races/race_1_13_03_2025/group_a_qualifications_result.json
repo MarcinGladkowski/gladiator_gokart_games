@@ -1,0 +1,114 @@
+{
+  "session_details": {
+    "name": "GP - Měřák, sk. A",
+    "date": "2025-03-13",
+    "time_range": "18:00 - 17:59",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 13,
+      "driver": "CHLEBEK",
+      "laps": 6,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:25.915"
+    },
+    {
+      "rank": 2,
+      "kart_number": 7,
+      "driver": "BIEG KAROL",
+      "laps": 6,
+      "difference_to_leader": "1.718",
+      "best_lap_time": "1:27.633"
+    },
+    {
+      "rank": 3,
+      "kart_number": 1,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 6,
+      "difference_to_leader": "2.285",
+      "best_lap_time": "1:28.200"
+    },
+    {
+      "rank": 4,
+      "kart_number": 11,
+      "driver": "KREWETA",
+      "laps": 6,
+      "difference_to_leader": "2.397",
+      "best_lap_time": "1:28.312"
+    },
+    {
+      "rank": 5,
+      "kart_number": 15,
+      "driver": "KUBAG",
+      "laps": 6,
+      "difference_to_leader": "2.492",
+      "best_lap_time": "1:28.407"
+    },
+    {
+      "rank": 6,
+      "kart_number": 9,
+      "driver": "MLODY93",
+      "laps": 6,
+      "difference_to_leader": "3.073",
+      "best_lap_time": "1:28.988"
+    },
+    {
+      "rank": 7,
+      "kart_number": 5,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 6,
+      "difference_to_leader": "3.410",
+      "best_lap_time": "1:29.325"
+    },
+    {
+      "rank": 8,
+      "kart_number": 12,
+      "driver": "NORMAN POWER",
+      "laps": 5,
+      "difference_to_leader": "3.480",
+      "best_lap_time": "1:29.395"
+    },
+    {
+      "rank": 9,
+      "kart_number": 4,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 6,
+      "difference_to_leader": "4.426",
+      "best_lap_time": "1:30.341"
+    },
+    {
+      "rank": 10,
+      "kart_number": 2,
+      "driver": "QUNIO",
+      "laps": 5,
+      "difference_to_leader": "7.036",
+      "best_lap_time": "1:32.951"
+    },
+    {
+      "rank": 11,
+      "kart_number": 10,
+      "driver": "PILSON",
+      "laps": 5,
+      "difference_to_leader": "7.509",
+      "best_lap_time": "1:33.424"
+    },
+    {
+      "rank": 12,
+      "kart_number": 6,
+      "driver": "NIEMIEC",
+      "laps": 5,
+      "difference_to_leader": "7.529",
+      "best_lap_time": "1:33.444"
+    },
+    {
+      "rank": 13,
+      "kart_number": 8,
+      "driver": "ZGUD",
+      "laps": 5,
+      "difference_to_leader": "11.547",
+      "best_lap_time": "1:37.462"
+    }
+  ]
+}

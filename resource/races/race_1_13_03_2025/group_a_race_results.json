@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "GP - Závod, sk. A",
+    "date": "2025-03-13",
+    "time_range": "18:36 - 18:50",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 4,
+      "driver": "CHLEBEK",
+      "laps": 10,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:25.573"
+    },
+    {
+      "rank": 2,
+      "kart_number": 13,
+      "driver": "NORMAN POWER",
+      "laps": 10,
+      "difference_to_leader": "17.955",
+      "best_lap_time": "1:26.618"
+    },
+    {
+      "rank": 3,
+      "kart_number": 5,
+      "driver": "KREWETA",
+      "laps": 10,
+      "difference_to_leader": "22.584",
+      "best_lap_time": "1:26.846"
+    },
+    {
+      "rank": 4,
+      "kart_number": 7,
+      "driver": "PAWELTGB",
+      "laps": 10,
+      "difference_to_leader": "25.074",
+      "best_lap_time": "1:27.110"
+    },
+    {
+      "rank": 5,
+      "kart_number": 11,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 10,
+      "difference_to_leader": "25.752",
+      "best_lap_time": "1:27.464"
+    },
+    {
+      "rank": 6,
+      "kart_number": 1,
+      "driver": "BIEG KAROL",
+      "laps": 10,
+      "difference_to_leader": "35.137",
+      "best_lap_time": "1:27.742"
+    },
+    {
+      "rank": 7,
+      "kart_number": 15,
+      "driver": "WILCZU",
+      "laps": 10,
+      "difference_to_leader": "35.267",
+      "best_lap_time": "1:27.567"
+    },
+    {
+      "rank": 8,
+      "kart_number": 9,
+      "driver": "GRZECH",
+      "laps": 10,
+      "difference_to_leader": "35.837",
+      "best_lap_time": "1:28.355"
+    },
+    {
+      "rank": 9,
+      "kart_number": 2,
+      "driver": "KUBAG",
+      "laps": 10,
+      "difference_to_leader": "36.252",
+      "best_lap_time": "1:27.674"
+    },
+    {
+      "rank": 10,
+      "kart_number": 12,
+      "driver": "MLODY93",
+      "laps": 10,
+      "difference_to_leader": "40.567",
+      "best_lap_time": "1:27.722"
+    },
+    {
+      "rank": 11,
+      "kart_number": 8,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 9,
+      "difference_to_leader": "1 lap",
+      "best_lap_time": "1:30.695"
+    },
+    {
+      "rank": 12,
+      "kart_number": 10,
+      "driver": "MAREK BK",
+      "laps": 9,
+      "difference_to_leader": "1 lap",
+      "best_lap_time": "1:33.820"
+    },
+    {
+      "rank": 13,
+      "kart_number": 6,
+      "driver": "KRZYCHU",
+      "laps": 9,
+      "difference_to_leader": "1 lap",
+      "best_lap_time": "1:35.786"
+    }
+  ]
+}

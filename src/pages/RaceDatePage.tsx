@@ -71,17 +71,31 @@ export function RaceDatePage() {
                 </div>
               </div>
               <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
                 {drivers === null ? (
                   <p className="text-gray-500 text-sm">Loading…</p>
                 ) : drivers.length === 0 ? (
                   <p className="text-gray-500 text-sm">No registrations yet.</p>
                 ) : (
-                  <ol className="list-decimal list-inside space-y-1">
-                    {drivers.map((name, i) => (
-                      <li key={i} className="text-gray-300 text-sm">{name}</li>
-                    ))}
-                  </ol>
+                  <div className="flex gap-12">
+                    <div>
+                      <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
+                      <ol className="list-decimal list-inside space-y-1">
+                        {drivers.slice(0, 26).map((name, i) => (
+                          <li key={i} className="text-gray-300 text-sm">{name}</li>
+                        ))}
+                      </ol>
+                    </div>
+                    {drivers.length > 26 && (
+                      <div>
+                        <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
+                        <ol className="list-decimal list-inside space-y-1" start={27}>
+                          {drivers.slice(26).map((name, i) => (
+                            <li key={i} className="text-gray-300 text-sm">{name}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

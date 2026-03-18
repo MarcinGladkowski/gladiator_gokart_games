@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
 import { daysLeft } from '../utils/daysLeft'
@@ -6,6 +7,12 @@ import { GoogleSheetTable } from '../components/GoogleSheetTable'
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
+  const [refreshKey, setRefreshKey] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setRefreshKey((k) => k + 1), 10_000)
+    return () => clearInterval(id)
+  }, [])
 
   if (!event) {
     return <p className="text-gray-500">Event {date} not found.</p>
@@ -32,8 +39,16 @@ export function RaceDatePage() {
           {date === '2026-04-23' && (
             <div className="space-y-8">
               <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Registered drivers</h2>
-                <GoogleSheetTable csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-lg font-semibold text-white">Registered drivers</h2>
+                  <button
+                    onClick={() => setRefreshKey((k) => k + 1)}
+                    className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                  >
+                    Refresh
+                  </button>
+                </div>
+                <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>

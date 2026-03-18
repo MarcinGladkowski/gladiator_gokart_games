@@ -21,12 +21,30 @@ export function RaceDatePage() {
       </div>
       <h1 className="text-2xl font-bold text-white mb-6">{event.label}</h1>
       {event.upcoming ? (
-        <p className="text-lg">
-          {daysLeft(event.date) === 0
-            ? <strong className="text-white">Today!</strong>
-            : <span className="text-gray-500">{daysLeft(event.date)} days left</span>
-          }
-        </p>
+        <>
+          <p className="text-lg mb-8">
+            {daysLeft(event.date) === 0
+              ? <strong className="text-white">Today!</strong>
+              : <span className="text-gray-500">{daysLeft(event.date)} days left</span>
+            }
+          </p>
+          {date === '2026-04-23' && (
+            <div>
+              <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
+              <div className="rounded-lg overflow-hidden border border-gray-700">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSeY5sO3TXK8fDVz-TQbN67C9yTmAe8C6Uhifr1ip5J45q-drQ/viewform?embedded=true"
+                  width="100%"
+                  height="900"
+                  style={{ border: 0 }}
+                  title="Race enrollment form"
+                >
+                  Loading…
+                </iframe>
+              </div>
+            </div>
+          )}
+        </>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
           {event.sessions.map((session) => {

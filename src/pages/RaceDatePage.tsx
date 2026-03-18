@@ -4,8 +4,21 @@ import { useRaceEvent } from '../hooks/useResults'
 import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
+import config from '../data/config.json'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
+const GRID_SIZE = 26
+const staffSet = new Set(config.staff)
+
+function partitionDrivers(drivers: string[]): { grid: string[]; reserve: string[] } {
+  const staff = drivers.filter((d) => staffSet.has(d))
+  const nonStaff = drivers.filter((d) => !staffSet.has(d))
+  const remainingSpots = Math.max(0, GRID_SIZE - staff.length)
+  return {
+    grid: [...staff, ...nonStaff.slice(0, remainingSpots)],
+    reserve: nonStaff.slice(remainingSpots),
+  }
+}
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
@@ -75,28 +88,31 @@ export function RaceDatePage() {
                   <p className="text-gray-500 text-sm">Loading…</p>
                 ) : drivers.length === 0 ? (
                   <p className="text-gray-500 text-sm">No registrations yet.</p>
-                ) : (
-                  <div className="flex gap-12">
-                    <div>
-                      <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
-                      <ol className="list-decimal list-inside space-y-1">
-                        {drivers.slice(0, 26).map((name, i) => (
-                          <li key={i} className="text-gray-300 text-sm">{name}</li>
-                        ))}
-                      </ol>
-                    </div>
-                    {drivers.length > 26 && (
+                ) : (() => {
+                  const { grid, reserve } = partitionDrivers(drivers)
+                  return (
+                    <div className="flex gap-12">
                       <div>
-                        <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
-                        <ol className="list-decimal list-inside space-y-1" start={27}>
-                          {drivers.slice(26).map((name, i) => (
+                        <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
+                        <ol className="list-decimal list-inside space-y-1">
+                          {grid.map((name, i) => (
                             <li key={i} className="text-gray-300 text-sm">{name}</li>
                           ))}
                         </ol>
                       </div>
-                    )}
-                  </div>
-                )}
+                      {reserve.length > 0 && (
+                        <div>
+                          <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
+                          <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
+                            {reserve.map((name, i) => (
+                              <li key={i} className="text-gray-300 text-sm">{name}</li>
+                            ))}
+                          </ol>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })()}
               </div>
             </div>
           )}

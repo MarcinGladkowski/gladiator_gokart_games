@@ -38,31 +38,37 @@ export function RaceDatePage() {
           </p>
           {date === '2026-04-23' && (
             <div className="space-y-8">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-lg font-semibold text-white">Requests</h2>
-                  <button
-                    onClick={() => setRefreshKey((k) => k + 1)}
-                    className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
-                  >
-                    Refresh
-                  </button>
+              <div className="flex gap-6 items-start">
+                <div className="w-[640px] shrink-0">
+                  <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
+                  <div className="rounded-lg overflow-hidden border border-gray-700">
+                    <iframe
+                      src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
+                      width="100%"
+                      height="900"
+                      style={{ border: 0 }}
+                      title="Race enrollment form"
+                    >
+                      Loading…
+                    </iframe>
+                  </div>
                 </div>
-                <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-lg font-semibold text-white">Requests</h2>
+                    <button
+                      onClick={() => setRefreshKey((k) => k + 1)}
+                      className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                    >
+                      Refresh
+                    </button>
+                  </div>
+                  <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+                </div>
               </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
-                <div className="rounded-lg overflow-hidden border border-gray-700">
-                  <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
-                    width="100%"
-                    height="900"
-                    style={{ border: 0 }}
-                    title="Race enrollment form"
-                  >
-                    Loading…
-                  </iframe>
-                </div>
+              <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                <h2 className="text-lg font-semibold text-white mb-2">Additional information</h2>
+                <p className="text-gray-500 text-sm">Content coming soon…</p>
               </div>
             </div>
           )}

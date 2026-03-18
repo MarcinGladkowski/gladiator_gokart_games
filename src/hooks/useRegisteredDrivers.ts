@@ -20,16 +20,10 @@ export function useRegisteredDrivers(
       .then((text) => {
         const [header, ...rows] = parseCsv(text)
         const col = header.indexOf('Zawodnik')
-        if (col === -1) return
-        const names = rows.map((r) => r[col]).filter(Boolean)
-        names.sort((a, b) => {
-          for (const fn of sortFns) {
-            const result = fn(a, b)
-            if (result !== 0) return result
-          }
-          return 0
-        })
-        setDrivers(names)
+        if (col === -1) {
+          return
+        }
+        setDrivers(rows.map((r) => r[col]).filter(Boolean))
       })
       .catch(console.error)
   }, [csvUrl, refreshKey])

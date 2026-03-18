@@ -40,7 +40,7 @@ export function RaceDatePage() {
             <div className="space-y-8">
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-lg font-semibold text-white">Registered drivers</h2>
+                  <h2 className="text-lg font-semibold text-white">Requests</h2>
                   <button
                     onClick={() => setRefreshKey((k) => k + 1)}
                     className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"

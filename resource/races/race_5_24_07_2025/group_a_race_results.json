@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "mGP (2 sk.) - Závod, sk. A",
+    "date": "2025-07-24",
+    "time_range": "18:26 - 18:26",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 6,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:04.600"
+    },
+    {
+      "rank": 2,
+      "kart_number": 2,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "1.138",
+      "best_lap_time": "1:04.433"
+    },
+    {
+      "rank": 3,
+      "kart_number": 9,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "2.062",
+      "best_lap_time": "1:04.592"
+    },
+    {
+      "rank": 4,
+      "kart_number": 5,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "3.144",
+      "best_lap_time": "1:04.958"
+    },
+    {
+      "rank": 5,
+      "kart_number": 11,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "7.606",
+      "best_lap_time": "1:05.312"
+    },
+    {
+      "rank": 6,
+      "kart_number": 15,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "9.181",
+      "best_lap_time": "1:04.746"
+    },
+    {
+      "rank": 7,
+      "kart_number": 8,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "9.676",
+      "best_lap_time": "1:05.260"
+    },
+    {
+      "rank": 8,
+      "kart_number": 12,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "9.781",
+      "best_lap_time": "1:05.140"
+    },
+    {
+      "rank": 9,
+      "kart_number": 3,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "13.645",
+      "best_lap_time": "1:05.718"
+    },
+    {
+      "rank": 10,
+      "kart_number": 10,
+      "driver": "ZGUD",
+      "laps": 12,
+      "difference_to_leader": "15.427",
+      "best_lap_time": "1:06.123"
+    },
+    {
+      "rank": 11,
+      "kart_number": 13,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "17.124",
+      "best_lap_time": "1:05.447"
+    },
+    {
+      "rank": 12,
+      "kart_number": 7,
+      "driver": "MARCINBTM",
+      "laps": 12,
+      "difference_to_leader": "18.307",
+      "best_lap_time": "1:06.191"
+    },
+    {
+      "rank": 13,
+      "kart_number": 1,
+      "driver": "GRZECH",
+      "laps": 12,
+      "difference_to_leader": "29.104",
+      "best_lap_time": "1:05.949"
+    }
+  ]
+}

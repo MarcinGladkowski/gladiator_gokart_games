@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "GP - Závod, sk. A",
+    "date": "2025-06-12",
+    "time_range": "18:30 - 18:46",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 1,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:10.985"
+    },
+    {
+      "rank": 2,
+      "kart_number": 2,
+      "driver": "MARCIN GŁADKOWSKI",
+      "laps": 12,
+      "difference_to_leader": "0.317",
+      "best_lap_time": "1:11.005"
+    },
+    {
+      "rank": 3,
+      "kart_number": 9,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "5.628",
+      "best_lap_time": "1:11.215"
+    },
+    {
+      "rank": 4,
+      "kart_number": 12,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "8.391",
+      "best_lap_time": "1:11.566"
+    },
+    {
+      "rank": 5,
+      "kart_number": 14,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "13.881",
+      "best_lap_time": "1:11.936"
+    },
+    {
+      "rank": 6,
+      "kart_number": 6,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "13.971",
+      "best_lap_time": "1:11.017"
+    },
+    {
+      "rank": 7,
+      "kart_number": 3,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "17.607",
+      "best_lap_time": "1:11.862"
+    },
+    {
+      "rank": 8,
+      "kart_number": 15,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "17.748",
+      "best_lap_time": "1:11.629"
+    },
+    {
+      "rank": 9,
+      "kart_number": 5,
+      "driver": "FILIP BUCHWALD",
+      "laps": 12,
+      "difference_to_leader": "18.154",
+      "best_lap_time": "1:12.095"
+    },
+    {
+      "rank": 10,
+      "kart_number": 11,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "21.124",
+      "best_lap_time": "1:11.926"
+    },
+    {
+      "rank": 11,
+      "kart_number": 10,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "22.262",
+      "best_lap_time": "1:12.508"
+    },
+    {
+      "rank": 12,
+      "kart_number": 8,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "24.691",
+      "best_lap_time": "1:12.545"
+    },
+    {
+      "rank": 13,
+      "kart_number": 13,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "24.972",
+      "best_lap_time": "1:12.647"
+    }
+  ]
+}

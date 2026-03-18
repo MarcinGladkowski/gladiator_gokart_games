@@ -4,7 +4,7 @@ interface Props {
   csvUrl: string
 }
 
-function parseCsv(text: string): string[][] {
+export function parseCsv(text: string): string[][] {
   const rows: string[][] = []
   const lines = text.split(/\r?\n/)
   for (const line of lines) {

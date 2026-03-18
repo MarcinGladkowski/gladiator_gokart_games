@@ -2,17 +2,34 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
 import { daysLeft } from '../utils/daysLeft'
-import { GoogleSheetTable } from '../components/GoogleSheetTable'
+import { GoogleSheetTable, parseCsv } from '../components/GoogleSheetTable'
+
+const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
   const [refreshKey, setRefreshKey] = useState(0)
+  const [drivers, setDrivers] = useState<string[] | null>(null)
 
   useEffect(() => {
     const id = setInterval(() => setRefreshKey((k) => k + 1), 20_000)
     return () => clearInterval(id)
   }, [])
+
+  useEffect(() => {
+    fetch(REGISTRATIONS_CSV)
+      .then((r) => r.text())
+      .then((text) => {
+        const [header, ...rows] = parseCsv(text)
+        const col = header.indexOf('Zawodnik')
+        if (col === -1) return
+        const names = rows.map((r) => r[col]).filter(Boolean)
+        names.sort((a, b) => a.localeCompare(b, 'pl'))
+        setDrivers(names)
+      })
+      .catch(console.error)
+  }, [refreshKey])
 
   if (!event) {
     return <p className="text-gray-500">Event {date} not found.</p>
@@ -67,8 +84,18 @@ export function RaceDatePage() {
                 </div>
               </div>
               <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                <h2 className="text-lg font-semibold text-white mb-2">Additional information</h2>
-                <p className="text-gray-500 text-sm">Content coming soon…</p>
+                <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
+                {drivers === null ? (
+                  <p className="text-gray-500 text-sm">Loading…</p>
+                ) : drivers.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No registrations yet.</p>
+                ) : (
+                  <ol className="list-decimal list-inside space-y-1">
+                    {drivers.map((name, i) => (
+                      <li key={i} className="text-gray-300 text-sm">{name}</li>
+                    ))}
+                  </ol>
+                )}
               </div>
             </div>
           )}

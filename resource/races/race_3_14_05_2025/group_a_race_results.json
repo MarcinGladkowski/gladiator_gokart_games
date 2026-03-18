@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "mGP (3 sk.) - Závod, sk. A",
+    "date": "2025-05-14",
+    "time_range": "18:39 - 18:58",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 8,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:11.225"
+    },
+    {
+      "rank": 2,
+      "kart_number": 2,
+      "driver": "CHLEBEK",
+      "laps": 12,
+      "difference_to_leader": "4.505",
+      "best_lap_time": "1:11.512"
+    },
+    {
+      "rank": 3,
+      "kart_number": 1,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "8.286",
+      "best_lap_time": "1:11.388"
+    },
+    {
+      "rank": 4,
+      "kart_number": 9,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "9.770",
+      "best_lap_time": "1:11.703"
+    },
+    {
+      "rank": 5,
+      "kart_number": 11,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "9.987",
+      "best_lap_time": "1:11.916"
+    },
+    {
+      "rank": 6,
+      "kart_number": 13,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "10.035",
+      "best_lap_time": "1:11.213"
+    },
+    {
+      "rank": 7,
+      "kart_number": 7,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "10.802",
+      "best_lap_time": "1:11.336"
+    },
+    {
+      "rank": 8,
+      "kart_number": 15,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "11.201",
+      "best_lap_time": "1:11.303"
+    },
+    {
+      "rank": 9,
+      "kart_number": 6,
+      "driver": "FILIP BUCHWALD",
+      "laps": 12,
+      "difference_to_leader": "15.956",
+      "best_lap_time": "1:11.356"
+    },
+    {
+      "rank": 10,
+      "kart_number": 5,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "16.368",
+      "best_lap_time": "1:11.911"
+    },
+    {
+      "rank": 11,
+      "kart_number": 4,
+      "driver": "BODEK",
+      "laps": 12,
+      "difference_to_leader": "17.347",
+      "best_lap_time": "1:10.961"
+    },
+    {
+      "rank": 12,
+      "kart_number": 14,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "20.632",
+      "best_lap_time": "1:11.469"
+    },
+    {
+      "rank": 13,
+      "kart_number": 10,
+      "driver": "WILCZU",
+      "laps": 12,
+      "difference_to_leader": "26.449",
+      "best_lap_time": "1:12.592"
+    }
+  ]
+}

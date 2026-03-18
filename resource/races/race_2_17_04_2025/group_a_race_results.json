@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "GP 3sk. - Závod, sk. A",
+    "date": "2025-04-17",
+    "time_range": "19:01 - 18:43",
+    "track": "OKRUH"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 6,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "Winner",
+      "best_lap_time": "1:11.120"
+    },
+    {
+      "rank": 2,
+      "kart_number": 14,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "1.645",
+      "best_lap_time": "1:11.070"
+    },
+    {
+      "rank": 3,
+      "kart_number": 13,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "15.363",
+      "best_lap_time": "1:12.359"
+    },
+    {
+      "rank": 4,
+      "kart_number": 15,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "15.618",
+      "best_lap_time": "1:12.224"
+    },
+    {
+      "rank": 5,
+      "kart_number": 12,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "15.874",
+      "best_lap_time": "1:12.370"
+    },
+    {
+      "rank": 6,
+      "kart_number": 8,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "18.341",
+      "best_lap_time": "1:11.923"
+    },
+    {
+      "rank": 7,
+      "kart_number": 11,
+      "driver": "SIMBA",
+      "laps": 12,
+      "difference_to_leader": "20.222",
+      "best_lap_time": "1:12.618"
+    },
+    {
+      "rank": 8,
+      "kart_number": 3,
+      "driver": "LUCKY LUKE",
+      "laps": 12,
+      "difference_to_leader": "21.415",
+      "best_lap_time": "1:12.239"
+    },
+    {
+      "rank": 9,
+      "kart_number": 4,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "27.009",
+      "best_lap_time": "1:12.864"
+    },
+    {
+      "rank": 10,
+      "kart_number": 1,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "29.648",
+      "best_lap_time": "1:13.150"
+    },
+    {
+      "rank": 11,
+      "kart_number": 5,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "29.809",
+      "best_lap_time": "1:12.971"
+    },
+    {
+      "rank": 12,
+      "kart_number": 7,
+      "driver": "SSSOII",
+      "laps": 12,
+      "difference_to_leader": "30.219",
+      "best_lap_time": "1:13.132"
+    },
+    {
+      "rank": 13,
+      "kart_number": 2,
+      "driver": "MARCINBTM",
+      "laps": 12,
+      "difference_to_leader": "45.560",
+      "best_lap_time": "1:13.766"
+    }
+  ]
+}

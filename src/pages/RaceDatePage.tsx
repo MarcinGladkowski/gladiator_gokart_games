@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
 import { daysLeft } from '../utils/daysLeft'
+import { GoogleSheetTable } from '../components/GoogleSheetTable'
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
@@ -29,18 +30,24 @@ export function RaceDatePage() {
             }
           </p>
           {date === '2026-04-23' && (
-            <div>
-              <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
-              <div className="rounded-lg overflow-hidden border border-gray-700">
-                <iframe
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
-                  width="100%"
-                  height="900"
-                  style={{ border: 0 }}
-                  title="Race enrollment form"
-                >
-                  Loading…
-                </iframe>
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-lg font-semibold text-white mb-3">Registered drivers</h2>
+                <GoogleSheetTable csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
+                <div className="rounded-lg overflow-hidden border border-gray-700">
+                  <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
+                    width="100%"
+                    height="900"
+                    style={{ border: 0 }}
+                    title="Race enrollment form"
+                  >
+                    Loading…
+                  </iframe>
+                </div>
               </div>
             </div>
           )}

@@ -14,8 +14,9 @@ export function useRegisteredDrivers(
       .then((text) => {
         const [header, ...rows] = parseCsv(text)
         const nicknameCol = header.indexOf('Zawodnik')
-        const timestampCol = header.indexOf('Timestamp')
+        const timestampCol = header.indexOf('Sygnatura czasowa')
         if (nicknameCol === -1) return
+
         const parsed: Registration[] = rows
           .filter((r) => r[nicknameCol]?.trim())
           .map((r) => ({
@@ -23,6 +24,7 @@ export function useRegisteredDrivers(
             nickname: r[nicknameCol].trim().toLowerCase(),
             registrationDateTime: new Date(r[timestampCol] ?? ''),
           }))
+
         setRegistrations(parsed)
       })
       .catch(console.error)

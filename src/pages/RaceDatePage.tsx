@@ -78,7 +78,9 @@ export function RaceDatePage() {
                 ) : drivers.length === 0 ? (
                   <p className="text-gray-500 text-sm">No registrations yet.</p>
                 ) : (() => {
-                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26)
+                  // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
+                  const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
+                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26, enrollOpenDateTime)
                   return (
                     <div className="flex gap-12">
                       <div>

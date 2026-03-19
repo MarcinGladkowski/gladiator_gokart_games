@@ -5,24 +5,9 @@ import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
 import config from '../data/config.json'
+import { partitionDrivers } from '../services/partitionDrivers'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
-const GRID_SIZE = 26
-const staffSet = new Set(config.staff.map((s) => s.trim().toLowerCase()))
-
-function normalize(name: string): string {
-  return name.trim().toLowerCase()
-}
-
-function partitionDrivers(drivers: string[]): { grid: string[]; reserve: string[] } {
-  const staff = drivers.filter((d) => staffSet.has(normalize(d)))
-  const nonStaff = drivers.filter((d) => !staffSet.has(normalize(d)))
-  const remainingSpots = Math.max(0, GRID_SIZE - staff.length)
-  return {
-    grid: [...staff, ...nonStaff.slice(0, remainingSpots)],
-    reserve: nonStaff.slice(remainingSpots),
-  }
-}
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
@@ -93,7 +78,7 @@ export function RaceDatePage() {
                 ) : drivers.length === 0 ? (
                   <p className="text-gray-500 text-sm">No registrations yet.</p>
                 ) : (() => {
-                  const { grid, reserve } = partitionDrivers(drivers)
+                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26)
                   return (
                     <div className="flex gap-12">
                       <div>

@@ -1,3 +1,9 @@
+export interface Registration {
+  nickname: string
+  originalNickname: string
+  registrationDateTime: Date
+}
+
 export type LapTime = string;
 export type IsoDate = string;
 export type GroupLetter = string;

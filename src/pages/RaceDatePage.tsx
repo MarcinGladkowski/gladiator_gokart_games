@@ -84,8 +84,8 @@ export function RaceDatePage() {
                       <div>
                         <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
                         <ol className="list-decimal list-inside space-y-1">
-                          {grid.map((name, i) => (
-                            <li key={i} className="text-gray-300 text-sm">{name}</li>
+                          {grid.map((r, i) => (
+                            <li key={i} className="text-gray-300 text-sm">{r.originalNickname}</li>
                           ))}
                         </ol>
                       </div>
@@ -93,8 +93,8 @@ export function RaceDatePage() {
                         <div>
                           <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
                           <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
-                            {reserve.map((name, i) => (
-                              <li key={i} className="text-gray-300 text-sm">{name}</li>
+                            {reserve.map((r, i) => (
+                              <li key={i} className="text-gray-300 text-sm">{r.originalNickname}</li>
                             ))}
                           </ol>
                         </div>

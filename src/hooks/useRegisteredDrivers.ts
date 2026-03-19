@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react'
 import { parseCsv } from '../components/GoogleSheetTable'
+import type { Registration } from '../types'
 
 export function useRegisteredDrivers(
   csvUrl: string,
   refreshKey: number,
-): string[] | null {
-  const [drivers, setDrivers] = useState<string[] | null>(null)
+): Registration[] | null {
+  const [registrations, setRegistrations] = useState<Registration[] | null>(null)
 
   useEffect(() => {
     fetch(csvUrl)
       .then((r) => r.text())
       .then((text) => {
         const [header, ...rows] = parseCsv(text)
-        const col = header.indexOf('Zawodnik')
-        if (col === -1) {
-          return
-        }
-        setDrivers(rows.map((r) => r[col]).filter(Boolean))
+        const nicknameCol = header.indexOf('Zawodnik')
+        const timestampCol = header.indexOf('Timestamp')
+        if (nicknameCol === -1) return
+        const parsed: Registration[] = rows
+          .filter((r) => r[nicknameCol]?.trim())
+          .map((r) => ({
+            originalNickname: r[nicknameCol],
+            nickname: r[nicknameCol].trim().toLowerCase(),
+            registrationDateTime: new Date(r[timestampCol] ?? ''),
+          }))
+        setRegistrations(parsed)
       })
       .catch(console.error)
   }, [csvUrl, refreshKey])
 
-  return drivers
+  return registrations
 }

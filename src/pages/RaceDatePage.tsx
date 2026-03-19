@@ -76,7 +76,7 @@ export function RaceDatePage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-3">
-                    <h2 className="text-lg font-semibold text-white">Requests</h2>
+                    <h2 className="text-lg font-semibold text-white">All sent requests - time ordered</h2>
                     <button
                       onClick={() => setRefreshKey((k) => k + 1)}
                       className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"

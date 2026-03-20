@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
+import { useTotalResults } from '../hooks/useResults'
 import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
@@ -14,6 +15,7 @@ export function RaceDatePage() {
   const event = useRaceEvent(Number(year), date ?? '')
   const [refreshKey, setRefreshKey] = useState(0)
   const drivers = useRegisteredDrivers(REGISTRATIONS_CSV, refreshKey)
+  const leagueStandings = useTotalResults()
 
   useEffect(() => {
     const id = setInterval(() => setRefreshKey((k) => k + 1), 20_000)
@@ -44,6 +46,9 @@ export function RaceDatePage() {
           </p>
           {date === '2026-04-23' && (
             <div className="space-y-8">
+              <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">
+                ⚠ Under testing — results on this page may not reflect the final starting grid.
+              </div>
               <div className="flex gap-6 items-start">
                 <div className="w-[640px] shrink-0">
                   <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
@@ -80,7 +85,7 @@ export function RaceDatePage() {
                 ) : (() => {
                   // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
                   const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
-                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26, enrollOpenDateTime)
+                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26, enrollOpenDateTime, leagueStandings)
                   return (
                     <div className="flex gap-12">
                       <div>

@@ -49,8 +49,8 @@ export function RaceDatePage() {
               <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">
                 ⚠ Under testing — results on this page may not reflect the final starting grid.
               </div>
-              <div className="flex gap-6 items-start">
-                <div className="w-[640px] shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6 items-start">
+                <div className="w-full lg:w-[640px] lg:shrink-0">
                   <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
                   <div className="rounded-lg overflow-hidden border border-gray-700">
                     <iframe
@@ -87,7 +87,7 @@ export function RaceDatePage() {
                   const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
                   const { grid, reserve } = partitionDrivers(drivers, config.staff, 26, enrollOpenDateTime, leagueStandings)
                   return (
-                    <div className="flex gap-12">
+                    <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
                       <div>
                         <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
                         <ol className="list-decimal list-inside space-y-1">

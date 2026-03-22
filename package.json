@@ -7,7 +7,9 @@
     "parse": "tsx scripts/parse-data.ts",
     "dev": "npm run parse && vite",
     "build": "npm run parse && tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -26,6 +28,7 @@
     "typescript": "^5.8.2",
     "vite": "^6.3.0",
     "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^4.1.0",
     "workbox-window": "^7.3.0"
   }
 }

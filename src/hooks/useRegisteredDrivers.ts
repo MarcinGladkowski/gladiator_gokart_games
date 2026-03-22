@@ -20,8 +20,8 @@ export function useRegisteredDrivers(
         const parsed: Registration[] = rows
           .filter((r) => r[nicknameCol]?.trim())
           .map((r) => ({
-            originalNickname: r[nicknameCol],
-            nickname: r[nicknameCol].trim().toLowerCase(),
+            nickname: r[nicknameCol].trim().toUpperCase(),
+            originalNickname: r[nicknameCol].trim(),
             registrationDateTime: new Date(r[timestampCol] ?? ''),
           }))
 

@@ -74,3 +74,8 @@ export interface ClassificationEntry {
   racesCount: number;
   raceScores: RaceScore[];
 }
+
+export interface PartitionResult {
+  grid: Registration[]
+  reserve: Registration[]
+}

@@ -1,35 +1,34 @@
-import type { Registration, TotalResultEntry } from '../types'
+import type { Registration, TotalResultEntry, PartitionResult} from '../types'
 
 export const ENROLL_WINDOW_MS = 24 * 60 * 60 * 1000 // 24 hours, after that drivers are moved to reserve list
 
-export interface PartitionResult {
-  grid: Registration[]
-  reserve: Registration[]
-}
+export class DriversGridService {
+  private readonly staffSet: Set<string>
+  private readonly leagueStandings: TotalResultEntry[]
+  private readonly enrollCloseDateTime: Date
 
-export function partitionDrivers(
-  registrations: Registration[],
-  staff: string[],
-  gridSize: number,
-  enrollOpenDateTime: Date,
-  leagueStandings: TotalResultEntry[],
-): PartitionResult {
-  const enrollCloseDateTime = new Date(enrollOpenDateTime.getTime() + ENROLL_WINDOW_MS)
-  const staffSet = new Set(staff.map((s) => s.trim().toLowerCase()))
-  const leagueSet = new Set(leagueStandings.map((e) => e.nickname.trim().toLowerCase()))
+  constructor(
+    staff: string[],
+    _gridSize: number,
+    enrollOpenDateTime: Date,
+    leagueStandings: TotalResultEntry[],
+  ) {
+    this.staffSet = new Set(staff.map((staffName) => staffName.trim().toLowerCase()))
+    this.leagueStandings = leagueStandings
+    this.enrollCloseDateTime = new Date(enrollOpenDateTime.getTime() + ENROLL_WINDOW_MS)
+  }
 
-  const onTime = registrations.filter((r) => r.registrationDateTime <= enrollCloseDateTime)
-  const late = registrations.filter((r) => r.registrationDateTime > enrollCloseDateTime)
+  partition(registrations: Registration[]): PartitionResult {
+    const onTime = registrations.filter((registration) => registration.registrationDateTime <= this.enrollCloseDateTime)
+    const late = registrations.filter((registration) => registration.registrationDateTime > this.enrollCloseDateTime)
 
-  const gridEligible = onTime.filter((r) => !leagueSet.has(r.nickname))
-  const knownReserve = onTime.filter((r) => leagueSet.has(r.nickname))
+    const gridEligible = onTime.filter((registration) => !this.leagueStandings.some((standing) => standing.nickname.trim().toLowerCase() === registration.nickname.trim().toLowerCase()))
+    const staffDrivers = gridEligible.filter((registration) => this.staffSet.has(registration.nickname.trim().toLowerCase()))
+    const nonStaff = gridEligible.filter((registration) => !this.staffSet.has(registration.nickname.trim().toLowerCase()))
 
-  const staffDrivers = gridEligible.filter((r) => staffSet.has(r.nickname))
-  const nonStaff = gridEligible.filter((r) => !staffSet.has(r.nickname))
-  const remainingSpots = Math.max(0, gridSize - staffDrivers.length)
-
-  return {
-    grid: [...staffDrivers, ...nonStaff.slice(0, remainingSpots)],
-    reserve: [...nonStaff.slice(remainingSpots), ...knownReserve, ...late],
+    return {
+      grid: [...staffDrivers, ...nonStaff],
+      reserve: [...late],
+    }
   }
 }

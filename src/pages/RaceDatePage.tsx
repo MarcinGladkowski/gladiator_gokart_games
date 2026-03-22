@@ -6,7 +6,7 @@ import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
 import config from '../data/config.json'
-import { partitionDrivers } from '../services/partitionDrivers'
+import { DriversGridService } from '../services/partitionDrivers'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
 
@@ -85,7 +85,7 @@ export function RaceDatePage() {
                 ) : (() => {
                   // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
                   const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
-                  const { grid, reserve } = partitionDrivers(drivers, config.staff, 26, enrollOpenDateTime, leagueStandings)
+                  const { grid, reserve } = new DriversGridService(config.staff, 26, enrollOpenDateTime, leagueStandings).partition(drivers)
                   return (
                     <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
                       <div>

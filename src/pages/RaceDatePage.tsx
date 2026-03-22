@@ -52,7 +52,7 @@ export function RaceDatePage() {
               <div className="flex flex-col lg:flex-row gap-6 items-start">
                 <div className="w-full lg:w-[640px] lg:shrink-0">
                   <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
-                  <div className="rounded-lg overflow-hidden border border-gray-700">
+                  <div className="rounded-lg overflow-hidden border border-gray-700 bg-white">
                     <iframe
                       src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
                       width="100%"

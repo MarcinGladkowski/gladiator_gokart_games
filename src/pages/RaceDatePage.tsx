@@ -5,7 +5,7 @@ import { useTotalResults } from '../hooks/useResults'
 import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
-import config from '../data/config.json'
+// import config from '../data/config.json'
 import { DriversGridService } from '../services/partitionDrivers'
 
 const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
@@ -85,14 +85,14 @@ export function RaceDatePage() {
                 ) : (() => {
                   // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
                   const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
-                  const { grid, reserve } = new DriversGridService(config.staff, 26, enrollOpenDateTime, leagueStandings).partition(drivers)
+                  const { grid, reserve } = new DriversGridService(26, enrollOpenDateTime, leagueStandings).partition(drivers)
                   return (
                     <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
                       <div>
                         <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
                         <ol className="list-decimal list-inside space-y-1">
                           {grid.map((r, i) => (
-                            <li key={i} className="text-gray-300 text-sm">{r.originalNickname}</li>
+                            <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
                           ))}
                         </ol>
                       </div>
@@ -101,7 +101,7 @@ export function RaceDatePage() {
                           <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
                           <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
                             {reserve.map((r, i) => (
-                              <li key={i} className="text-gray-300 text-sm">{r.originalNickname}</li>
+                              <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
                             ))}
                           </ol>
                         </div>

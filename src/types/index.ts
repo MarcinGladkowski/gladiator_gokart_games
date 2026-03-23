@@ -75,7 +75,12 @@ export interface ClassificationEntry {
   raceScores: RaceScore[];
 }
 
+export interface GridEntry {
+  registration: Registration
+  standing: TotalResultEntry | undefined
+}
+
 export interface PartitionResult {
-  grid: Registration[]
-  reserve: Registration[]
+  grid: GridEntry[]
+  reserve: GridEntry[]
 }

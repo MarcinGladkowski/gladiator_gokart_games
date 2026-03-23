@@ -23,8 +23,24 @@ describe('DriversGridService', () => {
     expect(reserve).toHaveLength(0)
   })
 
+  it('move drivers to reserve if there is no space on main grid', () => {
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 1000) // 1 hour ago
+    const service = new DriversGridService([], 2, enrollOpenDateTime, [])
+
+    const registrations: Registration[] = [
+      makeRegistration('DRIVER1', 30),
+      makeRegistration('DRIVER2', 30),
+      makeRegistration('DRIVER3', 30),
+    ]
+
+    const { grid, reserve } = service.partition(registrations)
+    
+    expect(grid).toHaveLength(2)
+    expect(reserve).toHaveLength(1)
+  })
+
   it('puts late registrations on the reserve', () => {
-    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 1 day ago
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 1 day ago + 1 hour
     const service = new DriversGridService([], 26, enrollOpenDateTime, [])
 
     const registrations: Registration[] = [

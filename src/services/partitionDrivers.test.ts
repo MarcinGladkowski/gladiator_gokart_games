@@ -103,4 +103,31 @@ describe('DriversGridService', () => {
     expect(reserve).toHaveLength(1)
     expect(reserve[0].registration.nickname).toBe('DRIVER3')
   })
+
+   it('sort driver grid by position but put late registrations on reserve', () => {
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25  * 1000) // 25 hours ago
+    const service = new DriversGridService(
+      2,
+      enrollOpenDateTime,
+      [
+        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER2', position: 1, scorePercent: 70, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER3', position: 12, scorePercent: 80, racesCount: 10, raceScores: {} },
+      ]
+    )
+
+    const registrations: Registration[] = [
+      makeRegistration('DRIVER1', 90), // on time
+      makeRegistration('DRIVER2', 30), // late
+      makeRegistration('DRIVER3', 90), // on time
+    ]
+
+    const { grid, reserve } = service.partition(registrations)
+
+    expect(grid).toHaveLength(2)
+    expect(grid[0].registration.nickname).toBe('DRIVER1')
+    expect(grid[1].registration.nickname).toBe('DRIVER3')
+    expect(reserve).toHaveLength(1)
+    expect(reserve[0].registration.nickname).toBe('DRIVER2')
+  })
 })

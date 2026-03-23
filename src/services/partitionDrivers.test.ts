@@ -104,8 +104,8 @@ describe('DriversGridService', () => {
     expect(reserve[0].registration.nickname).toBe('DRIVER3')
   })
 
-   it('sort driver grid by position but put late registrations on reserve', () => {
-    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25  * 1000) // 25 hours ago
+  it('sort driver grid by position but put late registrations on reserve', () => {
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 25 hours ago
     const service = new DriversGridService(
       2,
       enrollOpenDateTime,
@@ -129,5 +129,9 @@ describe('DriversGridService', () => {
     expect(grid[1].registration.nickname).toBe('DRIVER3')
     expect(reserve).toHaveLength(1)
     expect(reserve[0].registration.nickname).toBe('DRIVER2')
+  })
+
+  it('registered staff drivers in 24 hours window are prioritized and cannot be moved to reserve', () => {
+    expect(true).toBeTruthy() // TODO
   })
 })

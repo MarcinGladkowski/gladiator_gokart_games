@@ -38,6 +38,8 @@ export class DriversGridService {
     registrationsOnTime.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
 
     const grid = registrationsOnTime.slice(0, this.gridSize)
+
+
     const reserve = [...registrationsOnTime.slice(this.gridSize), ...late]
 
     return { grid, reserve }

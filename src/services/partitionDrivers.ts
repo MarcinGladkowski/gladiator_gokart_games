@@ -28,15 +28,14 @@ export class DriversGridService {
       ),
     }))
 
-    const onTime = entries.filter((entry) => entry.registration.registrationDateTime <= this.enrollCloseDateTime)
+    const registrationsOnTime = entries.filter((entry) => entry.registration.registrationDateTime <= this.enrollCloseDateTime)
     const late = entries.filter((entry) => entry.registration.registrationDateTime > this.enrollCloseDateTime)
 
-    onTime.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
+    registrationsOnTime.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
 
-    const grid = onTime.slice(0, this.gridSize)
-    const reserve = [...onTime.slice(this.gridSize), ...late]
+    const grid = registrationsOnTime.slice(0, this.gridSize)
+    const reserve = [...registrationsOnTime.slice(this.gridSize), ...late]
     
-
     return { grid, reserve }
   }
 }

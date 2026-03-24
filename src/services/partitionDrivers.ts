@@ -41,7 +41,7 @@ export class DriversGridService {
 
     const nonStaffDriversOnTime = registrationsOnTime.filter((entry) => !entry.registration.isStaff)
 
-    const remainingGridSpots = this.gridSize - grid.length
+    const remainingGridSpots = (this.gridSize - grid.length)
 
     const fitToGrid = nonStaffDriversOnTime.slice(0, remainingGridSpots);
 
@@ -51,7 +51,15 @@ export class DriversGridService {
 
     grid.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
 
-    const reserve = [...nonFitToGrid, ...late]
+    let reserve = [...nonFitToGrid, ...late]
+
+    reserve.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
+
+    // FILLING MAIN GRID WITH RESERVE DRIVERS
+    // if (grid.length < this.gridSize) {
+    //   grid = [...grid, ...reserve.slice(0, this.gridSize - grid.length)]
+    //   reserve = reserve.slice(this.gridSize - grid.length)
+    // }
 
     return { grid, reserve }
   }

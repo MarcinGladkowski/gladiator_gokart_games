@@ -46,7 +46,7 @@ export function RaceDatePage() {
           </p>
           {date === '2026-04-23' && (() => {
             // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
-            const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
+            const enrollOpenDateTime = new Date(Date.now() - 1 * 60 * 60 * 1000)
             return (
             <div className="space-y-8">
               <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">

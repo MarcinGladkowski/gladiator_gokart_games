@@ -44,14 +44,18 @@ export function RaceDatePage() {
               : <span className="text-gray-500">{daysLeft(event.date)} days left</span>
             }
           </p>
-          {date === '2026-04-23' && (
+          {date === '2026-04-23' && (() => {
+            // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
+            const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
+            return (
             <div className="space-y-8">
               <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">
                 ⚠ Under testing — results on this page may not reflect the final starting grid.
               </div>
               <div className="flex flex-col lg:flex-row gap-6 items-start">
                 <div className="w-full lg:w-[640px] lg:shrink-0">
-                  <h2 className="text-lg font-semibold text-white mb-3">Enrollment</h2>
+                  <h2 className="text-lg font-semibold text-white mb-1">Enrollment</h2>
+                  <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
                   <div className="rounded-lg overflow-hidden border border-gray-700 bg-white">
                     <iframe
                       src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
@@ -83,8 +87,6 @@ export function RaceDatePage() {
                 ) : drivers.length === 0 ? (
                   <p className="text-gray-500 text-sm">No registrations yet.</p>
                 ) : (() => {
-                  // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
-                  const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
                   const { grid, reserve } = new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
                   return (
                     <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
@@ -111,7 +113,7 @@ export function RaceDatePage() {
                 })()}
               </div>
             </div>
-          )}
+          )})()}
         </>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">

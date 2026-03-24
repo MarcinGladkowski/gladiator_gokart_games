@@ -35,12 +35,23 @@ export class DriversGridService {
     const registrationsOnTime = entries.filter((entry) => entry.registration.registrationDateTime <= this.enrollCloseDateTime)
     const late = entries.filter((entry) => entry.registration.registrationDateTime > this.enrollCloseDateTime)
 
-    registrationsOnTime.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
+    const staffDriversOnTime = registrationsOnTime.filter((entry) => entry.registration.isStaff)
 
-    const grid = registrationsOnTime.slice(0, this.gridSize)
+    let grid = [...staffDriversOnTime]
 
+    const nonStaffDriversOnTime = registrationsOnTime.filter((entry) => !entry.registration.isStaff)
 
-    const reserve = [...registrationsOnTime.slice(this.gridSize), ...late]
+    const remainingGridSpots = this.gridSize - grid.length
+
+    const fitToGrid = nonStaffDriversOnTime.slice(0, remainingGridSpots);
+
+    const nonFitToGrid = nonStaffDriversOnTime.slice(remainingGridSpots)
+
+    grid = [...grid, ...fitToGrid]
+
+    grid.sort((a, b) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity))
+
+    const reserve = [...nonFitToGrid, ...late]
 
     return { grid, reserve }
   }

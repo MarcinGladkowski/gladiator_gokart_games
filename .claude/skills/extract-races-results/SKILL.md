@@ -59,9 +59,11 @@ Your task is to extract race competitions results from email messages saved in H
       "driver": "WIKTOR KALUZA",
       "laps": 6,
       "difference_to_leader": "Leader",
-      "best_lap_time": "1:25.495"
+      "best_lap_time": "1:25.495",
+      "best_lap_time_race": true
     },
 }
 ```
 * The file name will be in format: `resource/races/race_<race_id>_<date>/group_a_race_results.json`
 * Date should be in format DD_MM_YYYY
+* `best_lap_time_race` is a boolean: `true` for the driver(s) who set the fastest lap in the race, `false` for all others. Compare all `best_lap_time` values to determine who holds the race best lap.

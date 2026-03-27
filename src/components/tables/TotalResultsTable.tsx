@@ -20,7 +20,7 @@ export function TotalResultsTable({ entries }: Props) {
     for (const e of entries) {
       for (const s of e.scores) dates.add(s.date)
     }
-    return [...dates].sort()
+    return [...dates].sort().reverse()
   }, [entries])
 
   const sorted = useMemo(() => {

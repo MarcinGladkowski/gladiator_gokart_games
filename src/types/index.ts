@@ -47,17 +47,24 @@ export interface Season {
   events: RaceEvent[];
 }
 
+export interface TotalResultScore {
+  value: number;
+  betterResultsCount: number;
+  allResultsCount: number;
+  date: IsoDate;
+  positionAbsolute: number;
+}
+
 export interface TotalResultEntry {
   position: number;
   nickname: string;
-  scorePercent: number;
-  racesCount: number;
-  raceScores: Record<IsoDate, number | null>;
+  score: number;
+  entriesCount: number;
+  scores: TotalResultScore[];
 }
 
 export interface AppData {
   generatedAt: string;
-  totalResults: TotalResultEntry[];
   seasons: Season[];
 }
 

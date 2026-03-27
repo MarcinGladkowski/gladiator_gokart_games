@@ -3,7 +3,7 @@ import type { TotalResultEntry } from '../../types'
 import { DriverFilter } from '../filters/DriverFilter'
 import { useDriverFilter } from '../../hooks/useDriverFilter'
 
-type SortKey = 'position' | 'nickname' | 'scorePercent' | 'racesCount'
+type SortKey = 'position' | 'nickname' | 'score' | 'entriesCount'
 type SortDir = 'asc' | 'desc'
 
 interface Props {
@@ -18,7 +18,7 @@ export function TotalResultsTable({ entries }: Props) {
   const raceDates = useMemo(() => {
     const dates = new Set<string>()
     for (const e of entries) {
-      Object.keys(e.raceScores).forEach((d) => dates.add(d))
+      for (const s of e.scores) dates.add(s.date)
     }
     return [...dates].sort()
   }, [entries])
@@ -28,8 +28,8 @@ export function TotalResultsTable({ entries }: Props) {
       let cmp = 0
       if (sortKey === 'position') cmp = a.position - b.position
       else if (sortKey === 'nickname') cmp = a.nickname.localeCompare(b.nickname)
-      else if (sortKey === 'scorePercent') cmp = a.scorePercent - b.scorePercent
-      else if (sortKey === 'racesCount') cmp = a.racesCount - b.racesCount
+      else if (sortKey === 'score') cmp = a.score - b.score
+      else if (sortKey === 'entriesCount') cmp = a.entriesCount - b.entriesCount
       return sortDir === 'asc' ? cmp : -cmp
     })
   }, [filtered, sortKey, sortDir])
@@ -71,15 +71,15 @@ export function TotalResultsTable({ entries }: Props) {
               </th>
               <th
                 className="px-4 py-3 text-right cursor-pointer hover:text-gray-200 select-none"
-                onClick={() => toggleSort('scorePercent')}
+                onClick={() => toggleSort('score')}
               >
-                Score%<SortIcon col="scorePercent" />
+                Score%<SortIcon col="score" />
               </th>
               <th
                 className="px-4 py-3 text-right cursor-pointer hover:text-gray-200 select-none"
-                onClick={() => toggleSort('racesCount')}
+                onClick={() => toggleSort('entriesCount')}
               >
-                Races<SortIcon col="racesCount" />
+                Races<SortIcon col="entriesCount" />
               </th>
               {raceDates.map((d) => (
                 <th key={d} className="px-4 py-3 text-right whitespace-nowrap">
@@ -91,6 +91,7 @@ export function TotalResultsTable({ entries }: Props) {
           <tbody>
             {sorted.map((entry, idx) => {
               const color = PODIUM[entry.position - 1] ?? ''
+              const scoreByDate = new Map(entry.scores.map((s) => [s.date, s]))
               return (
                 <tr
                   key={idx}
@@ -98,13 +99,17 @@ export function TotalResultsTable({ entries }: Props) {
                 >
                   <td className={`px-4 py-3 text-right font-bold ${color}`}>{entry.position}</td>
                   <td className={`px-4 py-3 font-medium ${color}`}>{entry.nickname}</td>
-                  <td className="px-4 py-3 text-right text-green-400">{entry.scorePercent.toFixed(1)}%</td>
-                  <td className="px-4 py-3 text-right text-gray-300">{entry.racesCount}</td>
+                  <td className="px-4 py-3 text-right text-green-400">{(entry.score * 100).toFixed(1)}%</td>
+                  <td className="px-4 py-3 text-right text-gray-300">{entry.entriesCount}</td>
                   {raceDates.map((d) => {
-                    const score = entry.raceScores[d]
+                    const s = scoreByDate.get(d)
                     return (
                       <td key={d} className="px-4 py-3 text-right text-gray-400">
-                        {score != null ? `${score.toFixed(1)}%` : '—'}
+                        {s != null ? (
+                          <span title={`pos. ${s.positionAbsolute} / ${s.allResultsCount}`}>
+                            {(s.value * 100).toFixed(1)}%
+                          </span>
+                        ) : '—'}
                       </td>
                     )
                   })}

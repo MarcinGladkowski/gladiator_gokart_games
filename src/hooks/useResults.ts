@@ -1,5 +1,6 @@
 import type { AppData, Season, RaceEvent, Session, TotalResultEntry, ClassificationEntry, RaceScore, RaceEntry } from '../types'
 import resultsData from '../data/results.json'
+import totalResultsData from '../data/total_results.json'
 
 const data = resultsData as AppData
 
@@ -31,7 +32,7 @@ export function useSession(
 }
 
 export function useTotalResults(): TotalResultEntry[] {
-  return data.totalResults
+  return totalResultsData as TotalResultEntry[]
 }
 
 const GROUP_A_POINTS = [50, 44, 40, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16]

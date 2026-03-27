@@ -6,8 +6,8 @@
   "scripts": {
     "parse": "tsx scripts/parse-data.ts",
     "dev": "npm run parse && vite",
-    "build": "npm run parse && tsc -b && vite build",
-    "build:only": "vite build",
+    "build:parse": "npm run parse && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

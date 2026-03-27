@@ -1,7 +1,6 @@
 import { readdirSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
 import { parseResultsJson } from './parse-results-json.js';
-import { parseTotalResultsCsv } from './parse-total-results-csv.js';
 import type { AppData, RaceEvent, Season, Session, SessionType, GroupLetter } from '../src/types/index.js';
 
 // Full season schedule — used to add upcoming races that have no data directory yet
@@ -18,7 +17,6 @@ const SCHEDULE: Array<{ raceNum: number; isoDate: string }> = [
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const RACES_DIR = join(ROOT, 'resource', 'races');
-const TOTAL_CSV_PATH = join(ROOT, 'resource', 'total_results.csv');
 const OUT_DIR = join(ROOT, 'src', 'data');
 const OUT_FILE = join(OUT_DIR, 'results.json');
 
@@ -112,19 +110,8 @@ function main() {
       events: events.sort((a, b) => a.date.localeCompare(b.date)),
     }));
 
-  // Parse total results CSV
-  let totalResults: ReturnType<typeof parseTotalResultsCsv> = [];
-  try {
-    totalResults = parseTotalResultsCsv(TOTAL_CSV_PATH);
-    console.log(`Parsed ${totalResults.length} total result entries from CSV`);
-  } catch (err) {
-    console.error('Total results CSV parsing failed:', err);
-    console.warn('Continuing with empty total results');
-  }
-
   const appData: AppData = {
     generatedAt: new Date().toISOString(),
-    totalResults,
     seasons,
   };
 

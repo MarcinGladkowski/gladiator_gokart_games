@@ -59,8 +59,8 @@ describe('DriversGridService', () => {
       26,
       enrollOpenDateTime,
       [
-        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER2', position: 1, scorePercent: 80, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.80, entriesCount: 10, scores: [] },
       ]
     )
 
@@ -83,9 +83,9 @@ describe('DriversGridService', () => {
       2,
       enrollOpenDateTime,
       [
-        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER2', position: 1, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER3', position: 12, scorePercent: 80, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER3', position: 12, score: 0.80, entriesCount: 10, scores: [] },
       ]
     )
 
@@ -110,9 +110,9 @@ describe('DriversGridService', () => {
       2,
       enrollOpenDateTime,
       [
-        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER2', position: 1, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER3', position: 12, scorePercent: 80, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER3', position: 12, score: 0.80, entriesCount: 10, scores: [] },
       ]
     )
 
@@ -137,10 +137,10 @@ describe('DriversGridService', () => {
       2,
       enrollOpenDateTime,
       [
-        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER2', position: 1, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER3', position: 12, scorePercent: 80, racesCount: 10, raceScores: {} },
-        { nickname: 'HONKI', position: 11, scorePercent: 80, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER3', position: 12, score: 0.80, entriesCount: 10, scores: [] },
+        { nickname: 'HONKI', position: 11, score: 0.80, entriesCount: 10, scores: [] },
       ],
       ['Honki']
     )
@@ -169,10 +169,10 @@ describe('DriversGridService', () => {
       4,
       enrollOpenDateTime,
       [
-        { nickname: 'DRIVER1', position: 10, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER2', position: 1, scorePercent: 70, racesCount: 10, raceScores: {} },
-        { nickname: 'DRIVER3', position: 12, scorePercent: 80, racesCount: 10, raceScores: {} },
-        { nickname: 'HONKI', position: 11, scorePercent: 80, racesCount: 10, raceScores: {} },
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER3', position: 12, score: 0.80, entriesCount: 10, scores: [] },
+        { nickname: 'HONKI', position: 11, score: 0.80, entriesCount: 10, scores: [] },
       ],
       ['Honki']
     )

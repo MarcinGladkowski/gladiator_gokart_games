@@ -12,7 +12,8 @@
       "driver": "NORMAN POWER",
       "laps": 10,
       "difference_to_leader": "Winner",
-      "best_lap_time": "1:23.752"
+      "best_lap_time": "1:23.752",
+      "best_lap_time_race": true
     },
     {
       "rank": 2,
@@ -20,7 +21,8 @@
       "driver": "QUNIO",
       "laps": 10,
       "difference_to_leader": "10.178",
-      "best_lap_time": "1:24.255"
+      "best_lap_time": "1:24.255",
+      "best_lap_time_race": false
     },
     {
       "rank": 3,
@@ -28,7 +30,8 @@
       "driver": "ADMICH",
       "laps": 10,
       "difference_to_leader": "24.046",
-      "best_lap_time": "1:25.829"
+      "best_lap_time": "1:25.829",
+      "best_lap_time_race": false
     },
     {
       "rank": 4,
@@ -36,7 +39,8 @@
       "driver": "BALU",
       "laps": 10,
       "difference_to_leader": "24.432",
-      "best_lap_time": "1:25.194"
+      "best_lap_time": "1:25.194",
+      "best_lap_time_race": false
     },
     {
       "rank": 5,
@@ -44,7 +48,8 @@
       "driver": "ZGUD",
       "laps": 10,
       "difference_to_leader": "43.446",
-      "best_lap_time": "1:26.030"
+      "best_lap_time": "1:26.030",
+      "best_lap_time_race": false
     },
     {
       "rank": 6,
@@ -52,7 +57,8 @@
       "driver": "DOBRA PIANA",
       "laps": 10,
       "difference_to_leader": "48.281",
-      "best_lap_time": "1:27.234"
+      "best_lap_time": "1:27.234",
+      "best_lap_time_race": false
     },
     {
       "rank": 7,
@@ -60,7 +66,8 @@
       "driver": "SHEEPEK",
       "laps": 10,
       "difference_to_leader": "48.447",
-      "best_lap_time": "1:26.225"
+      "best_lap_time": "1:26.225",
+      "best_lap_time_race": false
     },
     {
       "rank": 8,
@@ -68,7 +75,8 @@
       "driver": "PAWELTGB",
       "laps": 10,
       "difference_to_leader": "48.496",
-      "best_lap_time": "1:27.243"
+      "best_lap_time": "1:27.243",
+      "best_lap_time_race": false
     },
     {
       "rank": 9,
@@ -76,7 +84,8 @@
       "driver": "KOCZI",
       "laps": 10,
       "difference_to_leader": "52.277",
-      "best_lap_time": "1:25.799"
+      "best_lap_time": "1:25.799",
+      "best_lap_time_race": false
     },
     {
       "rank": 10,
@@ -84,7 +93,8 @@
       "driver": "SLAWEK KAJZAR",
       "laps": 10,
       "difference_to_leader": "56.046",
-      "best_lap_time": "1:25.107"
+      "best_lap_time": "1:25.107",
+      "best_lap_time_race": false
     },
     {
       "rank": 11,
@@ -92,7 +102,8 @@
       "driver": "PASEK MARCIN",
       "laps": 10,
       "difference_to_leader": "58.799",
-      "best_lap_time": "1:26.439"
+      "best_lap_time": "1:26.439",
+      "best_lap_time_race": false
     },
     {
       "rank": 12,
@@ -100,7 +111,8 @@
       "driver": "MARCINBTM",
       "laps": 10,
       "difference_to_leader": "1:12.896",
-      "best_lap_time": "1:26.909"
+      "best_lap_time": "1:26.909",
+      "best_lap_time_race": false
     },
     {
       "rank": 13,
@@ -108,7 +120,8 @@
       "driver": "PIOTR KAMIŃSKI",
       "laps": 9,
       "difference_to_leader": "1 lap",
-      "best_lap_time": "1:32.866"
+      "best_lap_time": "1:32.866",
+      "best_lap_time_race": false
     }
   ]
 }

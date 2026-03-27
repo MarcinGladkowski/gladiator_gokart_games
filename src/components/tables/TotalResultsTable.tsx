@@ -107,7 +107,7 @@ export function TotalResultsTable({ entries }: Props) {
                       <td key={d} className="px-4 py-3 text-right text-gray-400">
                         {s != null ? (
                           <span title={`pos. ${s.positionAbsolute} / ${s.allResultsCount}`}>
-                            {(s.value * 100).toFixed(1)}%
+                            {(s.value * 100).toFixed(1)}% ({s.positionAbsolute}/{s.allResultsCount})
                           </span>
                         ) : '—'}
                       </td>

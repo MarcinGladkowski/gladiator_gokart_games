@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useRaceEvent } from '../hooks/useResults'
 import { useTotalResults } from '../hooks/useResults'
@@ -18,12 +18,7 @@ export function RaceDatePage() {
   const drivers = useRegisteredDrivers(REGISTRATIONS_CSV, refreshKey)
   const leagueStandings = useTotalResults()
 
-  useEffect(() => {
-    const id = setInterval(() => setRefreshKey((k) => k + 1), 20_000)
-    return () => clearInterval(id)
-  }, [])
-
-  if (!event) {
+if (!event) {
     return <p className="text-gray-500">Event {date} not found.</p>
   }
 

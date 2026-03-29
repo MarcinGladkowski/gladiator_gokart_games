@@ -39,7 +39,7 @@ export function GoogleSheetTable({ csvUrl }: Props) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetch(csvUrl)
+    fetch(csvUrl, { cache: 'no-store' })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.text()

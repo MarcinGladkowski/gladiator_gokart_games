@@ -9,7 +9,7 @@ export function useRegisteredDrivers(
   const [registrations, setRegistrations] = useState<Registration[] | null>(null)
 
   useEffect(() => {
-    fetch(csvUrl)
+    fetch(csvUrl, { cache: 'no-store' })
       .then((r) => r.text())
       .then((text) => {
         const [header, ...rows] = parseCsv(text)

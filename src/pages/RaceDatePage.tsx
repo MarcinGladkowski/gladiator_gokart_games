@@ -15,6 +15,7 @@ export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
   const [refreshKey, setRefreshKey] = useState(0)
+  const [activeTab, setActiveTab] = useState<'enrollment' | 'grid'>('enrollment')
   const drivers = useRegisteredDrivers(REGISTRATIONS_CSV, refreshKey)
   const leagueStandings = useTotalResults()
 
@@ -43,40 +44,58 @@ if (!event) {
           {date === '2026-04-23' && (() => {
             // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
             const enrollOpenDateTime = new Date(Date.now() - 1 * 60 * 60 * 1000)
+            const { grid, reserve } = drivers
+              ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
+              : { grid: [], reserve: [] }
             return (
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">
                 ⚠ Under testing — results on this page may not reflect the final starting grid.
               </div>
-              <div className="flex flex-col lg:flex-row gap-6 items-start">
-                <div className="w-full lg:w-[640px] lg:shrink-0">
-                  <h2 className="text-lg font-semibold text-white mb-1">Enrollment</h2>
-                  <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
-                  <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                    <EnrollmentForm onSubmitted={() => setRefreshKey((k) => k + 1)} />
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-3">
-                    <h2 className="text-lg font-semibold text-white">All sent requests - time ordered</h2>
-                    <button
-                      onClick={() => setRefreshKey((k) => k + 1)}
-                      className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
-                    >
-                      Refresh
-                    </button>
-                  </div>
-                  <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
-                </div>
+              <div className="flex gap-1 border-b border-gray-700">
+                {(['enrollment', 'grid'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+                      activeTab === tab
+                        ? 'border-red-600 text-white'
+                        : 'border-transparent text-gray-500 hover:text-gray-300'
+                    }`}
+                  >
+                    {tab === 'enrollment' ? 'Enrollment' : 'Starting Grid'}
+                  </button>
+                ))}
               </div>
-              <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                {drivers === null ? (
-                  <p className="text-gray-500 text-sm">Loading…</p>
-                ) : drivers.length === 0 ? (
-                  <p className="text-gray-500 text-sm">No registrations yet.</p>
-                ) : (() => {
-                  const { grid, reserve } = new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
-                  return (
+              {activeTab === 'enrollment' && (
+                <div className="flex flex-col lg:flex-row gap-6 items-start">
+                  <div className="w-full lg:w-[640px] lg:shrink-0">
+                    <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
+                    <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                      <EnrollmentForm onSubmitted={() => setRefreshKey((k) => k + 1)} />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-3">
+                      <h2 className="text-lg font-semibold text-white">All sent requests - time ordered</h2>
+                      <button
+                        onClick={() => setRefreshKey((k) => k + 1)}
+                        className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                      >
+                        Refresh
+                      </button>
+                    </div>
+                    <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+                  </div>
+                </div>
+              )}
+              {activeTab === 'grid' && (
+                <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                  {drivers === null ? (
+                    <p className="text-gray-500 text-sm">Loading…</p>
+                  ) : drivers.length === 0 ? (
+                    <p className="text-gray-500 text-sm">No registrations yet.</p>
+                  ) : (
                     <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
                       <div>
                         <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
@@ -97,9 +116,9 @@ if (!event) {
                         </div>
                       )}
                     </div>
-                  )
-                })()}
-              </div>
+                  )}
+                </div>
+              )}
             </div>
           )})()}
         </>

@@ -5,6 +5,7 @@ import { useTotalResults } from '../hooks/useResults'
 import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
+import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
 import { DriversGridService } from '../services/partitionDrivers'
 
@@ -56,16 +57,8 @@ export function RaceDatePage() {
                 <div className="w-full lg:w-[640px] lg:shrink-0">
                   <h2 className="text-lg font-semibold text-white mb-1">Enrollment</h2>
                   <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
-                  <div className="rounded-lg overflow-hidden border border-gray-700 bg-white">
-                    <iframe
-                      src="https://docs.google.com/forms/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/viewform?embedded=true"
-                      width="100%"
-                      height="900"
-                      style={{ border: 0 }}
-                      title="Race enrollment form"
-                    >
-                      Loading…
-                    </iframe>
+                  <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                    <EnrollmentForm onSubmitted={() => setRefreshKey((k) => k + 1)} />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">

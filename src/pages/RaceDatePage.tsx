@@ -9,14 +9,14 @@ import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
 import { DriversGridService } from '../services/partitionDrivers'
 
-const REGISTRATIONS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750'
+const REGISTRATIONS_URL = 'https://script.google.com/macros/s/AKfycbzlFhTcpHRHmAjs-P6BIwOb_69VBq2GORweV975VXuI96RmGzlPSS4Mah0z_50bZA/exec'
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
   const [refreshKey, setRefreshKey] = useState(0)
   const [activeTab, setActiveTab] = useState<'enrollment' | 'grid'>('enrollment')
-  const drivers = useRegisteredDrivers(REGISTRATIONS_CSV, refreshKey)
+  const drivers = useRegisteredDrivers(REGISTRATIONS_URL, refreshKey)
   const leagueStandings = useTotalResults()
 
 if (!event) {
@@ -72,7 +72,10 @@ if (!event) {
                   <div className="w-full lg:w-[640px] lg:shrink-0">
                     <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
                     <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                      <EnrollmentForm onSubmitted={() => setRefreshKey((k) => k + 1)} />
+                      <EnrollmentForm
+                      onSubmitted={() => setRefreshKey((k) => k + 1)}
+                      registeredDrivers={drivers?.map((d) => d.originalNickname) ?? []}
+                    />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -85,7 +88,7 @@ if (!event) {
                         Refresh
                       </button>
                     </div>
-                    <GoogleSheetTable key={refreshKey} csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRUDyRm1lKRO6mVLUchz1lT5nYwEtLJgWo0WSSF8469BIJmNOqxqN13RYIyCiQKt9Kq2qiGwTt68zOM/pub?output=csv&gid=178342750" />
+                    <GoogleSheetTable key={refreshKey} url={REGISTRATIONS_URL} />
                   </div>
                 </div>
               )}

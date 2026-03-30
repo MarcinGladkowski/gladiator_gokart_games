@@ -1,34 +1,27 @@
 import { useState, useEffect } from 'react'
-import { parseCsv } from '../components/GoogleSheetTable'
 import type { Registration } from '../types'
 
 export function useRegisteredDrivers(
-  csvUrl: string,
+  url: string,
   refreshKey: number,
 ): Registration[] | null {
   const [registrations, setRegistrations] = useState<Registration[] | null>(null)
 
   useEffect(() => {
-    fetch(csvUrl, { cache: 'no-store' })
-      .then((r) => r.text())
-      .then((text) => {
-        const [header, ...rows] = parseCsv(text)
-        const nicknameCol = header.indexOf('Zawodnik')
-        const timestampCol = header.indexOf('Sygnatura czasowa')
-        if (nicknameCol === -1) return
-
+    fetch(url)
+      .then((r) => r.json() as Promise<Record<string, string>[]>)
+      .then((rows) => {
         const parsed: Registration[] = rows
-          .filter((r) => r[nicknameCol]?.trim())
+          .filter((r) => r['Zawodnik']?.trim())
           .map((r) => ({
-            nickname: r[nicknameCol].trim().toUpperCase(),
-            originalNickname: r[nicknameCol].trim(),
-            registrationDateTime: new Date(r[timestampCol] ?? ''),
+            nickname: r['Zawodnik'].trim().toUpperCase(),
+            originalNickname: r['Zawodnik'].trim(),
+            registrationDateTime: new Date(r['Sygnatura czasowa'] ?? ''),
           }))
-
         setRegistrations(parsed)
       })
       .catch(console.error)
-  }, [csvUrl, refreshKey])
+  }, [url, refreshKey])
 
   return registrations
 }

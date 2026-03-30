@@ -6,7 +6,9 @@ const FIELD_DRIVER = 'entry.1615508197'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-export function EnrollmentForm({ onSubmitted }: { onSubmitted?: () => void }) {
+export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubmitted?: () => void; registeredDrivers?: string[] }) {
+  const registeredSet = new Set(registeredDrivers.map((n) => n.toUpperCase()))
+  const availableDrivers = (drivers as string[]).filter((name) => !registeredSet.has(name.toUpperCase()))
   const [selected, setSelected] = useState('')
   const [status, setStatus] = useState<Status>('idle')
 
@@ -64,7 +66,7 @@ export function EnrollmentForm({ onSubmitted }: { onSubmitted?: () => void }) {
           className="w-full rounded border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 text-sm focus:outline-none focus:border-red-600"
         >
           <option value="">— select —</option>
-          {(drivers as string[]).map((name) => (
+          {availableDrivers.map((name) => (
             <option key={name} value={name}>{name}</option>
           ))}
         </select>

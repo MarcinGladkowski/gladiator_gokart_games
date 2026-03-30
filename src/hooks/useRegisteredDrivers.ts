@@ -11,6 +11,7 @@ export function useRegisteredDrivers(
     fetch(url)
       .then((r) => r.json() as Promise<Record<string, string>[]>)
       .then((rows) => {
+        const seen = new Set<string>()
         const parsed: Registration[] = rows
           .filter((r) => r['Zawodnik']?.trim())
           .map((r) => ({
@@ -18,6 +19,7 @@ export function useRegisteredDrivers(
             originalNickname: r['Zawodnik'].trim(),
             registrationDateTime: new Date(r['Sygnatura czasowa'] ?? ''),
           }))
+          .filter((r) => !seen.has(r.nickname) && seen.add(r.nickname) !== undefined)
         setRegistrations(parsed)
       })
       .catch(console.error)

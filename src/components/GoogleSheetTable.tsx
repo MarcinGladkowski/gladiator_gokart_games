@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 
 interface Props {
   url: string
+  rowFilter?: (row: Record<string, string>) => boolean
+  formatters?: Record<string, (value: string) => string>
 }
 
-export function GoogleSheetTable({ url }: Props) {
+export function GoogleSheetTable({ url, rowFilter, formatters }: Props) {
   const [rows, setRows] = useState<Record<string, string>[] | null>(null)
   const [error, setError] = useState(false)
 
@@ -14,7 +16,7 @@ export function GoogleSheetTable({ url }: Props) {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json() as Promise<Record<string, string>[]>
       })
-      .then(setRows)
+      .then((data) => setRows(rowFilter ? data.filter(rowFilter) : data))
       .catch((err) => {
         console.error('GoogleSheetTable fetch error:', err)
         setError(true)
@@ -50,7 +52,7 @@ export function GoogleSheetTable({ url }: Props) {
               <td className="px-4 py-3 text-right text-gray-600">{i + 1}</td>
               {headers.map((col) => (
                 <td key={col} className="px-4 py-3 text-gray-300 whitespace-nowrap">
-                  {row[col]}
+                  {formatters?.[col] ? formatters[col](row[col]) : row[col]}
                 </td>
               ))}
             </tr>

@@ -8,7 +8,9 @@ import { GoogleSheetTable } from '../components/GoogleSheetTable'
 import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
 import { DriversGridService } from '../services/partitionDrivers'
+import knownDrivers from '../data/drivers.json'
 
+const KNOWN_DRIVERS_SET = new Set((knownDrivers as string[]).map((n) => n.toUpperCase()))
 const REGISTRATIONS_URL = 'https://script.google.com/macros/s/AKfycbzlFhTcpHRHmAjs-P6BIwOb_69VBq2GORweV975VXuI96RmGzlPSS4Mah0z_50bZA/exec'
 
 export function RaceDatePage() {
@@ -88,7 +90,14 @@ if (!event) {
                         Refresh
                       </button>
                     </div>
-                    <GoogleSheetTable key={refreshKey} url={REGISTRATIONS_URL} />
+                    <GoogleSheetTable
+                      key={refreshKey}
+                      url={REGISTRATIONS_URL}
+                      rowFilter={(row) => KNOWN_DRIVERS_SET.has((row['Zawodnik'] ?? '').trim().toUpperCase())}
+                      formatters={{
+                        'Sygnatura czasowa': (v) => new Date(v).toLocaleString(),
+                      }}
+                    />
                   </div>
                 </div>
               )}

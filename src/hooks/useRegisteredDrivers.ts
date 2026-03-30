@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { Registration } from '../types'
+import knownDrivers from '../data/drivers.json'
 
 export function useRegisteredDrivers(
   url: string,
@@ -11,9 +12,10 @@ export function useRegisteredDrivers(
     fetch(url)
       .then((r) => r.json() as Promise<Record<string, string>[]>)
       .then((rows) => {
+        const knownSet = new Set((knownDrivers as string[]).map((n) => n.toUpperCase()))
         const seen = new Set<string>()
         const parsed: Registration[] = rows
-          .filter((r) => r['Zawodnik']?.trim())
+          .filter((r) => r['Zawodnik']?.trim() && knownSet.has(r['Zawodnik'].trim().toUpperCase()))
           .map((r) => ({
             nickname: r['Zawodnik'].trim().toUpperCase(),
             originalNickname: r['Zawodnik'].trim(),

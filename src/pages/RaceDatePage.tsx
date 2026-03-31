@@ -107,28 +107,44 @@ if (!event) {
                     <p className="text-gray-500 text-sm">Loading…</p>
                   ) : drivers.length === 0 ? (
                     <p className="text-gray-500 text-sm">No registrations yet.</p>
-                  ) : (
-                    <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
-                      <div>
-                        <h2 className="text-lg font-semibold text-white mb-4">Starting grid</h2>
-                        <ol className="list-decimal list-inside space-y-1">
-                          {grid.map((r, i) => (
-                            <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
-                          ))}
-                        </ol>
+                  ) : (() => {
+                    const groupA = grid.slice(0, 13)
+                    const groupB = grid.slice(13, 26)
+                    return (
+                      <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
+                        {groupA.length > 0 && (
+                          <div>
+                            <h2 className="text-lg font-semibold text-white mb-4">Group A</h2>
+                            <ol className="list-decimal list-inside space-y-1">
+                              {groupA.map((r, i) => (
+                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+                        {groupB.length > 0 && (
+                          <div>
+                            <h2 className="text-lg font-semibold text-white mb-4">Group B</h2>
+                            <ol className="list-decimal list-inside space-y-1" start={14}>
+                              {groupB.map((r, i) => (
+                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+                        {reserve.length > 0 && (
+                          <div>
+                            <h2 className="text-lg font-semibold text-white mb-4">Reserve</h2>
+                            <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
+                              {reserve.map((r, i) => (
+                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
                       </div>
-                      {reserve.length > 0 && (
-                        <div>
-                          <h2 className="text-lg font-semibold text-white mb-4">Reserve list</h2>
-                          <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
-                            {reserve.map((r, i) => (
-                              <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
-                            ))}
-                          </ol>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                    )
+                  })()}
                 </div>
               )}
             </div>

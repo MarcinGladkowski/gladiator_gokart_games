@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import drivers from '../data/drivers.json'
 
 const FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/formResponse'
 const FIELD_DRIVER = 'entry.1615508197'
-const RECAPTCHA_SITE_KEY = '6LeXNKAsAAAAAKporyUCnOY-vRZErV9kOqagmJes'
+const RECAPTCHA_SITE_KEY = '6LeiTKAsAAAAADBLlBP-tqhM_W7RCl2dNbreC3cQ'
 const IS_LOCALHOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
 
-declare const grecaptcha: { execute: (key: string, options: { action: string }) => Promise<string> } | undefined
+declare const grecaptcha: {
+  render: (container: HTMLElement, params: { sitekey: string }) => number
+  getResponse: (widgetId: number) => string
+  reset: (widgetId: number) => void
+} | undefined
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -15,15 +19,25 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
   const availableDrivers = (drivers as string[]).filter((name) => !registeredSet.has(name.toUpperCase()))
   const [selected, setSelected] = useState('')
   const [status, setStatus] = useState<Status>('idle')
+  const captchaRef = useRef<HTMLDivElement>(null)
+  const widgetId = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (IS_LOCALHOST || typeof grecaptcha === 'undefined' || !captchaRef.current) return
+    widgetId.current = grecaptcha.render(captchaRef.current, { sitekey: RECAPTCHA_SITE_KEY })
+  }, [])
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
     if (!selected) return
     setStatus('submitting')
 
-    if (!IS_LOCALHOST && typeof grecaptcha === 'undefined') {
-      setStatus('error')
-      return
+    if (!IS_LOCALHOST) {
+      const token = widgetId.current !== null ? grecaptcha!.getResponse(widgetId.current) : ''
+      if (!token) {
+        setStatus('idle')
+        return
+      }
     }
 
     const now = Date.now().toString()
@@ -33,9 +47,6 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
     })
 
     try {
-      if (!IS_LOCALHOST) {
-        await grecaptcha!.execute(RECAPTCHA_SITE_KEY, { action: 'enroll' })
-      }
       await fetch(FORM_ACTION, {
         method: 'POST',
         mode: 'no-cors',
@@ -45,6 +56,7 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
       onSubmitted?.()
     } catch {
       setStatus('error')
+      if (!IS_LOCALHOST && widgetId.current !== null) grecaptcha!.reset(widgetId.current)
     }
   }
 
@@ -82,6 +94,8 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
           ))}
         </select>
       </div>
+
+      {!IS_LOCALHOST && <div ref={captchaRef} />}
 
       {status === 'error' && (
         <p className="text-red-400 text-xs">Submission failed. Please try again.</p>

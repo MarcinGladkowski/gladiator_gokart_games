@@ -7,7 +7,7 @@ const RECAPTCHA_SITE_KEY = '6LeiTKAsAAAAADBLlBP-tqhM_W7RCl2dNbreC3cQ'
 const IS_LOCALHOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
 
 declare const grecaptcha: {
-  render: (container: HTMLElement, params: { sitekey: string }) => number
+  render: (container: HTMLElement, params: { sitekey: string; callback: () => void; 'expired-callback': () => void }) => number
   getResponse: (widgetId: number) => string
   reset: (widgetId: number) => void
 } | undefined
@@ -19,12 +19,17 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
   const availableDrivers = (drivers as string[]).filter((name) => !registeredSet.has(name.toUpperCase()))
   const [selected, setSelected] = useState('')
   const [status, setStatus] = useState<Status>('idle')
+  const [captchaVerified, setCaptchaVerified] = useState(IS_LOCALHOST)
   const captchaRef = useRef<HTMLDivElement>(null)
   const widgetId = useRef<number | null>(null)
 
   useEffect(() => {
     if (IS_LOCALHOST || typeof grecaptcha === 'undefined' || !captchaRef.current) return
-    widgetId.current = grecaptcha.render(captchaRef.current, { sitekey: RECAPTCHA_SITE_KEY })
+    widgetId.current = grecaptcha.render(captchaRef.current, {
+      sitekey: RECAPTCHA_SITE_KEY,
+      callback: () => setCaptchaVerified(true),
+      'expired-callback': () => setCaptchaVerified(false),
+    })
   }, [])
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
@@ -77,6 +82,7 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {!IS_LOCALHOST && <div ref={captchaRef} />}
       <div>
         <label htmlFor="driver-select" className="block text-sm text-gray-400 mb-1">
           Zawodnik <span className="text-red-500">*</span>
@@ -86,7 +92,8 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
           required
-          className="w-full rounded border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+          disabled={!captchaVerified}
+          className="w-full rounded border border-gray-700 bg-gray-800 text-gray-100 px-3 py-2 text-sm focus:outline-none focus:border-red-600 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <option value="">— select —</option>
           {availableDrivers.map((name) => (
@@ -95,15 +102,13 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
         </select>
       </div>
 
-      {!IS_LOCALHOST && <div ref={captchaRef} />}
-
       {status === 'error' && (
         <p className="text-red-400 text-xs">Submission failed. Please try again.</p>
       )}
 
       <button
         type="submit"
-        disabled={!selected || status === 'submitting'}
+        disabled={!captchaVerified || !selected || status === 'submitting'}
         className="w-full rounded bg-red-700 hover:bg-red-600 disabled:bg-gray-700 disabled:text-gray-500 text-white text-sm font-semibold py-2 transition-colors"
       >
         {status === 'submitting' ? 'Sending…' : 'Submit'}

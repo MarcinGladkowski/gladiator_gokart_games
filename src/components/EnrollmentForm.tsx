@@ -4,6 +4,7 @@ import drivers from '../data/drivers.json'
 const FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/formResponse'
 const FIELD_DRIVER = 'entry.1615508197'
 const RECAPTCHA_SITE_KEY = '6LeXNKAsAAAAAKporyUCnOY-vRZErV9kOqagmJes'
+const IS_LOCALHOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
 
 declare const grecaptcha: { execute: (key: string, options: { action: string }) => Promise<string> } | undefined
 
@@ -20,18 +21,21 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
     if (!selected) return
     setStatus('submitting')
 
-    const now = Date.now().toString()
-    const token = typeof grecaptcha !== 'undefined'
-      ? await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'enroll' })
-      : null
+    if (!IS_LOCALHOST && typeof grecaptcha === 'undefined') {
+      setStatus('error')
+      return
+    }
 
+    const now = Date.now().toString()
     const body = new URLSearchParams({
       [FIELD_DRIVER]: selected,
       submissionTimestamp: now,
-      ...(token ? { 'g-recaptcha-response': token } : {}),
     })
 
     try {
+      if (!IS_LOCALHOST) {
+        await grecaptcha!.execute(RECAPTCHA_SITE_KEY, { action: 'enroll' })
+      }
       await fetch(FORM_ACTION, {
         method: 'POST',
         mode: 'no-cors',

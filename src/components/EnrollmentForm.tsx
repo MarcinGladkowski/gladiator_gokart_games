@@ -3,6 +3,9 @@ import drivers from '../data/drivers.json'
 
 const FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/formResponse'
 const FIELD_DRIVER = 'entry.1615508197'
+const RECAPTCHA_SITE_KEY = '6LeXNKAsAAAAAKporyUCnOY-vRZErV9kOqagmJes'
+
+declare const grecaptcha: { execute: (key: string, options: { action: string }) => Promise<string> } | undefined
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -18,10 +21,14 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
     setStatus('submitting')
 
     const now = Date.now().toString()
+    const token = typeof grecaptcha !== 'undefined'
+      ? await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'enroll' })
+      : null
 
     const body = new URLSearchParams({
       [FIELD_DRIVER]: selected,
       submissionTimestamp: now,
+      ...(token ? { 'g-recaptcha-response': token } : {}),
     })
 
     try {

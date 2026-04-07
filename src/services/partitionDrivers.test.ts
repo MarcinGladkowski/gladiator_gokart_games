@@ -39,7 +39,7 @@ describe('DriversGridService', () => {
     expect(reserve).toHaveLength(1)
   })
 
-  it('puts late registrations on the reserve', () => {
+  it('puts late registrations on the grid when available', () => {
     const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 1 day ago + 1 hour
     const service = new DriversGridService(26, enrollOpenDateTime, [])
 
@@ -51,6 +51,25 @@ describe('DriversGridService', () => {
 
     expect(grid).toHaveLength(0)
     expect(reserve).toHaveLength(1)
+  })
+
+  it('puts late registrations on both grid and reserve', () => {
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 1 day ago + 1 hour
+    const service = new DriversGridService(2, enrollOpenDateTime, [])
+
+    const registrations: Registration[] = [
+      makeRegistration('SSOII', 30), // 30 mins ago — late
+      makeRegistration('TEA3K', 29), // 29 mins ago — late
+      makeRegistration('KUBAG', 28), // 28 mins ago — late
+    ]
+
+    const { grid, reserve } = service.partition(registrations)
+
+    expect(grid).toHaveLength(2)
+    expect(grid[0].registration.nickname).toBe('KUBAG')
+    expect(grid[1].registration.nickname).toBe('TEA3K')
+    expect(reserve).toHaveLength(1)
+    expect(reserve[1].registration.nickname).toBe('SSOII')
   })
 
   it('sort driver grid by position in league standings', () => {
@@ -140,7 +159,7 @@ describe('DriversGridService', () => {
         { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
         { nickname: 'DRIVER2', position: 1, score: 0.70, entriesCount: 10, scores: [] },
         { nickname: 'DRIVER3', position: 12, score: 0.80, entriesCount: 10, scores: [] },
-        { nickname: 'HONKI', position: 11, score: 0.80, entriesCount: 10, scores: [] },
+        { nickname: 'HONKI', position: 13, score: 0.60, entriesCount: 10, scores: [] },
       ],
       ['Honki']
     )
@@ -186,11 +205,12 @@ describe('DriversGridService', () => {
 
     const { grid, reserve } = service.partition(registrations)
 
-    expect(grid).toHaveLength(3)
-    expect(grid[0].registration.nickname).toBe('DRIVER1')
-    expect(grid[1].registration.nickname).toBe('HONKI')
-    expect(reserve).toHaveLength(1)
-    expect(reserve[0].registration.nickname).toBe('DRIVER2')
+    expect(grid).toHaveLength(4)
+    expect(grid[0].registration.nickname).toBe('DRIVER2')
+    expect(grid[1].registration.nickname).toBe('DRIVER1')
+    expect(grid[2].registration.nickname).toBe('HONKI')
+    expect(grid[3].registration.nickname).toBe('DRIVER3')
+    expect(reserve).toHaveLength(0)
 
   })
 })

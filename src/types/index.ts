@@ -86,7 +86,15 @@ export interface ClassificationEntry {
 
 export interface GridEntry {
   registration: Registration
-  standing: TotalResultEntry | undefined
+  standing?: TotalResultEntry
+}
+
+// @ts-ignore
+export interface GridEvent extends GridEntry {
+  registration?: Registration
+  standing?: TotalResultEntry
+  timestamp: Date
+  type: 'enroll' | 'resign' | 'deadline'
 }
 
 export interface PartitionResult {

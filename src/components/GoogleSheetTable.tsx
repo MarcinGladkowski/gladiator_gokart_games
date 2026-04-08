@@ -31,7 +31,8 @@ export function GoogleSheetTable({ url, rowFilter, formatters }: Props) {
     return <p className="text-gray-500 text-sm">Loading registrations…</p>
   }
 
-  const headers = rows.length > 0 ? Object.keys(rows[0]) : []
+  const VISIBLE_COLUMNS = ['Sygnatura czasowa', 'Zawodnik']
+  const headers = rows.length > 0 ? Object.keys(rows[0]).filter((col) => VISIBLE_COLUMNS.includes(col)) : []
 
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-700">

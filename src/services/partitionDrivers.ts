@@ -1,4 +1,4 @@
-import type { Registration, TotalResultEntry, PartitionResult, GridEntry } from '../types'
+import { Registration, TotalResultEntry, PartitionResult, GridEvent, GridEntry } from '../types'
 
 export const ENROLL_WINDOW_MS = 24 * 60 * 60 * 1000 // 24 hours, after that drivers are moved to reserve list
 
@@ -21,9 +21,11 @@ export class DriversGridService {
   }
 
   partition(registrations: Registration[]): PartitionResult {
-    const active = registrations.filter((r) => !r.resignedAt)
+    let preGrid: GridEntry[] = [];
+    let grid: GridEntry[] = [];
+    let reserve: GridEntry[] = [];
 
-    let entries: GridEntry[] = active.map((registration) => ({
+    const events: GridEvent[] = registrations.map((registration) => ({
       registration: {
         ...registration,
         isStaff: this.staffSet.has(registration.nickname.trim().toLowerCase())
@@ -31,39 +33,82 @@ export class DriversGridService {
       standing: this.leagueStandings.find(
         (standing) => standing.nickname.trim().toLowerCase() === registration.nickname.trim().toLowerCase()
       ),
+      type: 'enroll',
+      timestamp: registration.registrationDateTime,
     }))
 
-    const registrationsOnTime = entries.filter((entry) => entry.registration.registrationDateTime <= this.enrollCloseDateTime)
-    registrationsOnTime.sort(this.sortingGridByPosition);
-    const late = entries.filter((entry) => entry.registration.registrationDateTime > this.enrollCloseDateTime)
+    events.push({
+      type: 'deadline',
+      timestamp: this.enrollCloseDateTime,
+    });
 
-    const staffDriversOnTime = registrationsOnTime.filter((entry) => entry.registration.isStaff)
+    events.filter(e => e.registration?.resignedAt != null)
+      .forEach(e => events.push({
+        type: 'resign',
+        registration: e.registration,
+        standing: e.standing,
+        timestamp: e.registration?.resignedAt!,
+      }));
 
-    let grid = [...staffDriversOnTime]
+    events.sort(this.sortingByTimestampAsc);
 
-    const nonStaffDriversOnTime = registrationsOnTime.filter((entry) => !entry.registration.isStaff)
+    events.forEach(event => {
+      switch (event.type) {
+        case 'enroll': {
+          if (event.timestamp < this.enrollCloseDateTime) {
+            preGrid.push({ ...event, registration: event.registration! });
+            preGrid.sort(this.sortingByPositionAscIncludingStaff);
+          } else {
+            if (grid.length < this.gridSize) {
+              grid.push({ ...event, registration: event.registration! });
+              grid.sort(this.sortingByPositionAscIncludingStaff);
+            } else {
+              reserve.push({ ...event, registration: event.registration! });
+              reserve.sort(this.sortingByPositionAscIncludingStaff);
+            }
+          }
+        }; break;
+        case 'resign': {
+          if (event.timestamp < this.enrollCloseDateTime) {
+            preGrid = preGrid.filter(e => e.registration?.nickname !== event.registration?.nickname);
+          } else {
+            const isOnGrid = grid.findIndex(e => e.registration?.nickname !== event.registration?.nickname) >= 0;
+            if (isOnGrid) {
+              grid = grid.filter(e => e.registration?.nickname !== event.registration?.nickname);
+              if (reserve.length > 0) {
+                grid.push(reserve[0]);
+                reserve.shift();
+              }
+              grid.sort(this.sortingByPositionAscIncludingStaff);
+            } else {
+              reserve.push({ ...event, registration: event.registration! });
+              reserve.sort(this.sortingByPositionAscIncludingStaff);
+            }
+          }
+        }; break;
+        case 'deadline': {
+          const fitToGrid = preGrid.slice(0, this.gridSize);
+          const nonFitToGrid = preGrid.slice(this.gridSize);
 
-    const remainingGridSpots = (this.gridSize - grid.length)
-
-    const fitToGrid = nonStaffDriversOnTime.slice(0, remainingGridSpots);
-
-    const nonFitToGrid = nonStaffDriversOnTime.slice(remainingGridSpots)
-
-    grid = [...grid, ...fitToGrid]
-
-    grid.sort(this.sortingGridByPosition);
-
-    let reserve = [...nonFitToGrid, ...late]
-
-    // FILLING MAIN GRID WITH RESERVE DRIVERS
-    if (grid.length < this.gridSize) {
-      grid = [...grid, ...reserve.slice(0, this.gridSize - grid.length)];
-      grid.sort(this.sortingGridByPosition);
-      reserve = reserve.slice(this.gridSize - grid.length);
-    }
+          grid.push(...fitToGrid);
+          reserve.push(...nonFitToGrid);
+        }; break;
+      }
+    });
 
     return { grid, reserve }
   }
   
-  sortingGridByPosition = (a: GridEntry, b: GridEntry) => (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity);
+  sortingByPositionAscIncludingStaff = (a: GridEntry, b: GridEntry) => {
+    if (a.registration?.isStaff && !b.registration?.isStaff) {
+      return -1;
+    }
+    if (!a.registration?.isStaff && b.registration?.isStaff) {
+      return 1;
+    }
+    return (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity);
+  }
+
+  sortingByTimestampAsc = (a: GridEvent, b: GridEvent) => a.timestamp.getTime() - b.timestamp.getTime();
+
 }

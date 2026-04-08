@@ -4,7 +4,7 @@ import type { RaceEvent, Season } from '../types'
 
 type EventWithYear = { event: RaceEvent; year: number }
 
-function daysUntil(dateStr: string): number {
+function timeUntil(dateStr: string): string {
   const now = new Date()
   const warsawNowStr = new Intl.DateTimeFormat('sv-SE', {
     timeZone: 'Europe/Warsaw',
@@ -17,11 +17,14 @@ function daysUntil(dateStr: string): number {
   }).format(now).replace(' ', 'T')
   const warsawNow = new Date(warsawNowStr)
   const target = new Date(`${dateStr}T18:00:00`)
-  return Math.ceil((target.getTime() - warsawNow.getTime()) / (1000 * 60 * 60 * 24))
+  const diffMs = target.getTime() - warsawNow.getTime()
+  const diffHours = diffMs / (1000 * 60 * 60)
+  if (diffHours < 24) return `${Math.max(1, Math.ceil(diffHours))}h`
+  return `${Math.ceil(diffHours / 24)} days`
 }
 
 function registrationOpenDate(raceDateStr: string): string {
-  const d = new Date(`${raceDateStr}T00:00:00`)
+  const d = new Date(`${raceDateStr}T18:00:00`)
   d.setDate(d.getDate() - 14)
   return d.toISOString().slice(0, 10)
 }
@@ -64,10 +67,10 @@ export function HomePage() {
             <p className="text-sm text-gray-500 mt-0.5">{nextRound.event.date}</p>
             <div className="mt-2 flex flex-col gap-1">
               <p className="text-sm text-gray-400">
-                Race in <span className="text-white font-medium">{daysUntil(nextRound.event.date)} days</span> <span className="text-gray-600">at 18:00</span>
+                Race in <span className="text-white font-medium">{timeUntil(nextRound.event.date)}</span> <span className="text-gray-600">at 18:00</span>
               </p>
               <p className="text-sm text-gray-400">
-                Registration opens in <span className="text-white font-medium">{daysUntil(registrationOpenDate(nextRound.event.date))} days</span> <span className="text-gray-600">at 18:00</span>
+                Registration opens in <span className="text-white font-medium">{timeUntil(registrationOpenDate(nextRound.event.date))}</span> <span className="text-gray-600">at {registrationOpenDate(nextRound.event.date)} at 18:00</span>
               </p>
             </div>
           </Link>

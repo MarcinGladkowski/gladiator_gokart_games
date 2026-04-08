@@ -57,14 +57,14 @@ export class DriversGridService {
         case 'enroll': {
           if (event.timestamp < this.enrollCloseDateTime) {
             preGrid.push({ ...event, registration: event.registration! });
-            preGrid.sort(this.sortingByPositionAscIncludingStaff);
+            preGrid.sort(this.sortingByPositionAsc);
           } else {
             if (grid.length < this.gridSize) {
               grid.push({ ...event, registration: event.registration! });
-              grid.sort(this.sortingByPositionAscIncludingStaff);
+              grid.sort(this.sortingByPositionAsc);
             } else {
               reserve.push({ ...event, registration: event.registration! });
-              reserve.sort(this.sortingByPositionAscIncludingStaff);
+              reserve.sort(this.sortingByPositionAsc);
             }
           }
         }; break;
@@ -79,18 +79,23 @@ export class DriversGridService {
                 grid.push(reserve[0]);
                 reserve.shift();
               }
-              grid.sort(this.sortingByPositionAscIncludingStaff);
+              grid.sort(this.sortingByPositionAsc);
             } else {
               reserve.push({ ...event, registration: event.registration! });
-              reserve.sort(this.sortingByPositionAscIncludingStaff);
+              reserve.sort(this.sortingByPositionAsc);
             }
           }
         }; break;
         case 'deadline': {
-          const fitToGrid = preGrid.slice(0, this.gridSize);
-          const nonFitToGrid = preGrid.slice(this.gridSize);
+          const staff = preGrid.filter(e => e.registration.isStaff);
+          grid.push(...staff);
+          const remainingGridSpots = (this.gridSize - grid.length);
+          const fitToGrid = preGrid.filter(e => !e.registration.isStaff).slice(0, remainingGridSpots);
+          const nonFitToGrid = preGrid.filter(e => !e.registration.isStaff).slice(remainingGridSpots);
+
 
           grid.push(...fitToGrid);
+          grid.sort(this.sortingByPositionAsc);
           reserve.push(...nonFitToGrid);
         }; break;
       }
@@ -99,13 +104,7 @@ export class DriversGridService {
     return { grid, reserve }
   }
   
-  sortingByPositionAscIncludingStaff = (a: GridEntry, b: GridEntry) => {
-    if (a.registration?.isStaff && !b.registration?.isStaff) {
-      return -1;
-    }
-    if (!a.registration?.isStaff && b.registration?.isStaff) {
-      return 1;
-    }
+  sortingByPositionAsc = (a: GridEntry, b: GridEntry) => {
     return (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity);
   }
 

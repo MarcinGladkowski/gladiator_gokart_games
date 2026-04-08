@@ -101,6 +101,9 @@ export class DriversGridService {
       }
     });
 
+    console.log('grid', grid);
+    console.log('reserve', reserve);
+
     return { grid, reserve }
   }
   

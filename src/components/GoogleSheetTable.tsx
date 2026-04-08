@@ -4,9 +4,10 @@ interface Props {
   url: string
   rowFilter?: (row: Record<string, string>) => boolean
   formatters?: Record<string, (value: string) => string>
+  rowClassName?: (row: Record<string, string>) => string
 }
 
-export function GoogleSheetTable({ url, rowFilter, formatters }: Props) {
+export function GoogleSheetTable({ url, rowFilter, formatters, rowClassName }: Props) {
   const [rows, setRows] = useState<Record<string, string>[] | null>(null)
   const [error, setError] = useState(false)
 
@@ -49,7 +50,7 @@ export function GoogleSheetTable({ url, rowFilter, formatters }: Props) {
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-t border-gray-700 hover:bg-gray-800/50 transition-colors">
+            <tr key={i} className={`border-t border-gray-700 hover:bg-gray-800/50 transition-colors ${rowClassName?.(row) ?? ''}`}>
               <td className="px-4 py-3 text-right text-gray-600">{i + 1}</td>
               {headers.map((col) => (
                 <td key={col} className="px-4 py-3 text-gray-300 whitespace-nowrap">

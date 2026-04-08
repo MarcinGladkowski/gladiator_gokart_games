@@ -97,6 +97,7 @@ if (!event) {
                       formatters={{
                         'Sygnatura czasowa': (v) => new Date(v).toLocaleString(),
                       }}
+                      rowClassName={(row) => row['Wypis']?.trim() ? 'opacity-40 line-through' : ''}
                     />
                   </div>
                 </div>

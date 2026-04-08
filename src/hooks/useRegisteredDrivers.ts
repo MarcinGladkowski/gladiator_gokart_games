@@ -20,6 +20,7 @@ export function useRegisteredDrivers(
             nickname: r['Zawodnik'].trim().toUpperCase(),
             originalNickname: r['Zawodnik'].trim(),
             registrationDateTime: new Date(r['Sygnatura czasowa'] ?? ''),
+            resignedAt: r['Wypis']?.trim() ? new Date(r['Wypis'].trim()) : undefined,
           }))
           .filter((r) => !seen.has(r.nickname) && seen.add(r.nickname) !== undefined)
         setRegistrations(parsed)

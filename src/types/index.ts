@@ -1,7 +1,8 @@
 export interface Registration {
   nickname: string
   originalNickname: string
-  registrationDateTime: Date,
+  registrationDateTime: Date
+  resignedAt?: Date
   isStaff?: boolean
 }
 

@@ -21,8 +21,9 @@ export class DriversGridService {
   }
 
   partition(registrations: Registration[]): PartitionResult {
-    
-    let entries: GridEntry[] = registrations.map((registration) => ({
+    const active = registrations.filter((r) => !r.resignedAt)
+
+    let entries: GridEntry[] = active.map((registration) => ({
       registration: {
         ...registration,
         isStaff: this.staffSet.has(registration.nickname.trim().toLowerCase())

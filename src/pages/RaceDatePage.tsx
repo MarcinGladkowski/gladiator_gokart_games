@@ -44,8 +44,8 @@ if (!event) {
             }
           </p>
           {date === '2026-04-23' && (() => {
-            // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
-            const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
+            const enrollOpenDateTime = new Date(`${event.date}T18:00:00`)
+            enrollOpenDateTime.setDate(enrollOpenDateTime.getDate() - 14)
             const { grid, reserve } = drivers
               ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
               : { grid: [], reserve: [] }
@@ -69,13 +69,22 @@ if (!event) {
               {activeTab === 'enrollment' && (
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
                   <div className="w-full lg:w-[640px] lg:shrink-0">
-                    <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
-                    <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
-                      <EnrollmentForm
-                      onSubmitted={() => setRefreshKey((k) => k + 1)}
-                      registeredDrivers={drivers?.map((d) => d.originalNickname) ?? []}
-                    />
-                    </div>
+                    {Date.now() < enrollOpenDateTime.getTime() ? (
+                      <div className="rounded-lg border border-gray-700 bg-gray-900 p-6 text-center">
+                        <p className="text-gray-400 text-sm font-medium mb-1">Enrollment not open yet</p>
+                        <p className="text-gray-500 text-xs">Opens on <span className="text-gray-300">{enrollOpenDateTime.toLocaleString()}</span></p>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
+                        <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                          <EnrollmentForm
+                            onSubmitted={() => setRefreshKey((k) => k + 1)}
+                            registeredDrivers={drivers?.map((d) => d.originalNickname) ?? []}
+                          />
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-3">

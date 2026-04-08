@@ -71,6 +71,7 @@ export function AppShell() {
             <span>Author: <a href="https://marcingladkowski.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">marcingladkowski.com</a></span>
             <span><a href="mailto:contact@marcingladkowski.com" className="hover:text-gray-400 transition-colors">contact@marcingladkowski.com</a></span>
             <span><a href="mailto:gladiatorgokartgames@gmail.com" className="hover:text-gray-400 transition-colors">gladiatorgokartgames@gmail.com</a></span>
+            <span>Build: {new Date(__BUILD_DATE__).toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' })}</span>
           </footer>
         </main>
       </div>

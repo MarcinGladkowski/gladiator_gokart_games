@@ -45,7 +45,7 @@ if (!event) {
           </p>
           {date === '2026-04-23' && (() => {
             // TODO: restore to event-based calculation: new Date(new Date(event.date).getTime() - 14 * 24 * 60 * 60 * 1000)
-            const enrollOpenDateTime = new Date(Date.now() - 1 * 60 * 60 * 1000)
+            const enrollOpenDateTime = new Date(Date.now() - 24 * 60 * 60 * 1000)
             const { grid, reserve } = drivers
               ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
               : { grid: [], reserve: [] }
@@ -104,6 +104,14 @@ if (!event) {
               )}
               {activeTab === 'grid' && (
                 <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                  <div className="flex justify-end mb-4">
+                    <button
+                      onClick={() => setRefreshKey((k) => k + 1)}
+                      className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                    >
+                      Refresh
+                    </button>
+                  </div>
                   {drivers === null ? (
                     <p className="text-gray-500 text-sm">Loading…</p>
                   ) : drivers.length === 0 ? (

@@ -51,9 +51,6 @@ if (!event) {
               : { grid: [], reserve: [] }
             return (
             <div className="space-y-6">
-              <div className="rounded-lg border border-yellow-600 bg-yellow-950 px-4 py-3 text-yellow-400 text-sm font-medium">
-                ⚠ Under testing — results on this page may not reflect the final starting grid.
-              </div>
               <div className="flex gap-1 border-b border-gray-700">
                 {(['enrollment', 'grid'] as const).map((tab) => (
                   <button
@@ -65,7 +62,7 @@ if (!event) {
                         : 'border-transparent text-gray-500 hover:text-gray-300'
                     }`}
                   >
-                    {tab === 'enrollment' ? 'Enrollment' : 'Starting Grid'}
+                    {tab === 'enrollment' ? 'Enrollment' : '🏁 Starting Grid'}
                   </button>
                 ))}
               </div>
@@ -82,7 +79,7 @@ if (!event) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-3">
-                      <h2 className="text-lg font-semibold text-white">All sent requests - time ordered</h2>
+                      <h2 className="text-lg font-semibold text-white">Requests (It is not start order)</h2>
                       <button
                         onClick={() => setRefreshKey((k) => k + 1)}
                         className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
@@ -104,6 +101,10 @@ if (!event) {
               )}
               {activeTab === 'grid' && (
                 <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
+                  <p className="text-xs text-gray-500 mb-4">
+                    Provisional grid — subject to change until enrollment closes on{' '}
+                    <span className="text-gray-300">{new Date(enrollOpenDateTime.getTime() + 24 * 60 * 60 * 1000).toLocaleString()}</span>.
+                  </p>
                   <div className="flex justify-end mb-4">
                     <button
                       onClick={() => setRefreshKey((k) => k + 1)}

@@ -22,13 +22,14 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
   const [captchaVerified, setCaptchaVerified] = useState(IS_LOCALHOST)
   const captchaRef = useRef<HTMLDivElement>(null)
   const widgetId = useRef<number | null>(null)
+  const captchaSolvedOnce = useRef(IS_LOCALHOST)
 
   useEffect(() => {
     if (IS_LOCALHOST || typeof grecaptcha === 'undefined' || !captchaRef.current) return
     widgetId.current = grecaptcha.render(captchaRef.current, {
       sitekey: RECAPTCHA_SITE_KEY,
-      callback: () => setCaptchaVerified(true),
-      'expired-callback': () => setCaptchaVerified(false),
+      callback: () => { captchaSolvedOnce.current = true; setCaptchaVerified(true) },
+      'expired-callback': () => { if (!captchaSolvedOnce.current) setCaptchaVerified(false) },
     })
   }, [])
 
@@ -82,7 +83,7 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {!IS_LOCALHOST && <div ref={captchaRef} />}
+      {!IS_LOCALHOST && <div ref={captchaRef} className={captchaVerified ? 'hidden' : ''} />}
       <div>
         <label htmlFor="driver-select" className="block text-sm text-gray-400 mb-1">
           Zawodnik <span className="text-red-500">*</span>

@@ -46,14 +46,3 @@ Quickest way — OAuth 2.0 Playground (no code)
 3. Click Authorize APIs → sign in with your Google account
 4. Click Exchange authorization code for tokens
 5. Copy the Access token — that's your Bearer token
-
-### Roadmap
-
-- [] Tests in workflow
-- [] Local workflow usign devcontainers
-- [] Documentation of configuring race from, sheet, download resultsd from email, parsing race results 
-- [] Configure forms and pages (with sheets and for permission till to the end of season)
-- [] Calculating total classification
-- [] Filling past seasones
-- [] Drivers profiles
-- [] Add nicknames mapping

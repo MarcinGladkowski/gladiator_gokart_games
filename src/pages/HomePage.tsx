@@ -23,6 +23,15 @@ function timeUntil(dateStr: string): string {
   return `${Math.ceil(diffHours / 24)} days`
 }
 
+function RegistrationCountdown({ raceDate }: { raceDate: string }) {
+  const openDate = registrationOpenDate(raceDate)
+  return (
+    <p className="text-sm text-gray-400">
+      Registration opens in <span className="text-white font-medium">{timeUntil(openDate)}</span> <span className="text-gray-600">at {openDate} at 18:00</span>
+    </p>
+  )
+}
+
 function registrationOpenDate(raceDateStr: string): string {
   const d = new Date(`${raceDateStr}T18:00:00`)
   d.setDate(d.getDate() - 14)
@@ -69,9 +78,7 @@ export function HomePage() {
               <p className="text-sm text-gray-400">
                 Race in <span className="text-white font-medium">{timeUntil(nextRound.event.date)}</span> <span className="text-gray-600">at 18:00</span>
               </p>
-              <p className="text-sm text-gray-400">
-                Registration opens in <span className="text-white font-medium">{timeUntil(registrationOpenDate(nextRound.event.date))}</span> <span className="text-gray-600">at {registrationOpenDate(nextRound.event.date)} at 18:00</span>
-              </p>
+              <RegistrationCountdown raceDate={nextRound.event.date} />
             </div>
           </Link>
         )}

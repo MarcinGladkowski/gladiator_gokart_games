@@ -7,6 +7,7 @@ import { daysLeft } from '../utils/daysLeft'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
 import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
+import { RegistrationCountdown } from '../components/RegistrationCountdown'
 import { DriversGridService } from '../services/partitionDrivers'
 import knownDrivers from '../data/drivers.json'
 
@@ -69,14 +70,15 @@ if (!event) {
               {activeTab === 'enrollment' && (
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
                   <div className="w-full lg:w-[640px] lg:shrink-0">
+                    <div className="mb-3">
+                      <RegistrationCountdown raceDate={event.date} />
+                    </div>
                     {Date.now() < enrollOpenDateTime.getTime() ? (
                       <div className="rounded-lg border border-gray-700 bg-gray-900 p-6 text-center">
                         <p className="text-gray-400 text-sm font-medium mb-1">Enrollment not open yet</p>
-                        <p className="text-gray-500 text-xs">Opens on <span className="text-gray-300">{enrollOpenDateTime.toLocaleString()}</span></p>
                       </div>
                     ) : (
                       <>
-                        <p className="text-xs text-gray-500 mb-3">Open since: {enrollOpenDateTime.toLocaleString()}</p>
                         <div className="rounded-lg border border-gray-700 bg-gray-900 p-6">
                           <EnrollmentForm
                             onSubmitted={() => setRefreshKey((k) => k + 1)}

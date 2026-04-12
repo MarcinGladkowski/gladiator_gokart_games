@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSeasons, useGeneralClassification } from '../hooks/useResults'
 import type { RaceEvent, Season } from '../types'
+import { RegistrationCountdown } from '../components/RegistrationCountdown'
 
 type EventWithYear = { event: RaceEvent; year: number }
 
@@ -21,21 +22,6 @@ function timeUntil(dateStr: string): string {
   const diffHours = diffMs / (1000 * 60 * 60)
   if (diffHours < 24) return `${Math.max(1, Math.ceil(diffHours))}h`
   return `${Math.ceil(diffHours / 24)} days`
-}
-
-function RegistrationCountdown({ raceDate }: { raceDate: string }) {
-  const openDate = registrationOpenDate(raceDate)
-  return (
-    <p className="text-sm text-gray-400">
-      Registration opens in <span className="text-white font-medium">{timeUntil(openDate)}</span> <span className="text-gray-600">at {openDate} at 18:00</span>
-    </p>
-  )
-}
-
-function registrationOpenDate(raceDateStr: string): string {
-  const d = new Date(`${raceDateStr}T18:00:00`)
-  d.setDate(d.getDate() - 14)
-  return d.toISOString().slice(0, 10)
 }
 
 export function HomePage() {

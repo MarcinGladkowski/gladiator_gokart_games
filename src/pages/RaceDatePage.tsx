@@ -23,7 +23,7 @@ export function RaceDatePage() {
   const enrollmentIsOpen = enrollOpenDateTime ? Date.now() >= enrollOpenDateTime.getTime() : false
   const [refreshKey, setRefreshKey] = useState(0)
   const [activeTab, setActiveTab] = useState<'enrollment' | 'grid'>('enrollment')
-  const drivers = useRegisteredDrivers(enrollmentIsOpen ? (enrollment?.registrationsUrl ?? null) : null, refreshKey)
+  const { registrations: drivers, rawRows } = useRegisteredDrivers(enrollmentIsOpen ? (enrollment?.registrationsUrl ?? null) : null, refreshKey)
   const leagueStandings = useTotalResults()
 
 if (!event) {
@@ -117,15 +117,13 @@ if (!event) {
                             </button>
                           </div>
                           <GoogleSheetTable
-                            key={`on-time-${refreshKey}`}
-                            url={enrollment.registrationsUrl}
+                            rows={rawRows}
                             rowFilter={(row) => isKnown(row) && isOnTime(row)}
                             {...sharedProps}
                           />
                           <h2 className="text-base font-semibold text-red-500 mt-6 mb-3">Requests sent after closed registration</h2>
                           <GoogleSheetTable
-                            key={`late-${refreshKey}`}
-                            url={enrollment.registrationsUrl}
+                            rows={rawRows}
                             rowFilter={(row) => isKnown(row) && isLate(row)}
                             {...sharedProps}
                           />

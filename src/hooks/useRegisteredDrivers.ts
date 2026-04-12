@@ -2,17 +2,24 @@ import { useState, useEffect } from 'react'
 import type { Registration } from '../types'
 import knownDrivers from '../data/drivers.json'
 
+interface UseRegisteredDriversResult {
+  registrations: Registration[] | null
+  rawRows: Record<string, string>[] | null
+}
+
 export function useRegisteredDrivers(
   url: string | null,
   refreshKey: number,
-): Registration[] | null {
+): UseRegisteredDriversResult {
   const [registrations, setRegistrations] = useState<Registration[] | null>(null)
+  const [rawRows, setRawRows] = useState<Record<string, string>[] | null>(null)
 
   useEffect(() => {
     if (!url) return
     fetch(url)
       .then((r) => r.json() as Promise<Record<string, string>[]>)
       .then((rows) => {
+        setRawRows(rows)
         const knownSet = new Set((knownDrivers as string[]).map((n) => n.toUpperCase()))
         const seen = new Set<string>()
         const parsed: Registration[] = rows
@@ -29,5 +36,5 @@ export function useRegisteredDrivers(
       .catch(console.error)
   }, [url, refreshKey])
 
-  return registrations
+  return { registrations, rawRows }
 }

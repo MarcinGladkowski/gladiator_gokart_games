@@ -1,28 +1,33 @@
 import { useEffect, useState } from 'react'
 
 interface Props {
-  url: string
+  url?: string
+  rows?: Record<string, string>[] | null
   rowFilter?: (row: Record<string, string>) => boolean
   formatters?: Record<string, (value: string) => string>
   rowClassName?: (row: Record<string, string>) => string
 }
 
-export function GoogleSheetTable({ url, rowFilter, formatters, rowClassName }: Props) {
-  const [rows, setRows] = useState<Record<string, string>[] | null>(null)
+export function GoogleSheetTable({ url, rows: rowsProp, rowFilter, formatters, rowClassName }: Props) {
+  const [fetchedRows, setFetchedRows] = useState<Record<string, string>[] | null>(null)
   const [error, setError] = useState(false)
 
   useEffect(() => {
+    if (rowsProp !== undefined || !url) return
     fetch(url)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json() as Promise<Record<string, string>[]>
       })
-      .then((data) => setRows(rowFilter ? data.filter(rowFilter) : data))
+      .then((data) => setFetchedRows(data))
       .catch((err) => {
         console.error('GoogleSheetTable fetch error:', err)
         setError(true)
       })
-  }, [url])
+  }, [url, rowsProp])
+
+  const allRows = rowsProp !== undefined ? rowsProp : fetchedRows
+  const rows = allRows && rowFilter ? allRows.filter(rowFilter) : allRows
 
   if (error) {
     return <p className="text-red-400 text-sm">Failed to load registrations.</p>

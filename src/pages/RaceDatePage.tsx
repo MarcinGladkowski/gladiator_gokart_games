@@ -89,24 +89,45 @@ if (!event) {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-3">
-                      <h2 className="text-lg font-semibold text-white">Requests (It is not start order)</h2>
-                      <button
-                        onClick={() => setRefreshKey((k) => k + 1)}
-                        className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
-                      >
-                        Refresh
-                      </button>
-                    </div>
-                    <GoogleSheetTable
-                      key={refreshKey}
-                      url={REGISTRATIONS_URL}
-                      rowFilter={(row) => KNOWN_DRIVERS_SET.has((row['Zawodnik'] ?? '').trim().toUpperCase())}
-                      formatters={{
-                        'Sygnatura czasowa': (v) => new Date(v).toLocaleString(),
-                      }}
-                      rowClassName={(row) => row['Wypis']?.trim() ? 'opacity-40 line-through' : ''}
-                    />
+                    {(() => {
+                      const closeTime = new Date(enrollOpenDateTime.getTime() + 24 * 60 * 60 * 1000)
+                      const isKnown = (row: Record<string, string>) =>
+                        KNOWN_DRIVERS_SET.has((row['Zawodnik'] ?? '').trim().toUpperCase())
+                      const isOnTime = (row: Record<string, string>) =>
+                        new Date(row['Sygnatura czasowa']) <= closeTime
+                      const isLate = (row: Record<string, string>) =>
+                        new Date(row['Sygnatura czasowa']) > closeTime
+                      const sharedProps = {
+                        formatters: { 'Sygnatura czasowa': (v: string) => new Date(v).toLocaleString() },
+                        rowClassName: (row: Record<string, string>) => row['Wypis']?.trim() ? 'opacity-40 line-through' : '',
+                      }
+                      return (
+                        <>
+                          <div className="flex items-center justify-between mb-3">
+                            <h2 className="text-lg font-semibold text-white">Requests (It is not start order)</h2>
+                            <button
+                              onClick={() => setRefreshKey((k) => k + 1)}
+                              className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                            >
+                              Refresh
+                            </button>
+                          </div>
+                          <GoogleSheetTable
+                            key={`on-time-${refreshKey}`}
+                            url={REGISTRATIONS_URL}
+                            rowFilter={(row) => isKnown(row) && isOnTime(row)}
+                            {...sharedProps}
+                          />
+                          <h2 className="text-base font-semibold text-red-500 mt-6 mb-3">Requests sent after closed registration</h2>
+                          <GoogleSheetTable
+                            key={`late-${refreshKey}`}
+                            url={REGISTRATIONS_URL}
+                            rowFilter={(row) => isKnown(row) && isLate(row)}
+                            {...sharedProps}
+                          />
+                        </>
+                      )
+                    })()}
                   </div>
                 </div>
               )}

@@ -12,14 +12,18 @@ import { DriversGridService } from '../services/partitionDrivers'
 import knownDrivers from '../data/drivers.json'
 
 const KNOWN_DRIVERS_SET = new Set((knownDrivers as string[]).map((n) => n.toUpperCase()))
-const REGISTRATIONS_URL = 'https://script.google.com/macros/s/AKfycbzlFhTcpHRHmAjs-P6BIwOb_69VBq2GORweV975VXuI96RmGzlPSS4Mah0z_50bZA/exec'
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()
   const event = useRaceEvent(Number(year), date ?? '')
+  const enrollment = date ? (config.enrollments as Record<string, { formAction: string; registrationsUrl: string }>)[date] : undefined
+  const enrollOpenDateTime = event && enrollment
+    ? (() => { const d = new Date(`${event.date}T18:00:00`); d.setDate(d.getDate() - 14); return d })()
+    : null
+  const enrollmentIsOpen = enrollOpenDateTime ? Date.now() >= enrollOpenDateTime.getTime() : false
   const [refreshKey, setRefreshKey] = useState(0)
   const [activeTab, setActiveTab] = useState<'enrollment' | 'grid'>('enrollment')
-  const drivers = useRegisteredDrivers(REGISTRATIONS_URL, refreshKey)
+  const drivers = useRegisteredDrivers(enrollmentIsOpen ? (enrollment?.registrationsUrl ?? null) : null, refreshKey)
   const leagueStandings = useTotalResults()
 
 if (!event) {
@@ -44,9 +48,7 @@ if (!event) {
               : <span className="text-gray-500">{daysLeft(event.date)} days left</span>
             }
           </p>
-          {date === '2026-04-23' && (() => {
-            const enrollOpenDateTime = new Date(`${event.date}T18:00:00`)
-            enrollOpenDateTime.setDate(enrollOpenDateTime.getDate() - 14)
+          {enrollment && enrollOpenDateTime && (() => {
             const { grid, reserve } = drivers
               ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
               : { grid: [], reserve: [] }
@@ -73,7 +75,7 @@ if (!event) {
                     <div className="mb-3">
                       <RegistrationCountdown raceDate={event.date} />
                     </div>
-                    {Date.now() < enrollOpenDateTime.getTime() ? (
+                    {!enrollmentIsOpen ? (
                       <div className="rounded-lg border border-gray-700 bg-gray-900 p-6 text-center">
                         <p className="text-gray-400 text-sm font-medium mb-1">Enrollment not open yet</p>
                       </div>
@@ -83,12 +85,14 @@ if (!event) {
                           <EnrollmentForm
                             onSubmitted={() => setRefreshKey((k) => k + 1)}
                             registeredDrivers={drivers?.map((d) => d.originalNickname) ?? []}
+                            formAction={enrollment.formAction}
+                            recaptchaSiteKey={config.recaptchaSiteKey}
                           />
                         </div>
                       </>
                     )}
                   </div>
-                  <div className="flex-1 min-w-0">
+                  {enrollmentIsOpen && <div className="flex-1 min-w-0">
                     {(() => {
                       const closeTime = new Date(enrollOpenDateTime.getTime() + 24 * 60 * 60 * 1000)
                       const isKnown = (row: Record<string, string>) =>
@@ -114,21 +118,21 @@ if (!event) {
                           </div>
                           <GoogleSheetTable
                             key={`on-time-${refreshKey}`}
-                            url={REGISTRATIONS_URL}
+                            url={enrollment.registrationsUrl}
                             rowFilter={(row) => isKnown(row) && isOnTime(row)}
                             {...sharedProps}
                           />
                           <h2 className="text-base font-semibold text-red-500 mt-6 mb-3">Requests sent after closed registration</h2>
                           <GoogleSheetTable
                             key={`late-${refreshKey}`}
-                            url={REGISTRATIONS_URL}
+                            url={enrollment.registrationsUrl}
                             rowFilter={(row) => isKnown(row) && isLate(row)}
                             {...sharedProps}
                           />
                         </>
                       )
                     })()}
-                  </div>
+                  </div>}
                 </div>
               )}
               {activeTab === 'grid' && (

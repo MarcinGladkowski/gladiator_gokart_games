@@ -3,12 +3,13 @@ import type { Registration } from '../types'
 import knownDrivers from '../data/drivers.json'
 
 export function useRegisteredDrivers(
-  url: string,
+  url: string | null,
   refreshKey: number,
 ): Registration[] | null {
   const [registrations, setRegistrations] = useState<Registration[] | null>(null)
 
   useEffect(() => {
+    if (!url) return
     fetch(url)
       .then((r) => r.json() as Promise<Record<string, string>[]>)
       .then((rows) => {

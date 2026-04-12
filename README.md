@@ -29,7 +29,7 @@ Setup with one text field and google sheet as output
 
 ### Google sheet
 
-Expose as JSON for application: extensions -> Apps Scrips
+Expose as JSON for application: extensions -> Apps Scrips -> deploy trigger -> as Application to everyone -> add permissions
 ```js
 function doGet() {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet()

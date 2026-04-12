@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import drivers from '../data/drivers.json'
 
-const FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/formResponse'
 const FIELD_DRIVER = 'entry.1615508197'
-const RECAPTCHA_SITE_KEY = '6LeiTKAsAAAAADBLlBP-tqhM_W7RCl2dNbreC3cQ'
 const IS_LOCALHOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
 
 declare const grecaptcha: {
@@ -11,10 +9,15 @@ declare const grecaptcha: {
   getResponse: (widgetId: number) => string
   reset: (widgetId: number) => void
 } | undefined
-
+  
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubmitted?: () => void; registeredDrivers?: string[] }) {
+export function EnrollmentForm({ onSubmitted, registeredDrivers = [], formAction, recaptchaSiteKey }: {
+  onSubmitted?: () => void
+  registeredDrivers?: string[]
+  formAction: string
+  recaptchaSiteKey: string
+}) {
   const registeredSet = new Set(registeredDrivers.map((n) => n.toUpperCase()))
   const availableDrivers = (drivers as string[]).filter((name) => !registeredSet.has(name.toUpperCase()))
   const [selected, setSelected] = useState('')
@@ -27,7 +30,7 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
   useEffect(() => {
     if (IS_LOCALHOST || typeof grecaptcha === 'undefined' || !captchaRef.current) return
     widgetId.current = grecaptcha.render(captchaRef.current, {
-      sitekey: RECAPTCHA_SITE_KEY,
+      sitekey: recaptchaSiteKey,
       callback: () => { captchaSolvedOnce.current = true; setCaptchaVerified(true) },
       'expired-callback': () => { if (!captchaSolvedOnce.current) setCaptchaVerified(false) },
     })
@@ -53,7 +56,7 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [] }: { onSubm
     })
 
     try {
-      await fetch(FORM_ACTION, {
+      await fetch(formAction, {
         method: 'POST',
         mode: 'no-cors',
         body,

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import drivers from '../data/drivers.json'
+import type { Driver } from '../types'
 
 const FIELD_DRIVER = 'entry.1615508197'
 const IS_LOCALHOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
@@ -19,7 +20,9 @@ export function EnrollmentForm({ onSubmitted, registeredDrivers = [], formAction
   recaptchaSiteKey: string
 }) {
   const registeredSet = new Set(registeredDrivers.map((n) => n.toUpperCase()))
-  const availableDrivers = (drivers as string[]).filter((name) => !registeredSet.has(name.toUpperCase()))
+  const availableDrivers = (drivers as Driver[])
+    .map((d) => d.nickname)
+    .filter((name) => !registeredSet.has(name.toUpperCase()))
   const [selected, setSelected] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [captchaVerified, setCaptchaVerified] = useState(IS_LOCALHOST)

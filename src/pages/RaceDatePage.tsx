@@ -10,8 +10,9 @@ import config from '../data/config.json'
 import { RegistrationCountdown } from '../components/RegistrationCountdown'
 import { DriversGridService } from '../services/partitionDrivers'
 import knownDrivers from '../data/drivers.json'
+import type { Driver } from '../types'
 
-const KNOWN_DRIVERS_SET = new Set((knownDrivers as string[]).map((n) => n.toUpperCase()))
+const KNOWN_DRIVERS_SET = new Set((knownDrivers as Driver[]).map((d) => d.nickname.toUpperCase()))
 
 export function RaceDatePage() {
   const { year, date } = useParams<{ year: string; date: string }>()

@@ -1,3 +1,8 @@
+export interface Driver {
+  nickname: string
+  member_id: number | null
+}
+
 export interface Registration {
   nickname: string
   originalNickname: string

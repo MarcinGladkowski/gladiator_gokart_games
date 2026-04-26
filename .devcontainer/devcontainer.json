@@ -2,13 +2,19 @@
   "name": "gladiator-gokart-games",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "forwardPorts": [5173],
-  "postCreateCommand": "npm run dev",
+  "postCreateCommand": "npm ci",
+  "remoteUser": "node",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
         "dbaeumer.vscode-eslint",
         "bradlc.vscode-tailwindcss",
-        "ms-vscode.vscode-typescript-next"
+        "ms-vscode.vscode-typescript-next",
+        "GitHub.vscode-pull-request-github"
       ]
     }
   }

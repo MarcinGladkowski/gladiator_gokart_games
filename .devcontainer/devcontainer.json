@@ -2,7 +2,7 @@
   "name": "gladiator-gokart-games",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "forwardPorts": [5173],
-  "postCreateCommand": "npm ci",
+  "postCreateCommand": "npm run dev",
   "customizations": {
     "vscode": {
       "extensions": [

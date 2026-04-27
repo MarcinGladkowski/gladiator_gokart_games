@@ -1,5 +1,5 @@
 ---
-name: extract-races-results
+name: extract-races-email-results
 description: "Extract races results from Gmail messages and save them as JSON files with specific keys and file names."
 ---
  

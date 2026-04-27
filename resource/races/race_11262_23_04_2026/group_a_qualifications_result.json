@@ -1,0 +1,115 @@
+{
+  "session_details": {
+    "name": "mGP - Měřák, sk. A",
+    "date": "2026-04-23",
+    "time_range": "18:00",
+    "track": "OKRUH",
+    "session_id": 11262
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": null,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 7,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.415"
+    },
+    {
+      "rank": 2,
+      "kart_number": null,
+      "driver": "KREWETA",
+      "laps": 7,
+      "difference_to_leader": "+0.055",
+      "best_lap_time": "1:11.470"
+    },
+    {
+      "rank": 3,
+      "kart_number": null,
+      "driver": "HONKI",
+      "laps": 7,
+      "difference_to_leader": "+0.309",
+      "best_lap_time": "1:11.724"
+    },
+    {
+      "rank": 4,
+      "kart_number": null,
+      "driver": "MARCIN GŁADKOWSKI",
+      "laps": 7,
+      "difference_to_leader": "+0.461",
+      "best_lap_time": "1:11.876"
+    },
+    {
+      "rank": 5,
+      "kart_number": null,
+      "driver": "NIEMIEC",
+      "laps": 7,
+      "difference_to_leader": "+0.667",
+      "best_lap_time": "1:12.082"
+    },
+    {
+      "rank": 6,
+      "kart_number": null,
+      "driver": "WIKTOR KALUZA",
+      "laps": 7,
+      "difference_to_leader": "+0.727",
+      "best_lap_time": "1:12.142"
+    },
+    {
+      "rank": 7,
+      "kart_number": null,
+      "driver": "FILIP BUCHWALD",
+      "laps": 6,
+      "difference_to_leader": "+0.998",
+      "best_lap_time": "1:12.413"
+    },
+    {
+      "rank": 8,
+      "kart_number": null,
+      "driver": "QUNIO",
+      "laps": 6,
+      "difference_to_leader": "+1.178",
+      "best_lap_time": "1:12.593"
+    },
+    {
+      "rank": 9,
+      "kart_number": null,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 7,
+      "difference_to_leader": "+1.240",
+      "best_lap_time": "1:12.655"
+    },
+    {
+      "rank": 10,
+      "kart_number": null,
+      "driver": "WILCZU",
+      "laps": 6,
+      "difference_to_leader": "+1.307",
+      "best_lap_time": "1:12.722"
+    },
+    {
+      "rank": 11,
+      "kart_number": null,
+      "driver": "WASEK",
+      "laps": 7,
+      "difference_to_leader": "+1.324",
+      "best_lap_time": "1:12.739"
+    },
+    {
+      "rank": 12,
+      "kart_number": null,
+      "driver": "BIEG KAROL",
+      "laps": 7,
+      "difference_to_leader": "+1.832",
+      "best_lap_time": "1:13.247"
+    },
+    {
+      "rank": 13,
+      "kart_number": null,
+      "driver": "PAWELTGB",
+      "laps": 6,
+      "difference_to_leader": "+2.464",
+      "best_lap_time": "1:13.879"
+    }
+  ]
+}

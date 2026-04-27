@@ -1,0 +1,128 @@
+{
+  "race_details": {
+    "name": "mGP - Závod, sk. B",
+    "date": "2026-04-23",
+    "time_range": "18:37",
+    "track": "OKRUH",
+    "session_id": 11265
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": null,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.649",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "kart_number": null,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "+3.948",
+      "best_lap_time": "1:12.105",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "kart_number": null,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+5.539",
+      "best_lap_time": "1:11.828",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "kart_number": null,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "+5.717",
+      "best_lap_time": "1:12.039",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "kart_number": null,
+      "driver": "PAWELTGB",
+      "laps": 12,
+      "difference_to_leader": "+9.120",
+      "best_lap_time": "1:11.733",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "kart_number": null,
+      "driver": "TIM7",
+      "laps": 12,
+      "difference_to_leader": "+17.254",
+      "best_lap_time": "1:12.876",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "kart_number": null,
+      "driver": "SHEEPEK",
+      "laps": 12,
+      "difference_to_leader": "+19.903",
+      "best_lap_time": "1:12.638",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "kart_number": null,
+      "driver": "MARCINBTM",
+      "laps": 12,
+      "difference_to_leader": "+20.239",
+      "best_lap_time": "1:12.742",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "kart_number": null,
+      "driver": "ADMICH",
+      "laps": 12,
+      "difference_to_leader": "+26.850",
+      "best_lap_time": "1:13.370",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "kart_number": null,
+      "driver": "TPBODEK",
+      "laps": 12,
+      "difference_to_leader": "+27.159",
+      "best_lap_time": "1:12.663",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "kart_number": null,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "+31.598",
+      "best_lap_time": "1:13.473",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "kart_number": null,
+      "driver": "BALU",
+      "laps": 12,
+      "difference_to_leader": "+32.080",
+      "best_lap_time": "1:12.878",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "kart_number": null,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+41.581",
+      "best_lap_time": "1:14.430",
+      "best_lap_time_race": false
+    }
+  ]
+}

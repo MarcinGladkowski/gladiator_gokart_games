@@ -94,7 +94,7 @@ Your task is to extract race competitions results from email messages saved in H
     },
 }
 ```
-* The file name will be in format: `resource/races/race_<race_id>_<date>/group_a_qualifications_result.json`
+* The file name will be in format: `resource/races/race_<race_number>_<date>/group_a_qualifications_result.json`
 * Date should be in format DD_MM_YYYY
 
 ## Race

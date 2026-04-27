@@ -1,9 +1,37 @@
 name: Use GitHub Models
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      round:
+        description: Race round number
+        required: true
+        type: string
+      date:
+        description: Race date
+        required: true
+        type: string  
+      qualifications_a_member_id:
+        description: 'Qualifications A member_id'
+        required: true
+        type: string
+      race_a_member_id:
+        description: 'Race A member_id'
+        required: true
+        type: string
+      qualifications_b_member_id:
+        description: 'Qualifications B member_id'
+        required: true
+        type: string
+      race_b_member_id:
+        description: 'Race B member_id'
+        required: true
+        type: string
 
 permissions:
   models: read
+  contents: write
+  issues: write
 
 jobs:
   call-model:
@@ -12,6 +40,12 @@ jobs:
       - name: Call AI model
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROUND: ${{ inputs.round }}
+          RACE_DATE: ${{ inputs.date }}
+          QUALIFICATIONS_A: ${{ inputs.qualifications_a_member_id }}
+          RACE_A: ${{ inputs.race_a_member_id }}
+          QUALIFICATIONS_B: ${{ inputs.qualifications_b_member_id }}
+          RACE_B: ${{ inputs.race_b_member_id }}
         run: |
           curl "https://models.github.ai/inference/chat/completions" \
              -H "Content-Type: application/json" \

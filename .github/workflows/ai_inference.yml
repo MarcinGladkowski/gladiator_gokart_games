@@ -71,7 +71,7 @@ jobs:
               env:
                   SESSION_ID: ${{ steps.extract_session.outputs.response }}
               run: |
-                SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
+                SESSION_ID=$(echo "$SESSION_ID")
                 echo "::debug::Session ID: $SESSION_ID"
                 RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \

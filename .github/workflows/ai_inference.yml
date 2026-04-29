@@ -13,7 +13,7 @@ jobs:
         uses: actions/ai-inference@v1
         with:
           prompt: 'Hello!'
-          system-prompt-file: './.claude/skills/extract-races-results-remote/results.prompt.md'
+          system-prompt-file: './.claude/skills/extract-races-results-remote/results.prompt.txt'
 
       - name: Print Output
         id: output

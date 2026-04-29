@@ -39,6 +39,7 @@ jobs:
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
                   --data-raw 'center_id=120&member_id=${{ inputs.member_id }}')
+                echo "::debug::Fetch member sessions response: $RESPONSE"
                 echo "data<<EOF" >> $GITHUB_OUTPUT
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
@@ -71,10 +72,12 @@ jobs:
                   SESSION_ID: ${{ steps.extract_session.outputs.response }}
               run: |
                 SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
+                echo "::debug::Session ID: $SESSION_ID"
                 RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
                   --data-raw "type=session_results&center_id=120&session_id=${SESSION_ID}")
+                echo "::debug::Fetch race details response: $RESPONSE"
                 echo "data<<EOF" >> $GITHUB_OUTPUT
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
@@ -161,6 +164,9 @@ jobs:
                 SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
                 GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
                 RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
+                echo "::debug::session_id=$SESSION_ID group=$GROUP race_dir=$RACE_DIR"
+                echo "::debug::Qualification response: $QUAL_RESPONSE"
+                echo "::debug::Race response: $RACE_RESPONSE"
                 mkdir -p "$RACE_DIR"
                 printf '%s' "$QUAL_RESPONSE" > "$RACE_DIR/group_${GROUP}_qualifications_result.json"
                 printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"

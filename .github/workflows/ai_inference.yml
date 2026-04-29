@@ -65,7 +65,7 @@ jobs:
                       ${{ steps.fetch_sessions.outputs.data }}
 
             # ── PHASE 2: Fetch and extract race details ───────────────────────
-            
+
             - name: Fetch race details
               id: fetch_race
               env:
@@ -81,6 +81,7 @@ jobs:
                 echo "data<<EOF" >> $GITHUB_OUTPUT
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
+                echo "::debug::RACE_DATA: $RESPONSE"
 
             - name: Extract race results
               id: extract_race

@@ -31,22 +31,20 @@ jobs:
 
                       **User last sessions**
                       ```sh
-                      curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
-                      -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
-                      -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                      --data-raw 'center_id=120&member_id=MEMBER_ID'
+                        curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
+                        -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+                        -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+                        --data-raw 'center_id=120&member_id=1803'
                       ```
 
                       Returned javascript block contains 'var graphic_all_data' which tells last sessions for driver.
 
                       **task**
 
-                      Based on arguments: MEMBER_ID and RUN_TYPE extract SESSION_ID of race.
-                      Input could contains multiple member_id: race_type pairs.
                       Race type MUST be recognized by key race_name. Additionaly input can contains YEAR and MONTH.
                       Originaly response contains names in Czech lang. In example April - dub. 2026
 
-                      `partial response`
+                      **example partial response**
                       ```
                       {
                                       "rank": "1",

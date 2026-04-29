@@ -1,81 +1,182 @@
-name: "AI inference"
+name: "AI inference - Extract Race Results"
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      member_id:
+        description: 'Member ID'
+        required: true
+        default: '1803'
+      year:
+        description: 'Year (YYYY)'
+        required: true
+        default: '2026'
+      month:
+        description: 'Month (MM)'
+        required: true
+        default: '04'
+      run_type:
+        description: 'Run type (e.g. Závod, sk. A)'
+        required: true
+        default: 'Závod, sk. A'
 
 jobs:
     inference:
         permissions:
             models: read
+            contents: write
         runs-on: ubuntu-latest
         steps:
-            - name: Fetch session data
-              id: fetch
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # ── PHASE 1: Discover session_id ──────────────────────────────────
+
+            - name: Fetch member sessions
+              id: fetch_sessions
               run: |
                 RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                  --data-raw 'center_id=120&member_id=1803')
+                  --data-raw 'center_id=120&member_id=${{ inputs.member_id }}')
                 echo "data<<EOF" >> $GITHUB_OUTPUT
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
 
-            - name: Extract race results
-              id: inference
+            - name: Extract session ID
+              id: extract_session
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
                   prompt: |
-                      ### DESCRIPTION
-                      Your task is to extract races results for:
-                      MEMBER_ID: 1803
-                      YEAR: 2026
-                      MONTH: 04
-                      RUN_TYPE: Zavod, sk. A
+                      From the JavaScript response below, extract the `var graphic_all_data` variable and find
+                      the entry that matches ALL of the following criteria:
+                      - race_name contains: ${{ inputs.run_type }}
+                      - date field matches year ${{ inputs.year }} and month ${{ inputs.month }}
 
-                      **Run types**
+                      The date field uses Czech month abbreviations:
+                      01=led, 02=úno, 03=bře, 04=dub, 05=kvě, 06=čer, 07=čvc, 08=srp, 09=zář, 10=říj, 11=lis, 12=pro
 
-                      * Race group A - Závod, sk. A
-                      * Qualification session group A - Měřák, sk. A - 18:00
-                      * Race group B - Závod, sk. B
-                      * Qualification session group B - Měřák, sk. B - 18:00
+                      Return ONLY a JSON object with no additional text:
+                      {"session_id": "<id>", "date": "<DD_MM_YYYY>"}
 
-                      DO NOT TAKE ANY ACTION while any member_id, race number and date DOES NOT PROVIDED.
+                      Data:
+                      ${{ steps.fetch_sessions.outputs.data }}
 
-                      **User last sessions data**
-                      The following JavaScript response was fetched from the API. Extract `var graphic_all_data` and parse the JSON entries:
+            - name: Parse session metadata
+              id: parse_session
+              env:
+                  SESSION_RESPONSE: ${{ steps.extract_session.outputs.response }}
+              run: |
+                SESSION_ID=$(echo "$SESSION_RESPONSE" | jq -r '.session_id')
+                DATE=$(echo "$SESSION_RESPONSE" | jq -r '.date')
+                GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
+                echo "session_id=$SESSION_ID" >> $GITHUB_OUTPUT
+                echo "date=$DATE" >> $GITHUB_OUTPUT
+                echo "group=$GROUP" >> $GITHUB_OUTPUT
+                echo "race_dir=resource/races/race_${SESSION_ID}_${DATE}" >> $GITHUB_OUTPUT
 
-                      ```
-                      ${{ steps.fetch.outputs.data }}
-                      ```
+            # ── PHASE 2: Fetch and extract race details ───────────────────────
 
-                      Returned javascript block contains 'var graphic_all_data' which tells last sessions for driver.
+            - name: Fetch race details
+              id: fetch_race
+              run: |
+                RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
+                  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+                  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+                  --data-raw 'type=session_results&center_id=120&session_id=${{ steps.parse_session.outputs.session_id }}')
+                echo "data<<EOF" >> $GITHUB_OUTPUT
+                echo "$RESPONSE" >> $GITHUB_OUTPUT
+                echo "EOF" >> $GITHUB_OUTPUT
 
-                      **task**
+            - name: Extract qualification results
+              id: extract_qualification
+              uses: actions/ai-inference@v1
+              with:
+                  model: openai/gpt-4o
+                  prompt: |
+                      From the race session data below, extract the QUALIFICATION results.
+                      Qualification entries have "Měřák" in the race_name.
+                      Group is identified by "sk. ${{ steps.parse_session.outputs.group }}" (uppercase) in race_name.
 
-                      Race type MUST be recognized by key race_name. Additionally input can contain YEAR and MONTH.
-                      Originally response contains names in Czech lang. In example April - dub. 2026
-
-                      Filter entries matching YEAR: 2026, MONTH: 04, and RUN_TYPE: Závod, sk. A.
-                      Return the matching session_id values.
-
-                      **example partial entry format (session_id is illustrative only — extract actual values from the data above)**
-                      ```json
+                      Return ONLY valid JSON with no additional text:
                       {
-                          "rank": "1",
-                          "time_millisecond": 72780,
-                          "time": "1:12.780",
-                          "sector_1": "",
-                          "sector_1_millisecond": 0,
-                          "sector_2": "",
-                          "sector_2_millisecond": 0,
-                          "sector_3": "",
-                          "sector_3_millisecond": 0,
-                          "date": "dub. 2026",
-                          "session_id": "11264",
-                          "race_name": "Závod, sk. A - 18:26"
+                        "session_details": {
+                          "name": "<session name>",
+                          "date": "<YYYY-MM-DD>",
+                          "time_range": "<HH:MM - HH:MM>",
+                          "track": "<track name>"
+                        },
+                        "general_results": [
+                          {
+                            "rank": 1,
+                            "kart_number": 4,
+                            "driver": "DRIVER NAME",
+                            "laps": 6,
+                            "difference_to_leader": "Leader",
+                            "best_lap_time": "1:25.495"
+                          }
+                        ]
                       }
-                      ```
 
-            - name: Print Output
-              id: output
-              run: echo "${{ steps.inference.outputs.response }}"
+                      Data:
+                      ${{ steps.fetch_race.outputs.data }}
+
+            - name: Extract race results
+              id: extract_race
+              uses: actions/ai-inference@v1
+              with:
+                  model: openai/gpt-4o
+                  prompt: |
+                      From the race session data below, extract the RACE results.
+                      Race entries have "Závod" in the race_name.
+                      Group is identified by "sk. ${{ steps.parse_session.outputs.group }}" (uppercase) in race_name.
+
+                      Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
+                      all drivers in the race; false for everyone else.
+
+                      Return ONLY valid JSON with no additional text:
+                      {
+                        "race_details": {
+                          "name": "<session name>",
+                          "date": "<YYYY-MM-DD>",
+                          "time_range": "<HH:MM - HH:MM>",
+                          "track": "<track name>"
+                        },
+                        "general_results": [
+                          {
+                            "rank": 1,
+                            "kart_number": 4,
+                            "driver": "DRIVER NAME",
+                            "laps": 6,
+                            "difference_to_leader": "Leader",
+                            "best_lap_time": "1:25.495",
+                            "best_lap_time_race": true
+                          }
+                        ]
+                      }
+
+                      Data:
+                      ${{ steps.fetch_race.outputs.data }}
+
+            # ── PHASE 3: Persist results ──────────────────────────────────────
+
+            - name: Save result files
+              env:
+                  QUAL_RESPONSE: ${{ steps.extract_qualification.outputs.response }}
+                  RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
+              run: |
+                RACE_DIR="${{ steps.parse_session.outputs.race_dir }}"
+                GROUP="${{ steps.parse_session.outputs.group }}"
+                mkdir -p "$RACE_DIR"
+                printf '%s' "$QUAL_RESPONSE" > "$RACE_DIR/group_${GROUP}_qualifications_result.json"
+                printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
+                echo "Saved results to $RACE_DIR"
+
+            - name: Commit and push results
+              run: |
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+                git add resource/races/
+                git diff --staged --quiet || git commit -m "race results: session ${{ steps.parse_session.outputs.session_id }} (${{ steps.parse_session.outputs.date }})"
+                git push

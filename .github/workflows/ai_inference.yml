@@ -82,40 +82,6 @@ jobs:
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
 
-            - name: Extract qualification results
-              id: extract_qualification
-              uses: actions/ai-inference@v1
-              with:
-                  model: openai/gpt-4o
-                  max-tokens: 5000
-                  prompt: |
-                      From the race session data below, extract the QUALIFICATION results.
-                      Qualification entries have "Měřák" in the race_name.
-                      Group is identified by run_type: ${{ inputs.run_type }}
-
-                      Return ONLY valid JSON with no additional text:
-                      {
-                        "session_details": {
-                          "name": "<session name>",
-                          "date": "<YYYY-MM-DD>",
-                          "time_range": "<HH:MM - HH:MM>",
-                          "track": "<track name>"
-                        },
-                        "general_results": [
-                          {
-                            "rank": 1,
-                            "kart_number": 4,
-                            "driver": "DRIVER NAME",
-                            "laps": 6,
-                            "difference_to_leader": "Leader",
-                            "best_lap_time": "1:25.495"
-                          }
-                        ]
-                      }
-
-                      Data:
-                      ${{ steps.fetch_race.outputs.data }}
-
             - name: Extract race results
               id: extract_race
               uses: actions/ai-inference@v1
@@ -157,7 +123,6 @@ jobs:
 
             - name: Save result files
               env:
-                  QUAL_RESPONSE: ${{ steps.extract_qualification.outputs.response }}
                   RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
                   SESSION_ID: ${{ steps.extract_session.outputs.response }}
               run: |
@@ -165,10 +130,8 @@ jobs:
                 GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
                 RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
                 echo "::debug::session_id=$SESSION_ID group=$GROUP race_dir=$RACE_DIR"
-                echo "::debug::Qualification response: $QUAL_RESPONSE"
                 echo "::debug::Race response: $RACE_RESPONSE"
                 mkdir -p "$RACE_DIR"
-                printf '%s' "$QUAL_RESPONSE" > "$RACE_DIR/group_${GROUP}_qualifications_result.json"
                 printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
                 echo "Saved results to $RACE_DIR"
 

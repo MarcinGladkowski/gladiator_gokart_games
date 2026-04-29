@@ -83,64 +83,64 @@ jobs:
                 echo "EOF" >> $GITHUB_OUTPUT
                 echo "::debug::RACE_DATA: $RESPONSE"
 
-            - name: Extract race results
-              id: extract_race
-              uses: actions/ai-inference@v1
-              with:
-                  model: openai/gpt-4o
-                  max-tokens: 5000
-                  prompt: |
-                      From the race session data below, extract the RACE results.
-                      Race entries have "Závod" in the race_name.
-                      Group is identified by run_type: ${{ inputs.run_type }}
+            # - name: Extract race results
+            #   id: extract_race
+            #   uses: actions/ai-inference@v1
+            #   with:
+            #       model: openai/gpt-4o
+            #       max-tokens: 5000
+            #       prompt: |
+            #           From the race session data below, extract the RACE results.
+            #           Race entries have "Závod" in the race_name.
+            #           Group is identified by run_type: ${{ inputs.run_type }}
 
-                      Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
-                      all drivers in the race; false for everyone else.
+            #           Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
+            #           all drivers in the race; false for everyone else.
 
-                      Return ONLY valid JSON with no additional text:
-                      {
-                        "race_details": {
-                          "name": "<session name>",
-                          "date": "<YYYY-MM-DD>",
-                          "time_range": "<HH:MM - HH:MM>",
-                          "track": "<track name>"
-                        },
-                        "general_results": [
-                          {
-                            "rank": 1,
-                            "kart_number": 4,
-                            "driver": "DRIVER NAME",
-                            "laps": 6,
-                            "difference_to_leader": "Leader",
-                            "best_lap_time": "1:25.495",
-                            "best_lap_time_race": true
-                          }
-                        ]
-                      }
+            #           Return ONLY valid JSON with no additional text:
+            #           {
+            #             "race_details": {
+            #               "name": "<session name>",
+            #               "date": "<YYYY-MM-DD>",
+            #               "time_range": "<HH:MM - HH:MM>",
+            #               "track": "<track name>"
+            #             },
+            #             "general_results": [
+            #               {
+            #                 "rank": 1,
+            #                 "kart_number": 4,
+            #                 "driver": "DRIVER NAME",
+            #                 "laps": 6,
+            #                 "difference_to_leader": "Leader",
+            #                 "best_lap_time": "1:25.495",
+            #                 "best_lap_time_race": true
+            #               }
+            #             ]
+            #           }
 
-                      Data:
-                      ${{ steps.fetch_race.outputs.data }}
+            #           Data:
+            #           ${{ steps.fetch_race.outputs.data }}
 
-            # ── PHASE 3: Persist results ──────────────────────────────────────
+            # # ── PHASE 3: Persist results ──────────────────────────────────────
 
-            - name: Save result files
-              env:
-                  RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
-                  SESSION_ID: ${{ steps.extract_session.outputs.response }}
-              run: |
-                SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
-                GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
-                RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
-                echo "::debug::session_id=$SESSION_ID group=$GROUP race_dir=$RACE_DIR"
-                echo "::debug::Race response: $RACE_RESPONSE"
-                mkdir -p "$RACE_DIR"
-                printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
-                echo "Saved results to $RACE_DIR"
+            # - name: Save result files
+            #   env:
+            #       RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
+            #       SESSION_ID: ${{ steps.extract_session.outputs.response }}
+            #   run: |
+            #     SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
+            #     GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
+            #     RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
+            #     echo "::debug::session_id=$SESSION_ID group=$GROUP race_dir=$RACE_DIR"
+            #     echo "::debug::Race response: $RACE_RESPONSE"
+            #     mkdir -p "$RACE_DIR"
+            #     printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
+            #     echo "Saved results to $RACE_DIR"
 
-            - name: Commit and push results
-              run: |
-                git config user.name "github-actions[bot]"
-                git config user.email "github-actions[bot]@users.noreply.github.com"
-                git add resource/races/
-                git diff --staged --quiet || git commit -m "race results: session ${{ steps.extract_session.outputs.response }} (${{ inputs.month }}/${{ inputs.year }})"
-                git push
+            # - name: Commit and push results
+            #   run: |
+            #     git config user.name "github-actions[bot]"
+            #     git config user.email "github-actions[bot]@users.noreply.github.com"
+            #     git add resource/races/
+            #     git diff --staged --quiet || git commit -m "race results: session ${{ steps.extract_session.outputs.response }} (${{ inputs.month }}/${{ inputs.year }})"
+            #     git push

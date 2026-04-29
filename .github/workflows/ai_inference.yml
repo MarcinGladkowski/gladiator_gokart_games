@@ -30,14 +30,14 @@ jobs:
                       curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
                       -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                       -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                      --data-raw 'center_id=120&member_id={member_id}'
+                      --data-raw 'center_id=120&member_id=MEMBER_ID'
                       ```
 
                       Returned javascript block contains 'var graphic_all_data' which tells last sessions for driver.
 
                       **task**
 
-                      Based on arguments: {member_id} and {run_type} extract {session_id} of race.
+                      Based on arguments: MEMBER_ID and RUN_TYPE extract SESSION_ID of race.
                       Input could contains multiple member_id: race_type pairs.
                       Race type MUST be recognized by key race_name. Additionaly input can contains {year} and {month}.
                       Originaly response contains names in Czech lang. In example April - dub. 2026
@@ -60,7 +60,7 @@ jobs:
                                   }
                       ```
 
-                      Correct id is: {sesssion_id: 11264}
+                      Correct id is: sesssion_id: 11264
 
             - name: Print Output
               id: output

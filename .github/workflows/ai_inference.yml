@@ -8,13 +8,25 @@ jobs:
             models: read
         runs-on: ubuntu-latest
         steps:
-            - name: Test Local Action
+            - name: Fetch session data
+              id: fetch
+              run: |
+                RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
+                  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+                  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+                  --data-raw 'center_id=120&member_id=1803')
+                echo "data<<EOF" >> $GITHUB_OUTPUT
+                echo "$RESPONSE" >> $GITHUB_OUTPUT
+                echo "EOF" >> $GITHUB_OUTPUT
+
+            - name: Extract race results
               id: inference
               uses: actions/ai-inference@v1
               with:
+                  model: openai/gpt-4o
                   prompt: |
                       ### DESCRIPTION
-                      Your task is to fetch and extract races results for:
+                      Your task is to extract races results for:
                       MEMBER_ID: 1803
                       YEAR: 2026
                       MONTH: 04
@@ -27,42 +39,42 @@ jobs:
                       * Race group B - Závod, sk. B
                       * Qualification session group B - Měřák, sk. B - 18:00
 
-                      DOT NOT TAKE ANY ACTION while any member_id, race number and date DOES NOT PROVIDED.
+                      DO NOT TAKE ANY ACTION while any member_id, race number and date DOES NOT PROVIDED.
 
-                      **User last sessions**
-                      ```sh
-                        curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
-                        -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
-                        -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                        --data-raw 'center_id=120&member_id=1803'
+                      **User last sessions data**
+                      The following JavaScript response was fetched from the API. Extract `var graphic_all_data` and parse the JSON entries:
+
+                      ```
+                      ${{ steps.fetch.outputs.data }}
                       ```
 
                       Returned javascript block contains 'var graphic_all_data' which tells last sessions for driver.
 
                       **task**
 
-                      Race type MUST be recognized by key race_name. Additionaly input can contains YEAR and MONTH.
-                      Originaly response contains names in Czech lang. In example April - dub. 2026
+                      Race type MUST be recognized by key race_name. Additionally input can contain YEAR and MONTH.
+                      Originally response contains names in Czech lang. In example April - dub. 2026
 
-                      **example partial response**
-                      ```
+                      Filter entries matching YEAR: 2026, MONTH: 04, and RUN_TYPE: Závod, sk. A.
+                      Return the matching session_id values.
+
+                      **example partial entry format (session_id is illustrative only — extract actual values from the data above)**
+                      ```json
                       {
-                                      "rank": "1",
-                                      "time_millisecond": 72780,
-                                      "time": "1:12.780",
-                                      "sector_1": "",
-                                      "sector_1_millisecond": 0,
-                                      "sector_2": "",
-                                      "sector_2_millisecond": 0,
-                                      "sector_3": "",
-                                      "sector_3_millisecond": 0,
-                                      "date": "dub. 2026",
-                                      "session_id": "11264",
-                                      "race_name": "Z\u00e1vod, sk. A - 18:26"
-                                  }
+                          "rank": "1",
+                          "time_millisecond": 72780,
+                          "time": "1:12.780",
+                          "sector_1": "",
+                          "sector_1_millisecond": 0,
+                          "sector_2": "",
+                          "sector_2_millisecond": 0,
+                          "sector_3": "",
+                          "sector_3_millisecond": 0,
+                          "date": "dub. 2026",
+                          "session_id": "11264",
+                          "race_name": "Závod, sk. A - 18:26"
+                      }
                       ```
-
-                      Correct id is: sesssion_id: 11264
 
             - name: Print Output
               id: output

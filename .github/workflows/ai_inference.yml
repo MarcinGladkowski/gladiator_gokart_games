@@ -65,7 +65,7 @@ jobs:
                       ${{ steps.fetch_sessions.outputs.data }}
 
             # ── PHASE 2: Fetch and extract race details ───────────────────────
-
+            
             - name: Fetch race details
               id: fetch_race
               env:
@@ -87,6 +87,7 @@ jobs:
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
+                  max-tokens: 5000
                   prompt: |
                       From the race session data below, extract the RACE results.
                       Race entries have "Závod" in the race_name.

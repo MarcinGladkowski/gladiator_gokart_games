@@ -48,6 +48,7 @@ jobs:
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
+                  max-tokens: 5000
                   prompt: |
                       From the JavaScript response below, extract the `var graphic_all_data` variable and find
                       the entry that matches ALL of the following criteria:
@@ -57,24 +58,10 @@ jobs:
                       The date field uses Czech month abbreviations:
                       01=led, 02=úno, 03=bře, 04=dub, 05=kvě, 06=čer, 07=čvc, 08=srp, 09=zář, 10=říj, 11=lis, 12=pro
 
-                      Return ONLY a JSON object with no additional text:
-                      {"session_id": "<id>", "date": "<DD_MM_YYYY>"}
+                      Return ONLY the session_id as a plain number with no additional text.
 
                       Data:
                       ${{ steps.fetch_sessions.outputs.data }}
-
-            - name: Parse session metadata
-              id: parse_session
-              env:
-                  SESSION_RESPONSE: ${{ steps.extract_session.outputs.response }}
-              run: |
-                SESSION_ID=$(echo "$SESSION_RESPONSE" | jq -r '.session_id')
-                DATE=$(echo "$SESSION_RESPONSE" | jq -r '.date')
-                GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
-                echo "session_id=$SESSION_ID" >> $GITHUB_OUTPUT
-                echo "date=$DATE" >> $GITHUB_OUTPUT
-                echo "group=$GROUP" >> $GITHUB_OUTPUT
-                echo "race_dir=resource/races/race_${SESSION_ID}_${DATE}" >> $GITHUB_OUTPUT
 
             # ── PHASE 2: Fetch and extract race details ───────────────────────
 
@@ -84,7 +71,7 @@ jobs:
                 RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                  --data-raw 'type=session_results&center_id=120&session_id=${{ steps.parse_session.outputs.session_id }}')
+                  --data-raw 'type=session_results&center_id=120&session_id=${{ steps.extract_session.outputs.response }}')
                 echo "data<<EOF" >> $GITHUB_OUTPUT
                 echo "$RESPONSE" >> $GITHUB_OUTPUT
                 echo "EOF" >> $GITHUB_OUTPUT
@@ -94,10 +81,11 @@ jobs:
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
+                  max-tokens: 5000
                   prompt: |
                       From the race session data below, extract the QUALIFICATION results.
                       Qualification entries have "Měřák" in the race_name.
-                      Group is identified by "sk. ${{ steps.parse_session.outputs.group }}" (uppercase) in race_name.
+                      Group is identified by run_type: ${{ inputs.run_type }}
 
                       Return ONLY valid JSON with no additional text:
                       {
@@ -130,7 +118,7 @@ jobs:
                   prompt: |
                       From the race session data below, extract the RACE results.
                       Race entries have "Závod" in the race_name.
-                      Group is identified by "sk. ${{ steps.parse_session.outputs.group }}" (uppercase) in race_name.
+                      Group is identified by run_type: ${{ inputs.run_type }}
 
                       Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
                       all drivers in the race; false for everyone else.
@@ -166,8 +154,9 @@ jobs:
                   QUAL_RESPONSE: ${{ steps.extract_qualification.outputs.response }}
                   RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
               run: |
-                RACE_DIR="${{ steps.parse_session.outputs.race_dir }}"
-                GROUP="${{ steps.parse_session.outputs.group }}"
+                SESSION_ID="${{ steps.extract_session.outputs.response }}"
+                GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
+                RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
                 mkdir -p "$RACE_DIR"
                 printf '%s' "$QUAL_RESPONSE" > "$RACE_DIR/group_${GROUP}_qualifications_result.json"
                 printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
@@ -178,5 +167,5 @@ jobs:
                 git config user.name "github-actions[bot]"
                 git config user.email "github-actions[bot]@users.noreply.github.com"
                 git add resource/races/
-                git diff --staged --quiet || git commit -m "race results: session ${{ steps.parse_session.outputs.session_id }} (${{ steps.parse_session.outputs.date }})"
+                git diff --staged --quiet || git commit -m "race results: session ${{ steps.extract_session.outputs.response }} (${{ inputs.month }}/${{ inputs.year }})"
                 git push

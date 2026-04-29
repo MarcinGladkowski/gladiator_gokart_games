@@ -13,6 +13,8 @@ Your task is to fetch and extract races results
 * Race group B - Závod, sk. B
 * Qualification session group B - Měřák, sk. B - 18:00
 
+DOT NOT TAKE ANY ACTION while any member_id, race number and date DOES NOT PROVIDED.
+
 **User last sessions**
 ```sh
 curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \

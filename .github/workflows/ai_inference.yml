@@ -1,20 +1,67 @@
-name: 'AI inference'
+name: "AI inference"
 
 on: workflow_dispatch
 
 jobs:
-  inference:
-    permissions:
-      models: read
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test Local Action
-        id: inference
-        uses: actions/ai-inference@v1
-        with:
-          prompt: 'Hello!'
-          system-prompt-file: './.claude/skills/extract-races-results-remote/results.prompt.txt'
+    inference:
+        permissions:
+            models: read
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test Local Action
+              id: inference
+              uses: actions/ai-inference@v1
+              with:
+                  prompt: |
+                      ### DESCRIPTION
+                      Your task is to fetch and extract races results
 
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.inference.outputs.response }}"
+                      **Run types**
+
+                      * Race group A - Závod, sk. A
+                      * Qualification session group A - Měřák, sk. A - 18:00
+                      * Race group B - Závod, sk. B
+                      * Qualification session group B - Měřák, sk. B - 18:00
+
+                      DOT NOT TAKE ANY ACTION while any member_id, race number and date DOES NOT PROVIDED.
+
+                      **User last sessions**
+                      ```sh
+                      curl -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_graphic.php' \
+                      -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+                      -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+                      --data-raw 'center_id=120&member_id={member_id}'
+                      ```
+
+                      Returned javascript block contains 'var graphic_all_data' which tells last sessions for driver.
+
+                      **task**
+
+                      Based on arguments: {member_id} and {run_type} extract {session_id} of race.
+                      Input could contains multiple member_id: race_type pairs.
+                      Race type MUST be recognized by key race_name. Additionaly input can contains {year} and {month}.
+                      Originaly response contains names in Czech lang. In example April - dub. 2026
+
+                      `partial response`
+                      ```
+                      {
+                                      "rank": "1",
+                                      "time_millisecond": 72780,
+                                      "time": "1:12.780",
+                                      "sector_1": "",
+                                      "sector_1_millisecond": 0,
+                                      "sector_2": "",
+                                      "sector_2_millisecond": 0,
+                                      "sector_3": "",
+                                      "sector_3_millisecond": 0,
+                                      "date": "dub. 2026",
+                                      "session_id": "11264",
+                                      "race_name": "Z\u00e1vod, sk. A - 18:26"
+                                  }
+                      ```
+
+                      Correct id is: {sesssion_id: 11264}
+
+            - name: Print Output
+              id: output
+              run: echo "${{ steps.inference.outputs.response }}"

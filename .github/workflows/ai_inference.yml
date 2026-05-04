@@ -60,7 +60,7 @@ jobs:
 
                       Return ONLY the session_id as a plain number with no additional text.
 
-                      RESPONSE MUST CONTAINS ONLY session_id such as example e.g. <number>
+                      RESPONSE MUST CONTAINS ONLY session_id such as example: <session_id>
 
                       Data:
                       ${{ steps.fetch_sessions.outputs.data }}

@@ -1,0 +1,128 @@
+
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "YYYY-MM-DD",
+    "time_range": "HH:MM - HH:MM",
+    "track": "Track Name"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "kart_number": 390,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.224",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "kart_number": 390,
+      "driver": "FILIP BUCHWALD",
+      "laps": 12,
+      "difference_to_leader": "+4.496",
+      "best_lap_time": "1:11.394",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "kart_number": 390,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+8.300",
+      "best_lap_time": "1:11.884",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "kart_number": 390,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "+8.633",
+      "best_lap_time": "1:11.879",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "kart_number": 390,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "+16.444",
+      "best_lap_time": "1:11.874",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "kart_number": 390,
+      "driver": "ZGUD",
+      "laps": 12,
+      "difference_to_leader": "+19.652",
+      "best_lap_time": "1:12.186",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "kart_number": 390,
+      "driver": "MARCIN GŁADKOWSKI",
+      "laps": 12,
+      "difference_to_leader": "+21.104",
+      "best_lap_time": "1:12.780",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "kart_number": 390,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "+21.201",
+      "best_lap_time": "1:12.238",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "kart_number": 390,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "+21.541",
+      "best_lap_time": "1:12.124",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "kart_number": 390,
+      "driver": "GRZECH",
+      "laps": 12,
+      "difference_to_leader": "+22.270",
+      "best_lap_time": "1:12.526",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "kart_number": 390,
+      "driver": "WILCZU",
+      "laps": 12,
+      "difference_to_leader": "+23.802",
+      "best_lap_time": "1:12.660",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "kart_number": 390,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "+27.928",
+      "best_lap_time": "1:13.177",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "kart_number": 390,
+      "driver": "WIDUCHKACPER",
+      "laps": 12,
+      "difference_to_leader": "+31.965",
+      "best_lap_time": "1:13.695",
+      "best_lap_time_race": false
+    }
+  ]
+}

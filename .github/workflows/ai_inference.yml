@@ -163,7 +163,7 @@ jobs:
               run: |
                 RACE_DIR="resource/races/race_${{ steps.round.outputs.round_number }}_${{ steps.round.outputs.date_formatted }}"
                 mkdir -p "$RACE_DIR"
-                printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/${{ steps.round.outputs.result_file }}"
+                printf '%s' "$RACE_RESPONSE" | sed 's/^```json//;s/^```//' > "$RACE_DIR/${{ steps.round.outputs.result_file }}"
                 echo "Saved to $RACE_DIR/${{ steps.round.outputs.result_file }}"
 
             - name: Commit and push results

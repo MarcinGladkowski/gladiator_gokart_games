@@ -69,6 +69,7 @@ jobs:
               env:
                   SESSION_ID: ${{ steps.extract_session.outputs.response }}
               run: |
+                echo "THIS IS AN RESPONSE"
                 echo "::debug::Session ID: $SESSION_ID"
 
             # - name: Extract race results

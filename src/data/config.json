@@ -10,30 +10,37 @@
   "recaptchaSiteKey": "6LeiTKAsAAAAADBLlBP-tqhM_W7RCl2dNbreC3cQ",
   "enrollments": {
     "2026-04-23": {
+      "round": 2,
       "formAction": "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeIKathI3As_-4Wyn7yrT2I8W5Zq2HtMQ1JkelSr3R-HOSXGw/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbzlFhTcpHRHmAjs-P6BIwOb_69VBq2GORweV975VXuI96RmGzlPSS4Mah0z_50bZA/exec"
     },
     "2026-05-14": {
+      "round": 3,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSetbSmvFyWWUsEZ7Q4_8TDAhhU0gzduVUARcKqjwqeXdvazWw/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbyiZIgrQe9dYzpBZNO9NXaZXaQX-S31JL1dIwR9Vi5X5jv9TdOmIEAqVck_zUYAE_E/exec"
     },
     "2026-06-18": {
+      "round": 4,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSes1pWoxyUU46YRqPLXkl-lPrfHo5bMNLb8NQ1YLmYZl3CzWw/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbzUgvhs1w_4CJXBhpQItUbnO3esrMmGpZ91pe7Kz8uqIKp5ukOHY7zNr18WgHGQMdQ/exec"
     },
     "2026-07-16": {
+      "round": 5,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSeZvFFRznJD40DEr9macvipaMNpbK0KKtQiVFyqY5qIKcWZbg/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbxYziYZD7zAVD3VpWRIN6hhA82F7NHRykeP6j5lXXIq3ax8vEybUaqzf7rL6651pm63/exec"
     },
     "2026-08-13": {
+      "round": 6,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSdcGGIdq9V6h1TdIbP8sEbN-ErmVYi_faTyabihVtkFSe5ijg/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbxfcCMUCPQXLXx5gHbVOoNFxJUFq4IZSjYXaDOq1t218t87d0SqsLkq6FYnG8OG_Cs/exec"
     },
     "2026-09-17": {
+      "round": 7,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSfUPWZbSQX7GfZNeJKuF83tRiRmmqoR7Bt84Og2GThh0yq4HA/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbx0hLABaYT6zwt0dpqP0m9c_nk3vuvED3pV4z2cSEeciI-f50cOnJcyduDCR5qKqMQu/exec"
     },
     "2026-10-15": {
+      "round": 8,
       "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSfpE6RsvEa9vIMHATZOmGpu7Murx10ujOGS-zWH1kUyFA5hdA/formResponse",
       "registrationsUrl": "https://script.google.com/macros/s/AKfycbxNT_ZtgGfzehNfOYejVLsYQPIXGo2I6QyAyoi1uj0uCDlS6YF8CJ14ajxh8DpQXVA/exec"
     }

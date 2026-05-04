@@ -132,13 +132,17 @@ jobs:
                       Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
                       all drivers in the race; false for everyone else.
 
-                      Replace with correct values for names, date, session_id.
+                      Replace with correct values for:
+                      * run_type: ${{ steps.round.outputs.run_type_value }}
+                      * date: ${{ steps.round.outputs.date_formatted }}
+                      * session_id: ${{ steps.fetch_sessions.outputs.data }}
 
                       Return ONLY valid JSON with no additional text:
                       {
                         "race_details": {
                           "name": "<race_type>",
                           "date": "<race_date>",
+                          "run_type": "<run_type>",
                           "session_id": "<session_id>",
                         },
                         "general_results": [

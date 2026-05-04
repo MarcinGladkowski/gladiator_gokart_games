@@ -132,6 +132,8 @@ jobs:
                       Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
                       all drivers in the race; false for everyone else.
 
+                      Replace with correct values for names, date, time_range.
+
                       Return ONLY valid JSON with no additional text:
                       {
                         "race_details": {
@@ -142,7 +144,6 @@ jobs:
                         "general_results": [
                           {
                             "rank": 1,
-                            "kart_number": 4,
                             "driver": "DRIVER NAME",
                             "laps": 6,
                             "difference_to_leader": "Leader",
@@ -162,7 +163,7 @@ jobs:
               run: |
                 RACE_DIR="resource/races/race_${{ steps.round.outputs.round_number }}_${{ steps.round.outputs.date_formatted }}"
                 mkdir -p "$RACE_DIR"
-                printf '%s' "$RACE_RESPONSE" | sed 's/^```json//;s/^```//' > "$RACE_DIR/${{ steps.round.outputs.result_file }}"
+                printf '%s' "$RACE_RESPONSE" | sed '/^```/d' > "$RACE_DIR/${{ steps.round.outputs.result_file }}"
                 echo "Saved to $RACE_DIR/${{ steps.round.outputs.result_file }}"
 
             - name: Commit and push results

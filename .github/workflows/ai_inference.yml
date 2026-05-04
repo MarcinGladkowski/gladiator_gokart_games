@@ -20,9 +20,14 @@ on:
           - '7:2026-09-17'
           - '8:2026-10-15'
       run_type:
-        description: 'Run type (e.g. Závod, sk. A)'
+        description: 'Run type'
         required: true
-        default: 'Závod, sk. A'
+        type: choice
+        options:
+          - 'Race A: Závod, sk. A'
+          - 'Race B: Závod, sk. B'
+          - 'Qualifications A: Měřák, sk. A'
+          - 'Qualifications B: Měřák, sk. B'
 
 jobs:
     inference:
@@ -37,10 +42,27 @@ jobs:
             - name: Parse round
               id: round
               run: |
+                ROUND_NUMBER=$(echo '${{ inputs.round }}' | cut -d: -f1)
                 DATE=$(echo '${{ inputs.round }}' | cut -d: -f2)
+                YEAR=$(echo $DATE | cut -d- -f1)
+                MONTH=$(echo $DATE | cut -d- -f2)
+                DAY=$(echo $DATE | cut -d- -f3)
+                echo "round_number=$ROUND_NUMBER" >> $GITHUB_OUTPUT
                 echo "date=$DATE" >> $GITHUB_OUTPUT
-                echo "year=$(echo $DATE | cut -d- -f1)" >> $GITHUB_OUTPUT
-                echo "month=$(echo $DATE | cut -d- -f2)" >> $GITHUB_OUTPUT
+                echo "year=$YEAR" >> $GITHUB_OUTPUT
+                echo "month=$MONTH" >> $GITHUB_OUTPUT
+                echo "date_formatted=${DAY}_${MONTH}_${YEAR}" >> $GITHUB_OUTPUT
+
+                RUN_TYPE_VALUE=$(echo '${{ inputs.run_type }}' | cut -d: -f2 | xargs)
+                echo "run_type_value=$RUN_TYPE_VALUE" >> $GITHUB_OUTPUT
+
+                case '${{ inputs.run_type }}' in
+                  'Race A:'*)         RESULT_FILE="group_a_race_result.json" ;;
+                  'Race B:'*)         RESULT_FILE="group_b_race_result.json" ;;
+                  'Qualifications A:'*) RESULT_FILE="group_a_qualifications_result.json" ;;
+                  'Qualifications B:'*) RESULT_FILE="group_b_qualifications_result.json" ;;
+                esac
+                echo "result_file=$RESULT_FILE" >> $GITHUB_OUTPUT
 
             # ── PHASE 1: Discover session_id ──────────────────────────────────
             - name: Fetch member sessions
@@ -64,7 +86,7 @@ jobs:
                   prompt: |
                       From the JavaScript response below, extract the `var graphic_all_data` variable and find
                       the entry that matches ALL of the following criteria:
-                      - race_name contains: ${{ inputs.run_type }}
+                      - race_name contains: ${{ steps.round.outputs.run_type_value }}
                       - date field matches year ${{ steps.round.outputs.year }} and month ${{ steps.round.outputs.month }}
 
                       The date field uses Czech month abbreviations:
@@ -105,7 +127,7 @@ jobs:
                   prompt: |
                       From the race session data below, extract the RACE results.
                       Race entries have "Závod" in the race_name.
-                      Group is identified by run_type: ${{ inputs.run_type }}
+                      Group is identified by run_type: ${{ steps.round.outputs.run_type_value }}
 
                       Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
                       all drivers in the race; false for everyone else.
@@ -139,12 +161,15 @@ jobs:
               env:
                   RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
               run: |
-                echo "::debug::Session ID: $RACE_RESPONSE"
+                RACE_DIR="resource/races/race_${{ steps.round.outputs.round_number }}_${{ steps.round.outputs.date_formatted }}"
+                mkdir -p "$RACE_DIR"
+                printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/${{ steps.round.outputs.result_file }}"
+                echo "Saved to $RACE_DIR/${{ steps.round.outputs.result_file }}"
 
-            # - name: Commit and push results
-            #   run: |
-            #     git config user.name "github-actions[bot]"
-            #     git config user.email "github-actions[bot]@users.noreply.github.com"
-            #     git add resource/races/
-            #     git diff --staged --quiet || git commit -m "race results: round ${{ inputs.round }} session ${{ steps.extract_session.outputs.response }}"
-            #     git push
+            - name: Commit and push results
+              run: |
+                git config user.name "github-actions[bot]"
+                git config user.email "github-actions[bot]@users.noreply.github.com"
+                git add resource/races/
+                git diff --staged --quiet || git commit -m "race results: round ${{ steps.round.outputs.round_number }} (${{ steps.round.outputs.date }})"
+                git push

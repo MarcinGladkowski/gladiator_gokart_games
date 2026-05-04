@@ -7,14 +7,18 @@ on:
         description: 'Member ID'
         required: true
         default: '1803'
-      year:
-        description: 'Year (YYYY)'
+      round:
+        description: 'Round (round:date)'
         required: true
-        default: '2026'
-      month:
-        description: 'Month (MM)'
-        required: true
-        default: '04'
+        type: choice
+        options:
+          - '2:2026-04-23'
+          - '3:2026-05-14'
+          - '4:2026-06-18'
+          - '5:2026-07-16'
+          - '6:2026-08-13'
+          - '7:2026-09-17'
+          - '8:2026-10-15'
       run_type:
         description: 'Run type (e.g. Závod, sk. A)'
         required: true
@@ -29,6 +33,14 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
+
+            - name: Parse round
+              id: round
+              run: |
+                DATE=$(echo '${{ inputs.round }}' | cut -d: -f2)
+                echo "date=$DATE" >> $GITHUB_OUTPUT
+                echo "year=$(echo $DATE | cut -d- -f1)" >> $GITHUB_OUTPUT
+                echo "month=$(echo $DATE | cut -d- -f2)" >> $GITHUB_OUTPUT
 
             # ── PHASE 1: Discover session_id ──────────────────────────────────
             - name: Fetch member sessions
@@ -53,7 +65,7 @@ jobs:
                       From the JavaScript response below, extract the `var graphic_all_data` variable and find
                       the entry that matches ALL of the following criteria:
                       - race_name contains: ${{ inputs.run_type }}
-                      - date field matches year ${{ inputs.year }} and month ${{ inputs.month }}
+                      - date field matches year ${{ steps.round.outputs.year }} and month ${{ steps.round.outputs.month }}
 
                       The date field uses Czech month abbreviations:
                       01=led, 02=úno, 03=bře, 04=dub, 05=kvě, 06=čer, 07=čvc, 08=srp, 09=zář, 10=říj, 11=lis, 12=pro
@@ -134,5 +146,5 @@ jobs:
             #     git config user.name "github-actions[bot]"
             #     git config user.email "github-actions[bot]@users.noreply.github.com"
             #     git add resource/races/
-            #     git diff --staged --quiet || git commit -m "race results: session ${{ steps.extract_session.outputs.response }} (${{ inputs.month }}/${{ inputs.year }})"
+            #     git diff --staged --quiet || git commit -m "race results: round ${{ inputs.round }} session ${{ steps.extract_session.outputs.response }}"
             #     git push

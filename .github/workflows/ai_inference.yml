@@ -74,59 +74,60 @@ jobs:
                 echo "THIS IS AN RESPONSE"
                 echo "::debug::Session ID: $SESSION_ID"
 
-            # - name: Extract race results
-            #   id: extract_race
-            #   uses: actions/ai-inference@v1
-            #   with:
-            #       model: openai/gpt-4o
-            #       max-tokens: 5000
-            #       prompt: |
-            #           From the race session data below, extract the RACE results.
-            #           Race entries have "Závod" in the race_name.
-            #           Group is identified by run_type: ${{ inputs.run_type }}
+                RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
+                  -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
+                  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
+                  --data-raw "type=session_results&center_id=120&session_id=${SESSION_ID}")
+                
+                echo "::debug::Fetch member sessions response: $RESPONSE"
+                echo "data<<EOF" >> $GITHUB_OUTPUT
+                echo "$RESPONSE" >> $GITHUB_OUTPUT
+                echo "EOF" >> $GITHUB_OUTPUT
 
-            #           Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
-            #           all drivers in the race; false for everyone else.
+            - name: Extract race results
+              id: extract_race
+              uses: actions/ai-inference@v1
+              with:
+                  model: openai/gpt-4o
+                  max-tokens: 5000
+                  prompt: |
+                      From the race session data below, extract the RACE results.
+                      Race entries have "Závod" in the race_name.
+                      Group is identified by run_type: ${{ inputs.run_type }}
 
-            #           Return ONLY valid JSON with no additional text:
-            #           {
-            #             "race_details": {
-            #               "name": "<session name>",
-            #               "date": "<YYYY-MM-DD>",
-            #               "time_range": "<HH:MM - HH:MM>",
-            #               "track": "<track name>"
-            #             },
-            #             "general_results": [
-            #               {
-            #                 "rank": 1,
-            #                 "kart_number": 4,
-            #                 "driver": "DRIVER NAME",
-            #                 "laps": 6,
-            #                 "difference_to_leader": "Leader",
-            #                 "best_lap_time": "1:25.495",
-            #                 "best_lap_time_race": true
-            #               }
-            #             ]
-            #           }
+                      Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
+                      all drivers in the race; false for everyone else.
 
-            #           Data:
-            #           ${{ steps.fetch_race.outputs.data }}
+                      Return ONLY valid JSON with no additional text:
+                      {
+                        "race_details": {
+                          "name": "<session name>",
+                          "date": "<YYYY-MM-DD>",
+                          "time_range": "<HH:MM - HH:MM>",
+                          "track": "<track name>"
+                        },
+                        "general_results": [
+                          {
+                            "rank": 1,
+                            "kart_number": 4,
+                            "driver": "DRIVER NAME",
+                            "laps": 6,
+                            "difference_to_leader": "Leader",
+                            "best_lap_time": "1:25.495",
+                            "best_lap_time_race": true
+                          }
+                        ]
+                      }
 
-            # # ── PHASE 3: Persist results ──────────────────────────────────────
+                      Data:
+                      ${{ steps.fetch_race.outputs.data }}
 
-            # - name: Save result files
-            #   env:
-            #       RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
-            #       SESSION_ID: ${{ steps.extract_session.outputs.response }}
-            #   run: |
-            #     SESSION_ID=$(echo "$SESSION_ID" | tr -d '[:space:]')
-            #     GROUP=$(echo '${{ inputs.run_type }}' | grep -oP 'sk\. \K[A-C]' | tr '[:upper:]' '[:lower:]')
-            #     RACE_DIR="resource/races/race_${SESSION_ID}_${{ inputs.month }}_${{ inputs.year }}"
-            #     echo "::debug::session_id=$SESSION_ID group=$GROUP race_dir=$RACE_DIR"
-            #     echo "::debug::Race response: $RACE_RESPONSE"
-            #     mkdir -p "$RACE_DIR"
-            #     printf '%s' "$RACE_RESPONSE" > "$RACE_DIR/group_${GROUP}_race_results.json"
-            #     echo "Saved results to $RACE_DIR"
+            # ── PHASE 3: Persist results ──────────────────────────────────────
+            - name: Save result files
+              env:
+                  RACE_RESPONSE: ${{ steps.extract_race.outputs.response }}
+              run: |
+                echo "::debug::Session ID: $RACE_RESPONSE"
 
             # - name: Commit and push results
             #   run: |

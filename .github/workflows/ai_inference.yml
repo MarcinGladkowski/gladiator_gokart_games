@@ -132,14 +132,14 @@ jobs:
                       Set best_lap_time_race to true only for the driver(s) who set the fastest lap across
                       all drivers in the race; false for everyone else.
 
-                      Replace with correct values for names, date, time_range.
+                      Replace with correct values for names, date, session_id.
 
                       Return ONLY valid JSON with no additional text:
                       {
                         "race_details": {
                           "name": "<race_type>",
                           "date": "<race_date>",
-                          "time_range": "<HH:MM - HH:MM>",
+                          "session_id": "<session_id>",
                         },
                         "general_results": [
                           {

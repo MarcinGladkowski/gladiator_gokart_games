@@ -28,12 +28,21 @@ on:
           - 'Race B: Závod, sk. B'
           - 'Qualifications A: Měřák, sk. A'
           - 'Qualifications B: Měřák, sk. B'
+      deploy:
+        description: 'Deploy to GitHub Pages after extraction?'
+        required: true
+        type: choice
+        default: 'NO'
+        options:
+          - 'NO'
+          - 'YES'
 
 jobs:
     inference:
         permissions:
             models: read
             contents: write
+            actions: write
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -192,3 +201,9 @@ jobs:
                 git add resource/races/
                 git diff --staged --quiet || git commit -m "race results: round ${{ steps.round.outputs.round_number }} (${{ steps.round.outputs.date }})"
                 git push
+
+            - name: Trigger deploy
+              if: ${{ inputs.deploy == 'YES' }}
+              env:
+                GH_TOKEN: ${{ github.token }}
+              run: gh workflow run deploy.yml --repo ${{ github.repository }}

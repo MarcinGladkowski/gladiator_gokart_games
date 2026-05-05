@@ -99,6 +99,21 @@ jobs:
                       Data:
                       ${{ steps.fetch_sessions.outputs.data }}
 
+            - name: Validate session ID
+              env:
+                  SESSION_ID: ${{ steps.extract_session.outputs.response }}
+              run: |
+                SESSION_ID_TRIMMED=$(echo "$SESSION_ID" | xargs)
+                if [ -z "$SESSION_ID_TRIMMED" ]; then
+                  echo "::error::SESSION_ID is empty — AI failed to extract a session ID"
+                  exit 1
+                fi
+                if ! echo "$SESSION_ID_TRIMMED" | grep -qE '^[0-9]+$'; then
+                  echo "::error::SESSION_ID is not a plain number: '$SESSION_ID_TRIMMED'"
+                  exit 1
+                fi
+                echo "SESSION_ID validated: $SESSION_ID_TRIMMED"
+
             # ── PHASE 2: Fetch and extract race details ───────────────────────
             - name: Fetch race details
               id: fetch_race

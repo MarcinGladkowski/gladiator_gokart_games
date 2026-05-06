@@ -4,6 +4,7 @@ import { useRaceEvent } from '../hooks/useResults'
 import { useTotalResults } from '../hooks/useResults'
 import { useRegisteredDrivers } from '../hooks/useRegisteredDrivers'
 import { daysLeft } from '../utils/daysLeft'
+import { downloadGridPdf } from '../utils/downloadGridPdf'
 import { GoogleSheetTable } from '../components/GoogleSheetTable'
 import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
@@ -140,7 +141,13 @@ if (!event) {
                     Provisional grid — subject to change until enrollment closes on{' '}
                     <span className="text-gray-300">{new Date(enrollOpenDateTime.getTime() + 24 * 60 * 60 * 1000).toLocaleString()}</span>.
                   </p>
-                  <div className="flex justify-end mb-4">
+                  <div className="flex justify-end gap-2 mb-4">
+                    <button
+                      onClick={() => void downloadGridPdf(event.label, event.date, grid, reserve)}
+                      className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                    >
+                      Download PDF
+                    </button>
                     <button
                       onClick={() => setRefreshKey((k) => k + 1)}
                       className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
@@ -170,7 +177,7 @@ if (!event) {
                         {groupB.length > 0 && (
                           <div>
                             <h2 className="text-lg font-semibold text-white mb-4">Group B</h2>
-                            <ol className="list-decimal list-inside space-y-1" start={14}>
+                            <ol className="list-decimal list-inside space-y-1">
                               {groupB.map((r, i) => (
                                 <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
                               ))}
@@ -180,7 +187,7 @@ if (!event) {
                         {reserve.length > 0 && (
                           <div>
                             <h2 className="text-lg font-semibold text-white mb-4">Reserve</h2>
-                            <ol className="list-decimal list-inside space-y-1" start={grid.length + 1}>
+                            <ol className="list-decimal list-inside space-y-1">
                               {reserve.map((r, i) => (
                                 <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
                               ))}

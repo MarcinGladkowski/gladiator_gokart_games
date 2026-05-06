@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod, sk. A",
+    "date": "21_04_2023",
+    "run_type": "Závod, sk. A",
+    "session_id": "7639"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.585",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "+0.740",
+      "best_lap_time": "1:10.722",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "TUKAN",
+      "laps": 12,
+      "difference_to_leader": "+1.065",
+      "best_lap_time": "1:10.802",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+13.768",
+      "best_lap_time": "1:11.002",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "CHLEBEK",
+      "laps": 12,
+      "difference_to_leader": "+14.355",
+      "best_lap_time": "1:11.752",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "JANEK",
+      "laps": 12,
+      "difference_to_leader": "+14.439",
+      "best_lap_time": "1:11.079",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "BODEK",
+      "laps": 12,
+      "difference_to_leader": "+14.827",
+      "best_lap_time": "1:10.969",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "RUT",
+      "laps": 12,
+      "difference_to_leader": "+15.233",
+      "best_lap_time": "1:11.598",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "ZGUD",
+      "laps": 12,
+      "difference_to_leader": "+15.904",
+      "best_lap_time": "1:11.728",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "PILSON",
+      "laps": 12,
+      "difference_to_leader": "+23.579",
+      "best_lap_time": "1:11.918",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "LUCKY LUKE",
+      "laps": 12,
+      "difference_to_leader": "+27.007",
+      "best_lap_time": "1:12.467",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "BARTEZ",
+      "laps": 12,
+      "difference_to_leader": "+48.123",
+      "best_lap_time": "1:13.238",
+      "best_lap_time_race": false
+    }
+  ]
+}

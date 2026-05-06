@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "parse": "tsx scripts/parse-data.ts",
+    "parse": "tsx scripts/parse-data.ts && tsx scripts/update-total-results.ts",
+    "parse:data": "tsx scripts/parse-data.ts ",
     "dev": "npm run parse && vite",
     "build:parse": "npm run parse && tsc -b && vite build",
     "build": "tsc -b && vite build",

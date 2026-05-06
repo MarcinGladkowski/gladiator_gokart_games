@@ -1,5 +1,0 @@
-curl 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
-  -H 'accept: text/html, */*; q=0.01' \
-  -H 'accept-language: pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7' \
-  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
-  --data-raw 'type=session_results&center_id=120&session_id=11146'

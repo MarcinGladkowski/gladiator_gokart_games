@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod, sk. B",
+    "date": "06_07_2023",
+    "run_type": "Závod, sk. B",
+    "session_id": "8415"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "BIEG KAROL",
+      "laps": 16,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.956",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "HONKI",
+      "laps": 15,
+      "difference_to_leader": "+0.069",
+      "best_lap_time": "1:11.025",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "PRZEMEK W.",
+      "laps": 14,
+      "difference_to_leader": "+0.526",
+      "best_lap_time": "1:11.482",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "FRYTA",
+      "laps": 15,
+      "difference_to_leader": "+1.446",
+      "best_lap_time": "1:12.402",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "LUCKY LUKE",
+      "laps": 16,
+      "difference_to_leader": "+1.418",
+      "best_lap_time": "1:12.374",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "HUBERT",
+      "laps": 14,
+      "difference_to_leader": "+1.968",
+      "best_lap_time": "1:12.924",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "SHEEPEK",
+      "laps": 14,
+      "difference_to_leader": "+2.954",
+      "best_lap_time": "1:13.910",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "BARTMAN117",
+      "laps": 14,
+      "difference_to_leader": "+2.606",
+      "best_lap_time": "1:13.562",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "KUBAL",
+      "laps": 15,
+      "difference_to_leader": "+1.463",
+      "best_lap_time": "1:12.419",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "YABOIDZEJDZEJ",
+      "laps": 15,
+      "difference_to_leader": "+1.618",
+      "best_lap_time": "1:12.574",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "MATEUSZPALKA",
+      "laps": 14,
+      "difference_to_leader": "+6.114",
+      "best_lap_time": "1:17.070",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "ZANULA",
+      "laps": 13,
+      "difference_to_leader": "+7.525",
+      "best_lap_time": "1:18.481",
+      "best_lap_time_race": false
+    }
+  ]
+}

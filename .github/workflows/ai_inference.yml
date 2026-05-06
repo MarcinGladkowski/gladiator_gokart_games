@@ -146,6 +146,9 @@ jobs:
                 echo "SESSION_ID validated: $SESSION_ID_TRIMMED"
 
             # ── PHASE 2: Fetch and extract race details ───────────────────────
+            - name: Install lynx
+              run: sudo apt-get install -y lynx
+
             - name: Fetch race details
               id: fetch_race
               env:
@@ -157,7 +160,8 @@ jobs:
                 RESPONSE=$(curl -s -X POST 'https://www.apex-timing.com/gokarts/functions/request_member_profile.php' \
                   -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \
                   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36' \
-                  --data-raw "type=session_results&center_id=120&session_id=${SESSION_ID}")
+                  --data-raw "type=session_results&center_id=120&session_id=${SESSION_ID}" \
+                  | lynx -dump -stdin 2>/dev/null)
                 
                 echo "::debug::Fetch member sessions response: $RESPONSE"
                 echo "data<<EOF" >> $GITHUB_OUTPUT

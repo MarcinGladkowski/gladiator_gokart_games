@@ -113,7 +113,7 @@ jobs:
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
-                  max-tokens: 5000
+                  max-tokens: 10000
                   prompt: |
                       From the JavaScript response below, extract the `var graphic_all_data` variable and find
                       the entry that matches ALL of the following criteria:
@@ -169,7 +169,7 @@ jobs:
               uses: actions/ai-inference@v1
               with:
                   model: openai/gpt-4o
-                  max-tokens: 5000
+                  max-tokens: 10000
                   prompt: |
                       From the race session data below, extract the RACE results.
                       Race entries have "Závod" in the race_name.

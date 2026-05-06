@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "21_04_2023",
+    "run_type": "Závod, sk. B",
+    "session_id": "7638"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "NESTOR",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.559",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "PIOTR 90+",
+      "laps": 12,
+      "difference_to_leader": "+10.049",
+      "best_lap_time": "1:11.665",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "KWASNY",
+      "laps": 12,
+      "difference_to_leader": "+10.321",
+      "best_lap_time": "1:12.086",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "JEZDEC",
+      "laps": 12,
+      "difference_to_leader": "+11.489",
+      "best_lap_time": "1:12.415",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "MOEN",
+      "laps": 12,
+      "difference_to_leader": "+11.625",
+      "best_lap_time": "1:12.225",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "BORYS",
+      "laps": 12,
+      "difference_to_leader": "+18.022",
+      "best_lap_time": "1:12.447",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+19.197",
+      "best_lap_time": "1:12.733",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "NIKO",
+      "laps": 12,
+      "difference_to_leader": "+23.066",
+      "best_lap_time": "1:12.707",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "KOCZI",
+      "laps": 12,
+      "difference_to_leader": "+23.527",
+      "best_lap_time": "1:12.809",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "+30.988",
+      "best_lap_time": "1:13.046",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "WASKI",
+      "laps": 12,
+      "difference_to_leader": "+35.097",
+      "best_lap_time": "1:13.426",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "IRDEK",
+      "laps": 12,
+      "difference_to_leader": "+1:07.959",
+      "best_lap_time": "1:13.307",
+      "best_lap_time_race": false
+    }
+  ]
+}

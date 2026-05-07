@@ -1,0 +1,116 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "19_09_2024",
+    "run_type": "Závod, sk. A",
+    "session_id": "9434"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:04.219",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "+7.497",
+      "best_lap_time": "1:04.779",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "S.KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "+10.513",
+      "best_lap_time": "1:04.890",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "TUKAN",
+      "laps": 12,
+      "difference_to_leader": "+11.050",
+      "best_lap_time": "1:04.917",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "+13.993",
+      "best_lap_time": "1:04.370",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "+14.887",
+      "best_lap_time": "1:04.919",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+16.991",
+      "best_lap_time": "1:05.098",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "JEZDEC",
+      "laps": 12,
+      "difference_to_leader": "+17.273",
+      "best_lap_time": "1:05.018",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "+18.822",
+      "best_lap_time": "1:04.347",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "+25.403",
+      "best_lap_time": "1:05.672",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "ZGUD",
+      "laps": 12,
+      "difference_to_leader": "+26.297",
+      "best_lap_time": "1:05.596",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "MARCINBTM",
+      "laps": 12,
+      "difference_to_leader": "+37.419",
+      "best_lap_time": "1:06.751",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "GRZECH",
+      "laps": 12,
+      "difference_to_leader": "+38.581",
+      "best_lap_time": "1:05.819",
+      "best_lap_time_race": false
+    }
+  ]
+}
+
+**Fastest lap note:** `best_lap_time_race: true` is set exclusively for **SZLACHTA BARTŁOMIEJ** (rank 1) with a best lap of **1:04.219**, which is the quickest time across all 13 drivers in the race.

@@ -1,0 +1,116 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "19_09_2024",
+    "run_type": "Závod, sk. B",
+    "session_id": "9433"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "KKLAUDEK",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:04.428",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "+3.937",
+      "best_lap_time": "1:04.948",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "+4.147",
+      "best_lap_time": "1:04.843",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+23.522",
+      "best_lap_time": "1:06.458",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "BLACK MAMBA",
+      "laps": 12,
+      "difference_to_leader": "+24.022",
+      "best_lap_time": "1:05.880",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "KUBA SKOCZYNSKI",
+      "laps": 12,
+      "difference_to_leader": "+27.219",
+      "best_lap_time": "1:05.818",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+29.202",
+      "best_lap_time": "1:04.812",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "TEA3K",
+      "laps": 12,
+      "difference_to_leader": "+31.779",
+      "best_lap_time": "1:06.748",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "JAKUP",
+      "laps": 12,
+      "difference_to_leader": "+32.146",
+      "best_lap_time": "1:06.595",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "+34.627",
+      "best_lap_time": "1:05.679",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "NIKODEM OLSZOWSKI",
+      "laps": 12,
+      "difference_to_leader": "+36.866",
+      "best_lap_time": "50.440",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 12,
+      "driver": "WOJT",
+      "laps": 12,
+      "difference_to_leader": "+37.622",
+      "best_lap_time": "1:07.078",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "TPBODEK",
+      "laps": 11,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:06.507",
+      "best_lap_time_race": false
+    }
+  ]
+}
+
+**Note:** `best_lap_time_race: true` is assigned to **NIKODEM OLSZOWSKI** with a best lap of **50.440s**, which is the fastest across all 13 drivers (all others posted times in the 1:04–1:07 range). Rank 13 (TPBODEK) is credited with **11 laps** as they finished "+1 Kolo" (1 lap down) behind the leader.

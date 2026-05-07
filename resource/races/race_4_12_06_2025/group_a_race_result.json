@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "Race",
+    "date": "12_06_2025",
+    "run_type": "Závod, sk. A",
+    "session_id": "10047"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.985",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "MARCIN GŁADKOWSKI",
+      "laps": 12,
+      "difference_to_leader": "+0.317",
+      "best_lap_time": "1:11.005",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "+5.628",
+      "best_lap_time": "1:11.215",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "+8.391",
+      "best_lap_time": "1:11.566",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+13.881",
+      "best_lap_time": "1:11.936",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "+13.971",
+      "best_lap_time": "1:11.017",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "+17.607",
+      "best_lap_time": "1:11.862",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "+17.748",
+      "best_lap_time": "1:11.629",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "FILIP BUCHWALD",
+      "laps": 12,
+      "difference_to_leader": "+18.154",
+      "best_lap_time": "1:12.095",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "QUNIO",
+      "laps": 12,
+      "difference_to_leader": "+21.124",
+      "best_lap_time": "1:11.926",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+22.262",
+      "best_lap_time": "1:12.508",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "+24.691",
+      "best_lap_time": "1:12.545",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+24.972",
+      "best_lap_time": "1:12.647",
+      "best_lap_time_race": false
+    }
+  ]
+}

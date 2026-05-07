@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "06_07_2023",
+    "run_type": "Závod, sk. A",
+    "session_id": "8256"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.074",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "+0.116",
+      "best_lap_time": "1:11.190",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "+1.575",
+      "best_lap_time": "1:11.216",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "TUKAN",
+      "laps": 12,
+      "difference_to_leader": "+5.120",
+      "best_lap_time": "1:11.326",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "+8.114",
+      "best_lap_time": "1:11.477",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "KKLAUDEK",
+      "laps": 12,
+      "difference_to_leader": "+11.363",
+      "best_lap_time": "1:11.469",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "+4.905",
+      "best_lap_time": "1:11.519",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "+18.300",
+      "best_lap_time": "1:11.648",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "ERPAX",
+      "laps": 12,
+      "difference_to_leader": "+18.038",
+      "best_lap_time": "1:12.095",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "+19.129",
+      "best_lap_time": "1:12.251",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "KUBAL007",
+      "laps": 12,
+      "difference_to_leader": "+27.769",
+      "best_lap_time": "1:12.573",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "IRDEK",
+      "laps": 12,
+      "difference_to_leader": "+23.551",
+      "best_lap_time": "1:12.827",
+      "best_lap_time_race": false
+    }
+  ]
+}

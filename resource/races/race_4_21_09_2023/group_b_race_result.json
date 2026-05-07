@@ -1,0 +1,98 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "21_09_2023",
+    "run_type": "Závod, sk. B",
+    "session_id": "8255"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:12.539",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "SHEEPEK",
+      "laps": 12,
+      "difference_to_leader": "+11.668",
+      "best_lap_time": "1:12.931",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "+13.299",
+      "best_lap_time": "1:12.274",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 4,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+14.514",
+      "best_lap_time": "1:12.418",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "BRACHOL",
+      "laps": 12,
+      "difference_to_leader": "+25.125",
+      "best_lap_time": "1:13.400",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "SZYMON G",
+      "laps": 12,
+      "difference_to_leader": "+25.963",
+      "best_lap_time": "1:13.488",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "IZI",
+      "laps": 12,
+      "difference_to_leader": "+26.167",
+      "best_lap_time": "1:12.953",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "SSSOII",
+      "laps": 12,
+      "difference_to_leader": "+26.765",
+      "best_lap_time": "1:12.576",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "TRUSZEK",
+      "laps": 12,
+      "difference_to_leader": "+46.843",
+      "best_lap_time": "1:15.545",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KIPA",
+      "laps": 11,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:16.059",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "KREWETA",
+      "laps": 11,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:17.031",
+      "best_lap_time_race": false
+    }
+  ]
+}

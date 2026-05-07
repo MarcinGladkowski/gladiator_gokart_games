@@ -1,0 +1,108 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "18_04_2024",
+    "run_type": "Závod, sk. A",
+    "session_id": "8691"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "KKLAUDEK",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.797",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "LUCKY LUKE",
+      "laps": 12,
+      "difference_to_leader": "+8.001",
+      "best_lap_time": "1:11.186",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "+8.230",
+      "best_lap_time": "1:11.244",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "HONKI",
+      "laps": 12,
+      "difference_to_leader": "+8.387",
+      "best_lap_time": "1:11.093",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "KAMIŇSKI",
+      "laps": 12,
+      "difference_to_leader": "+8.879",
+      "best_lap_time": "1:10.903",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 12,
+      "difference_to_leader": "+9.018",
+      "best_lap_time": "1:10.487",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 7,
+      "driver": "WATOLA PRZEMYSLAW",
+      "laps": 12,
+      "difference_to_leader": "+9.335",
+      "best_lap_time": "1:10.800",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "TUKAN",
+      "laps": 12,
+      "difference_to_leader": "+10.703",
+      "best_lap_time": "1:11.082",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "WASEK",
+      "laps": 12,
+      "difference_to_leader": "+18.931",
+      "best_lap_time": "1:11.310",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+27.217",
+      "best_lap_time": "1:12.470",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "MIEDDES#39",
+      "laps": 12,
+      "difference_to_leader": "+33.660",
+      "best_lap_time": "1:13.388",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "GRUZ",
+      "laps": 7,
+      "difference_to_leader": "+5 Kola",
+      "best_lap_time": "1:10.856",
+      "best_lap_time_race": false
+    }
+  ]
+}
+
+**Fastest lap note:** `SZLACHTA BARTŁOMIEJ` set the fastest lap of the race with **1:10.487**, which is the quickest among all 12 drivers despite finishing 6th overall. `GRUZ` was lapped 5 times (finished 5 laps behind the leader, hence 7 total laps vs. the leader's 12).

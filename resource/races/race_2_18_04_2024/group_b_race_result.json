@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "18_04_2024",
+    "run_type": "Závod, sk. B",
+    "session_id": "8690"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.262",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "+2.449",
+      "best_lap_time": "1:10.419",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "PILSON",
+      "laps": 12,
+      "difference_to_leader": "+10.628",
+      "best_lap_time": "1:10.751",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "+12.658",
+      "best_lap_time": "1:11.045",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+21.296",
+      "best_lap_time": "1:11.399",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "KWASNY",
+      "laps": 12,
+      "difference_to_leader": "+28.578",
+      "best_lap_time": "1:12.226",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "+28.709",
+      "best_lap_time": "1:11.070",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "NIKO",
+      "laps": 12,
+      "difference_to_leader": "+29.972",
+      "best_lap_time": "1:11.899",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "ADMICH",
+      "laps": 12,
+      "difference_to_leader": "+30.227",
+      "best_lap_time": "1:11.243",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "+34.212",
+      "best_lap_time": "1:12.505",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "SSSOII",
+      "laps": 12,
+      "difference_to_leader": "+34.317",
+      "best_lap_time": "1:12.577",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+41.895",
+      "best_lap_time": "1:13.248",
+      "best_lap_time_race": false
+    }
+  ]
+}

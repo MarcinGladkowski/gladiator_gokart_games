@@ -26,6 +26,7 @@ export function parseResultsJson(
   group: GroupLetter,
   type: SessionType,
 ): Session {
+  console.log(`Parsing file in path: ${filePath}`)
   const raw = readFileSync(filePath, 'utf-8');
   const data: ResultJson = JSON.parse(raw);
 

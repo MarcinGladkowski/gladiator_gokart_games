@@ -145,6 +145,9 @@ jobs:
                 fi
                 echo "SESSION_ID validated: $SESSION_ID_TRIMMED"
 
+            - name: Delay between AI calls
+              run: sleep 60
+
             # ── PHASE 2: Fetch and extract race details ───────────────────────
             - name: Install lynx
               run: sudo apt-get install -y lynx

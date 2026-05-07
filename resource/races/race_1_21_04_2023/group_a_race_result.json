@@ -1,6 +1,18 @@
+Looking at the data, I need to:
+1. Parse all 12 drivers and their best lap times
+2. Find the fastest lap across all drivers to set `best_lap_time_race: true`
+
+Comparing all best lap times:
+- SLAWEK KAJZAR: **1:10.585** ← fastest
+- NIEMIEC: 1:10.722
+- TUKAN: 1:10.802
+- BODEK: 1:10.969
+- KREWETA: 1:11.002
+- ...etc.
+
 {
   "race_details": {
-    "name": "Závod, sk. A",
+    "name": "Závod",
     "date": "21_04_2023",
     "run_type": "Závod, sk. A",
     "session_id": "7639"
@@ -8,11 +20,11 @@
   "general_results": [
     {
       "rank": 1,
-      "driver": "SLAWEK KAJZAR",
+      "driver": "TUKAN",
       "laps": 12,
       "difference_to_leader": "Leader",
-      "best_lap_time": "1:10.585",
-      "best_lap_time_race": true
+      "best_lap_time": "1:10.802",
+      "best_lap_time_race": false
     },
     {
       "rank": 2,
@@ -24,11 +36,11 @@
     },
     {
       "rank": 3,
-      "driver": "TUKAN",
+      "driver": "SLAWEK KAJZAR",
       "laps": 12,
       "difference_to_leader": "+1.065",
-      "best_lap_time": "1:10.802",
-      "best_lap_time_race": false
+      "best_lap_time": "1:10.585",
+      "best_lap_time_race": true
     },
     {
       "rank": 4,

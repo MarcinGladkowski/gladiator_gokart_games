@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "16_05_2024",
+    "run_type": "Závod, sk. A",
+    "session_id": "8833"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:10.005",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "TUKAN",
+      "laps": 12,
+      "difference_to_leader": "+1.279",
+      "best_lap_time": "1:10.679",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "NIEMIEC",
+      "laps": 12,
+      "difference_to_leader": "+1.723",
+      "best_lap_time": "1:10.705",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "BIEG KAROL",
+      "laps": 12,
+      "difference_to_leader": "+5.065",
+      "best_lap_time": "1:10.884",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "PILSON",
+      "laps": 12,
+      "difference_to_leader": "+8.460",
+      "best_lap_time": "1:11.095",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "WIKTOR KALUZA",
+      "laps": 12,
+      "difference_to_leader": "+11.253",
+      "best_lap_time": "1:10.986",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "KUBAG",
+      "laps": 12,
+      "difference_to_leader": "+11.483",
+      "best_lap_time": "1:10.814",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "KKLAUDEK",
+      "laps": 12,
+      "difference_to_leader": "+11.772",
+      "best_lap_time": "1:10.766",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "CHLEBEK",
+      "laps": 12,
+      "difference_to_leader": "+13.101",
+      "best_lap_time": "1:11.353",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KREWETA",
+      "laps": 12,
+      "difference_to_leader": "+17.047",
+      "best_lap_time": "1:11.664",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "LUCKY LUKE",
+      "laps": 12,
+      "difference_to_leader": "+19.995",
+      "best_lap_time": "1:11.702",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "NORMAN POWER",
+      "laps": 12,
+      "difference_to_leader": "+27.576",
+      "best_lap_time": "1:12.224",
+      "best_lap_time_race": false
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "13_03_2025",
+    "run_type": "Závod, sk. B",
+    "session_id": "9730"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "NIEMIEC",
+      "laps": 10,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:25.337",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "PILSON",
+      "laps": 10,
+      "difference_to_leader": "+15.887",
+      "best_lap_time": "1:26.772",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "ZGUD",
+      "laps": 10,
+      "difference_to_leader": "+22.173",
+      "best_lap_time": "1:27.580",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "TIM7",
+      "laps": 10,
+      "difference_to_leader": "+25.538",
+      "best_lap_time": "1:27.320",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 10,
+      "difference_to_leader": "+34.120",
+      "best_lap_time": "1:29.141",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "SIZAR",
+      "laps": 10,
+      "difference_to_leader": "+41.754",
+      "best_lap_time": "1:28.487",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "KORZEN",
+      "laps": 10,
+      "difference_to_leader": "+42.919",
+      "best_lap_time": "1:29.758",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "MARCINBTM",
+      "laps": 10,
+      "difference_to_leader": "+43.260",
+      "best_lap_time": "1:28.259",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "WOJT",
+      "laps": 10,
+      "difference_to_leader": "+59.457",
+      "best_lap_time": "1:30.413",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "QUNIO",
+      "laps": 9,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:35.394",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "TPBODEK",
+      "laps": 9,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:35.877",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "BLACK MAMBA",
+      "laps": 9,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:36.999",
+      "best_lap_time_race": false
+    }
+  ]
+}

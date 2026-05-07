@@ -18,7 +18,7 @@
       "rank": 2,
       "driver": "SEBA01",
       "laps": 12,
-      "difference_to_leader": "+13.700",
+      "difference_to_leader": "+0.093",
       "best_lap_time": "1:10.910",
       "best_lap_time_race": false
     },
@@ -26,7 +26,7 @@
       "rank": 3,
       "driver": "KREWETA",
       "laps": 12,
-      "difference_to_leader": "+0.169",
+      "difference_to_leader": "+0.183",
       "best_lap_time": "1:11.000",
       "best_lap_time_race": false
     },
@@ -59,19 +59,11 @@
       "driver": "NIEMIEC",
       "laps": 12,
       "difference_to_leader": "+10.086",
-      "best_lap_time": "1:11.623",
-      "best_lap_time_race": false
-    },
-    {
-      "rank": 8,
-      "driver": "PAWELTGB",
-      "laps": 12,
-      "difference_to_leader": "+13.345",
       "best_lap_time": "1:11.612",
       "best_lap_time_race": false
     },
     {
-      "rank": 9,
+      "rank": 8,
       "driver": "LUCKY LUKE",
       "laps": 12,
       "difference_to_leader": "+12.341",
@@ -79,11 +71,19 @@
       "best_lap_time_race": false
     },
     {
-      "rank": 10,
+      "rank": 9,
       "driver": "QUNIO",
       "laps": 12,
       "difference_to_leader": "+12.729",
       "best_lap_time": "1:11.911",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "PAWELTGB",
+      "laps": 12,
+      "difference_to_leader": "+13.345",
+      "best_lap_time": "1:11.612",
       "best_lap_time_race": false
     },
     {

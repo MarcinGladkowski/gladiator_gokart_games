@@ -1,0 +1,127 @@
+Looking at the data, I need to:
+1. Extract all 12 drivers' results
+2. Identify the fastest lap across all drivers
+3. Set laps based on the gap column ("10 Kola" = leader's 10 laps; "+1 Kolo" = 9 laps; "+8 Kola" = 2 laps)
+
+**Fastest lap analysis:**
+- BIEG KAROL: 1:28.794
+- KUBAG: 1:30.198
+- TUKAN: 1:29.681
+- **HONKI: 1:28.318** ← fastest
+- KAMINSKI JAKUB: 1:29.920
+- SLAWEK KAJZAR: 1:31.669
+- WIKTOR KALUZA: 1:31.388
+- SZLACHTA BARTŁOMIEJ: 1:30.927
+- NIKODEM OLSZOWSKI: 1:31.214
+- KKLAUDEK: 1:33.986
+- ZGUD: 1:35.102
+- BALU: 1:38.000
+
+→ **HONKI** set the best lap (1:28.318), so only he gets `best_lap_time_race: true`.
+
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "10_10_2024",
+    "run_type": "Závod, sk. B",
+    "session_id": "9549"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "BIEG KAROL",
+      "laps": 10,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:28.794",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "KUBAG",
+      "laps": 10,
+      "difference_to_leader": "+4.342",
+      "best_lap_time": "1:30.198",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "TUKAN",
+      "laps": 10,
+      "difference_to_leader": "+4.723",
+      "best_lap_time": "1:29.681",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "HONKI",
+      "laps": 10,
+      "difference_to_leader": "+5.693",
+      "best_lap_time": "1:28.318",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 5,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 10,
+      "difference_to_leader": "+11.139",
+      "best_lap_time": "1:29.920",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 10,
+      "difference_to_leader": "+24.231",
+      "best_lap_time": "1:31.669",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "WIKTOR KALUZA",
+      "laps": 10,
+      "difference_to_leader": "+24.568",
+      "best_lap_time": "1:31.388",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": 10,
+      "difference_to_leader": "+27.016",
+      "best_lap_time": "1:30.927",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "NIKODEM OLSZOWSKI",
+      "laps": 10,
+      "difference_to_leader": "+51.694",
+      "best_lap_time": "1:31.214",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KKLAUDEK",
+      "laps": 10,
+      "difference_to_leader": "+1:04.171",
+      "best_lap_time": "1:33.986",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "ZGUD",
+      "laps": 9,
+      "difference_to_leader": "+1 Kolo",
+      "best_lap_time": "1:35.102",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "BALU",
+      "laps": 2,
+      "difference_to_leader": "+8 Kola",
+      "best_lap_time": "1:38.000",
+      "best_lap_time_race": false
+    }
+  ]
+}

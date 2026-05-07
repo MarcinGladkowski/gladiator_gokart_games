@@ -1,24 +1,3 @@
-Looking at the data, I need to:
-1. Extract all 12 drivers' results
-2. Identify the fastest lap across all drivers
-3. Set laps based on the gap column ("10 Kola" = leader's 10 laps; "+1 Kolo" = 9 laps; "+8 Kola" = 2 laps)
-
-**Fastest lap analysis:**
-- BIEG KAROL: 1:28.794
-- KUBAG: 1:30.198
-- TUKAN: 1:29.681
-- **HONKI: 1:28.318** ← fastest
-- KAMINSKI JAKUB: 1:29.920
-- SLAWEK KAJZAR: 1:31.669
-- WIKTOR KALUZA: 1:31.388
-- SZLACHTA BARTŁOMIEJ: 1:30.927
-- NIKODEM OLSZOWSKI: 1:31.214
-- KKLAUDEK: 1:33.986
-- ZGUD: 1:35.102
-- BALU: 1:38.000
-
-→ **HONKI** set the best lap (1:28.318), so only he gets `best_lap_time_race: true`.
-
 {
   "race_details": {
     "name": "Závod",

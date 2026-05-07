@@ -96,7 +96,7 @@ Data:
 ${sessionsData}
 `);
 
-  const sessionId = sessionIdRaw.trim();
+  const sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
   if (!/^\d+$/.test(sessionId)) {
     console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
     process.exit(1);
@@ -151,21 +151,6 @@ ${raceData}
   const cleanJson = raceResultRaw.replace(/^```[a-z]*\n?/gm, '').replace(/^```\n?$/gm, '').trim();
   writeFileSync(outputPath, cleanJson);
   console.log(`[extract-race] Saved → ${outputPath}`);
-
-  // Phase 4: git commit and push
-  execSync('git config user.name "extract-race-script"', { cwd: ROOT });
-  execSync('git config user.email "noreply@local"', { cwd: ROOT });
-  execSync('git add resource/races/', { cwd: ROOT });
-  try {
-    execSync(
-      `git diff --staged --quiet || git commit -m "race results: round ${roundNumber} (${date})"`,
-      { cwd: ROOT, shell: '/bin/bash' }
-    );
-    execSync('git push', { cwd: ROOT });
-    console.log('[extract-race] Committed and pushed.');
-  } catch {
-    console.log('[extract-race] Nothing new to commit.');
-  }
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

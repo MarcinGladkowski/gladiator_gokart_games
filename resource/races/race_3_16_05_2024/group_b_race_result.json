@@ -1,0 +1,108 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "16_05_2024",
+    "run_type": "Závod, sk. B",
+    "session_id": "8832"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "CHLEBUS KAMIL",
+      "laps": 12,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:12.018",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "HENIEK",
+      "laps": 12,
+      "difference_to_leader": "+4.369",
+      "best_lap_time": "1:11.915",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "FILIP BUCHWALD",
+      "laps": 12,
+      "difference_to_leader": "+6.263",
+      "best_lap_time": "1:11.373",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 4,
+      "driver": "TEA3K",
+      "laps": 12,
+      "difference_to_leader": "+12.224",
+      "best_lap_time": "1:12.482",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "MAREK BK",
+      "laps": 12,
+      "difference_to_leader": "+12.477",
+      "best_lap_time": "1:12.621",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "SIZAR",
+      "laps": 12,
+      "difference_to_leader": "+15.129",
+      "best_lap_time": "1:12.831",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "DELFON",
+      "laps": 12,
+      "difference_to_leader": "+15.531",
+      "best_lap_time": "1:12.816",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "MLODY93",
+      "laps": 12,
+      "difference_to_leader": "+27.457",
+      "best_lap_time": "1:13.138",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "BLACK MAMBA",
+      "laps": 12,
+      "difference_to_leader": "+27.691",
+      "best_lap_time": "1:11.964",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "HAMMER",
+      "laps": 12,
+      "difference_to_leader": "+35.738",
+      "best_lap_time": "1:14.223",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "STYKI",
+      "laps": 12,
+      "difference_to_leader": "+38.815",
+      "best_lap_time": "1:13.754",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "WOJT",
+      "laps": 12,
+      "difference_to_leader": "+48.692",
+      "best_lap_time": "1:13.740",
+      "best_lap_time_race": false
+    }
+  ]
+}
+
+**Fastest lap:** FILIP BUCHWALD with **1:11.373** — the lowest time among all 12 drivers.

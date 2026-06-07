@@ -149,6 +149,33 @@ if (!event) {
                       Download PDF
                     </button>
                     <button
+                      onClick={() => {
+                        const groupA = grid.slice(0, 13)
+                        const groupB = grid.slice(13, 26)
+                        const formatEntry = (r: typeof grid[0], i: number) =>
+                          `${i + 1}. ${r.registration.nickname}`
+                        const lines: string[] = [`${event.label}`, '']
+                        if (groupA.length > 0) {
+                          lines.push('Grupa A')
+                          groupA.forEach((r, i) => lines.push(formatEntry(r, i)))
+                          lines.push('')
+                        }
+                        if (groupB.length > 0) {
+                          lines.push('Grupa B')
+                          groupB.forEach((r, i) => lines.push(formatEntry(r, i)))
+                          lines.push('')
+                        }
+                        if (reserve.length > 0) {
+                          lines.push('Rezerwa')
+                          reserve.forEach((r, i) => lines.push(formatEntry(r, i)))
+                        }
+                        void navigator.clipboard.writeText(lines.join('\n'))
+                      }}
+                      className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
+                    >
+                      Copy
+                    </button>
+                    <button
                       onClick={() => setRefreshKey((k) => k + 1)}
                       className="text-xs px-3 py-1.5 rounded border border-gray-700 text-gray-400 hover:text-gray-100 hover:border-gray-500 transition-colors"
                     >

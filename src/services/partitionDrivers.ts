@@ -89,9 +89,14 @@ export class DriversGridService {
         case 'deadline': {
           const staff = preGrid.filter(e => e.registration.isStaff);
           grid.push(...staff);
+          const rookies = preGrid.filter(e => e.standing == null);
+          grid.push(...rookies);
+
           const remainingGridSpots = (this.gridSize - grid.length);
-          const fitToGrid = preGrid.filter(e => !e.registration.isStaff).slice(0, remainingGridSpots);
-          const nonFitToGrid = preGrid.filter(e => !e.registration.isStaff).slice(remainingGridSpots);
+          const restOfPreGrid = preGrid.filter(e => !e.registration.isStaff).filter(e => e.standing != null);
+
+          const fitToGrid = restOfPreGrid.slice(0, remainingGridSpots);
+          const nonFitToGrid = restOfPreGrid.slice(remainingGridSpots);
 
 
           grid.push(...fitToGrid);

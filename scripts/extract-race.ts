@@ -96,8 +96,12 @@ Data:
 ${sessionsData}
 `);
 
+  if (process.env.DEBUG) {
+    console.log(sessionsData)
+  }
+ 
   const sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
-  if (!/^\d+$/.test(sessionId)) {
+  if (!/^\d{6}$/.test(sessionId)) {
     console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
     process.exit(1);
   }

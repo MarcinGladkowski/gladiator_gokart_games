@@ -11,7 +11,7 @@
       "driver": "KUBAG",
       "laps": 13,
       "difference_to_leader": "Leader",
-      "best_lap_time": "58.841",
+      "best_lap_time": "0:58.841",
       "best_lap_time_race": false
     },
     {
@@ -19,7 +19,7 @@
       "driver": "KAMINSKI JAKUB",
       "laps": 13,
       "difference_to_leader": "+0.224",
-      "best_lap_time": "58.394",
+      "best_lap_time": "0:58.394",
       "best_lap_time_race": false
     },
     {
@@ -27,7 +27,7 @@
       "driver": "WASEK",
       "laps": 13,
       "difference_to_leader": "+0.627",
-      "best_lap_time": "58.509",
+      "best_lap_time": "0:58.509",
       "best_lap_time_race": false
     },
     {
@@ -35,7 +35,7 @@
       "driver": "SLAWEK KAJZAR",
       "laps": 13,
       "difference_to_leader": "+7.407",
-      "best_lap_time": "58.112",
+      "best_lap_time": "0:58.112",
       "best_lap_time_race": true
     },
     {
@@ -43,7 +43,7 @@
       "driver": "KREWETA",
       "laps": 13,
       "difference_to_leader": "+8.829",
-      "best_lap_time": "58.969",
+      "best_lap_time": "0:58.969",
       "best_lap_time_race": false
     },
     {
@@ -51,7 +51,7 @@
       "driver": "QUNIO",
       "laps": 13,
       "difference_to_leader": "+8.924",
-      "best_lap_time": "58.597",
+      "best_lap_time": "0:58.597",
       "best_lap_time_race": false
     },
     {
@@ -59,7 +59,7 @@
       "driver": "NIEMIEC",
       "laps": 13,
       "difference_to_leader": "+9.283",
-      "best_lap_time": "58.304",
+      "best_lap_time": "0:58.304",
       "best_lap_time_race": false
     },
     {
@@ -67,7 +67,7 @@
       "driver": "PIOTR 90+",
       "laps": 13,
       "difference_to_leader": "+10.418",
-      "best_lap_time": "58.878",
+      "best_lap_time": "0:58.878",
       "best_lap_time_race": false
     },
     {
@@ -75,7 +75,7 @@
       "driver": "BIEG KAROL",
       "laps": 13,
       "difference_to_leader": "+12.398",
-      "best_lap_time": "59.321",
+      "best_lap_time": "0:59.321",
       "best_lap_time_race": false
     },
     {
@@ -83,7 +83,7 @@
       "driver": "KOCZI",
       "laps": 13,
       "difference_to_leader": "+16.316",
-      "best_lap_time": "59.376",
+      "best_lap_time": "0:59.376",
       "best_lap_time_race": false
     },
     {
@@ -91,7 +91,7 @@
       "driver": "NORMAN POWER",
       "laps": 13,
       "difference_to_leader": "+22.218",
-      "best_lap_time": "58.566",
+      "best_lap_time": "0:58.566",
       "best_lap_time_race": false
     },
     {
@@ -99,7 +99,7 @@
       "driver": "DOBRA PIANA",
       "laps": 13,
       "difference_to_leader": "+25.572",
-      "best_lap_time": "59.277",
+      "best_lap_time": "0:59.277",
       "best_lap_time_race": false
     },
     {

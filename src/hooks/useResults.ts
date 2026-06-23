@@ -35,7 +35,7 @@ export function useTotalResults(): TotalResultEntry[] {
   return totalResultsData as TotalResultEntry[]
 }
 
-const GROUP_A_POINTS = [50, 44, 40, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16]
+const GROUP_A_POINTS = [50, 44, 40, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18]
 const GROUP_B_POINTS = [18, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 const FASTEST_LAP_BONUS: Record<string, number> = { a: 2, b: 1 }
 const BEST_N = 6
@@ -71,6 +71,9 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
       let fastestDriver = ''
       for (const entry of entries) {
         const t = parseLapTimeToMs(entry.bestLap)
+
+        console.log(entry.bestLap, t)
+
         if (t < fastestTime) {
           fastestTime = t
           fastestDriver = entry.driver

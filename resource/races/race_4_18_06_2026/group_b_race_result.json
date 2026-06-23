@@ -11,7 +11,7 @@
       "driver": "FILIP BUCHWALD",
       "laps": 13,
       "difference_to_leader": "Leader",
-      "best_lap_time": "58.652",
+      "best_lap_time": "0:58.652",
       "best_lap_time_race": false
     },
     {
@@ -19,7 +19,7 @@
       "driver": "MAREK BK",
       "laps": 13,
       "difference_to_leader": "+0.122",
-      "best_lap_time": "58.626",
+      "best_lap_time": "0:58.626",
       "best_lap_time_race": false
     },
     {
@@ -27,7 +27,7 @@
       "driver": "CHLEBUS KAMIL",
       "laps": 13,
       "difference_to_leader": "+5.049",
-      "best_lap_time": "58.623",
+      "best_lap_time": "0:58.623",
       "best_lap_time_race": false
     },
     {
@@ -35,7 +35,7 @@
       "driver": "WIDUCHKACPER",
       "laps": 13,
       "difference_to_leader": "+5.875",
-      "best_lap_time": "58.813",
+      "best_lap_time": "0:58.813",
       "best_lap_time_race": false
     },
     {
@@ -43,7 +43,7 @@
       "driver": "MLODY93",
       "laps": 13,
       "difference_to_leader": "+15.231",
-      "best_lap_time": "59.860",
+      "best_lap_time": "0:59.860",
       "best_lap_time_race": false
     },
     {
@@ -51,7 +51,7 @@
       "driver": "PASEK MARCIN",
       "laps": 13,
       "difference_to_leader": "+15.498",
-      "best_lap_time": "59.528",
+      "best_lap_time": "0:59.528",
       "best_lap_time_race": false
     },
     {
@@ -59,7 +59,7 @@
       "driver": "SZLACHTA BARTŁOMIEJ",
       "laps": 13,
       "difference_to_leader": "+22.178",
-      "best_lap_time": "58.609",
+      "best_lap_time": "0:58.609",
       "best_lap_time_race": true
     },
     {
@@ -75,7 +75,7 @@
       "driver": "TIM7",
       "laps": 13,
       "difference_to_leader": "+24.232",
-      "best_lap_time": "59.190",
+      "best_lap_time": "0:59.190",
       "best_lap_time_race": false
     },
     {
@@ -83,7 +83,7 @@
       "driver": "MARCINBTM",
       "laps": 13,
       "difference_to_leader": "+24.420",
-      "best_lap_time": "59.977",
+      "best_lap_time": "0:59.977",
       "best_lap_time_race": false
     },
     {
@@ -91,7 +91,7 @@
       "driver": "SIZAR",
       "laps": 13,
       "difference_to_leader": "+24.554",
-      "best_lap_time": "59.358",
+      "best_lap_time": "0:59.358",
       "best_lap_time_race": false
     },
     {
@@ -99,7 +99,7 @@
       "driver": "TPBODEK",
       "laps": 13,
       "difference_to_leader": "+25.103",
-      "best_lap_time": "59.407",
+      "best_lap_time": "0:59.407",
       "best_lap_time_race": false
     },
     {
@@ -107,7 +107,7 @@
       "driver": "JACOSZKOWY",
       "laps": 13,
       "difference_to_leader": "+32.617",
-      "best_lap_time": "59.762",
+      "best_lap_time": "0:59.762",
       "best_lap_time_race": false
     }
   ]

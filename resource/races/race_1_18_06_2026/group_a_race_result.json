@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "18_06_2026",
+    "run_type": "Závod, sk. A",
+    "session_id": "11454"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "KUBAG",
+      "laps": 13,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "58.841",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "KAMINSKI JAKUB",
+      "laps": 13,
+      "difference_to_leader": "+0.224",
+      "best_lap_time": "58.394",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "WASEK",
+      "laps": 13,
+      "difference_to_leader": "+0.627",
+      "best_lap_time": "58.509",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "SLAWEK KAJZAR",
+      "laps": 13,
+      "difference_to_leader": "+7.407",
+      "best_lap_time": "58.112",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 5,
+      "driver": "KREWETA",
+      "laps": 13,
+      "difference_to_leader": "+8.829",
+      "best_lap_time": "58.969",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "QUNIO",
+      "laps": 13,
+      "difference_to_leader": "+8.924",
+      "best_lap_time": "58.597",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "NIEMIEC",
+      "laps": 13,
+      "difference_to_leader": "+9.283",
+      "best_lap_time": "58.304",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "PIOTR 90+",
+      "laps": 13,
+      "difference_to_leader": "+10.418",
+      "best_lap_time": "58.878",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "BIEG KAROL",
+      "laps": 13,
+      "difference_to_leader": "+12.398",
+      "best_lap_time": "59.321",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KOCZI",
+      "laps": 13,
+      "difference_to_leader": "+16.316",
+      "best_lap_time": "59.376",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "NORMAN POWER",
+      "laps": 13,
+      "difference_to_leader": "+22.218",
+      "best_lap_time": "58.566",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "DOBRA PIANA",
+      "laps": 13,
+      "difference_to_leader": "+25.572",
+      "best_lap_time": "59.277",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "PAWELTGB",
+      "laps": 13,
+      "difference_to_leader": "+30.114",
+      "best_lap_time": "1:00.698",
+      "best_lap_time_race": false
+    }
+  ]
+}

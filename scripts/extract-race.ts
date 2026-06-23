@@ -101,7 +101,7 @@ ${sessionsData}
   }
  
   const sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
-  if (!/^\d{6}$/.test(sessionId)) {
+  if (!/^\d{5,6}$/.test(sessionId)) {
     console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
     process.exit(1);
   }

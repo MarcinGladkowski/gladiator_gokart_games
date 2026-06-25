@@ -79,6 +79,7 @@ export interface RaceScore {
   group: GroupLetter;
   points: number;
   counted: boolean;
+  fastestLap?: boolean;
 }
 
 export interface ClassificationEntry {

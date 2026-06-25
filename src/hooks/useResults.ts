@@ -55,7 +55,7 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
   const season = useSeason(year)
   if (!season) return []
 
-  const driverScores = new Map<string, Array<{ date: string; group: string; points: number }>>()
+  const driverScores = new Map<string, Array<{ date: string; group: string; points: number; fastestLap: boolean }>>()
 
   for (const event of season.events) {
     for (const session of event.sessions) {
@@ -71,9 +71,6 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
       let fastestDriver = ''
       for (const entry of entries) {
         const t = parseLapTimeToMs(entry.bestLap)
-
-        console.log(entry.bestLap, t)
-
         if (t < fastestTime) {
           fastestTime = t
           fastestDriver = entry.driver
@@ -82,10 +79,11 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
 
       for (const entry of entries) {
         const posPoints = pointsTable[entry.position - 1] ?? 0
-        const lapBonus = entry.driver === fastestDriver ? fastestBonus : 0
+        const isFastest = entry.driver === fastestDriver
+        const lapBonus = isFastest ? fastestBonus : 0
         const points = posPoints + lapBonus
         const existing = driverScores.get(entry.driver) ?? []
-        existing.push({ date: event.date, group, points })
+        existing.push({ date: event.date, group, points, fastestLap: isFastest })
         driverScores.set(entry.driver, existing)
       }
     }
@@ -102,6 +100,7 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
       group: s.group,
       points: s.points,
       counted: countedKeys.has(`${s.date}-${s.group}`),
+      fastestLap: s.fastestLap,
     }))
 
     const totalPoints = raceScores.filter((s) => s.counted).reduce((sum, s) => sum + s.points, 0)

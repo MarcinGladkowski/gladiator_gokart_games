@@ -72,6 +72,7 @@ export function GeneralClassificationTable({ entries }: Props) {
                         </td>
                       )
                     }
+                    const bonus = score.group === 'a' ? 2 : 1
                     return (
                       <td
                         key={key}
@@ -80,9 +81,14 @@ export function GeneralClassificationTable({ entries }: Props) {
                             ? 'text-white font-semibold'
                             : 'text-gray-500 line-through'
                         }`}
-                        title={score.counted ? 'Counted in best 6' : 'Not counted (best 6 rule)'}
+                        title={
+                          score.fastestLap
+                            ? `Fastest lap +${bonus}pt${score.counted ? ' · Counted in best 6' : ' · Not counted (best 6 rule)'}`
+                            : score.counted ? 'Counted in best 6' : 'Not counted (best 6 rule)'
+                        }
                       >
                         {score.points}
+                        {score.fastestLap && <span className="ml-1 text-purple-400 text-xs">⚡</span>}
                       </td>
                     )
                   })}
@@ -94,6 +100,7 @@ export function GeneralClassificationTable({ entries }: Props) {
       </div>
       <p className="mt-3 text-xs text-gray-500">
         Points in bold count toward the total (best {6} races per driver). Strikethrough scores are excluded.
+        {' '}<span className="text-purple-400">⚡</span> = fastest lap bonus (+2 pts in group A, +1 pt in group B).
       </p>
     </div>
   )

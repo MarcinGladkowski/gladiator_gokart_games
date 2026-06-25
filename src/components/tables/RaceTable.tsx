@@ -1,6 +1,7 @@
 import type { RaceEntry } from '../../types'
 import { DriverFilter } from '../filters/DriverFilter'
 import { useDriverFilter } from '../../hooks/useDriverFilter'
+import { parseLapTimeToMs } from '../../hooks/useResults'
 
 const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
 
@@ -10,6 +11,11 @@ interface Props {
 
 export function RaceTable({ entries }: Props) {
   const { query, setQuery, filtered } = useDriverFilter(entries)
+
+  const fastestDriver = entries.reduce<{ driver: string; ms: number } | null>((best, entry) => {
+    const ms = parseLapTimeToMs(entry.bestLap)
+    return best === null || ms < best.ms ? { driver: entry.driver, ms } : best
+  }, null)?.driver ?? null
 
   return (
     <div>
@@ -29,6 +35,7 @@ export function RaceTable({ entries }: Props) {
           <tbody>
             {filtered.map((entry, idx) => {
               const color = PODIUM[entry.position - 1] ?? ''
+              const isFastest = entry.driver === fastestDriver
               return (
                 <tr
                   key={idx}
@@ -39,7 +46,10 @@ export function RaceTable({ entries }: Props) {
                   <td className={`px-4 py-3 font-medium ${color}`}>{entry.driver}</td>
                   <td className="px-4 py-3 text-right text-gray-300">{entry.laps}</td>
                   <td className="px-4 py-3 text-right text-gray-400 font-mono">{entry.gap ?? '—'}</td>
-                  <td className="px-4 py-3 text-right font-mono text-green-400">{entry.bestLap}</td>
+                  <td className={`px-4 py-3 text-right font-mono font-bold ${isFastest ? 'text-purple-400' : 'text-green-400'}`}>
+                    {entry.bestLap}
+                    {isFastest && <span className="ml-1 text-xs">⚡</span>}
+                  </td>
                 </tr>
               )
             })}

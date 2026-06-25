@@ -40,7 +40,7 @@ const GROUP_B_POINTS = [18, 15, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 const FASTEST_LAP_BONUS: Record<string, number> = { a: 2, b: 1 }
 const BEST_N = 6
 
-function parseLapTimeToMs(lapTime: string): number {
+export function parseLapTimeToMs(lapTime: string): number {
   const colonIdx = lapTime.indexOf(':')
   if (colonIdx === -1) return Infinity
   const minutes = parseInt(lapTime.slice(0, colonIdx), 10)

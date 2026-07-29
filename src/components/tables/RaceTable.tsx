@@ -43,7 +43,7 @@ export function RaceTable({ entries }: Props) {
                 >
                   <td className={`px-4 py-3 text-right font-bold ${color}`}>{entry.position}</td>
                   <td className="px-4 py-3 text-right text-gray-400">{entry.kartNumber}</td>
-                  <td className={`px-4 py-3 font-medium ${color}`}>{entry.driver}</td>
+                  <td className={`px-4 py-3 font-medium uppercase ${color}`}>{entry.driver}</td>
                   <td className="px-4 py-3 text-right text-gray-300">{entry.laps}</td>
                   <td className="px-4 py-3 text-right text-gray-400 font-mono">{entry.gap ?? '—'}</td>
                   <td className={`px-4 py-3 text-right font-mono font-bold ${isFastest ? 'text-purple-400' : 'text-green-400'}`}>

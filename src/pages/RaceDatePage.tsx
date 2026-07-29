@@ -196,7 +196,7 @@ if (!event) {
                             <h2 className="text-lg font-semibold text-white mb-4">Group A</h2>
                             <ol className="list-decimal list-inside space-y-1">
                               {groupA.map((r, i) => (
-                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                                <li key={i} className="text-gray-300 text-sm uppercase">{r.registration.nickname}</li>
                               ))}
                             </ol>
                           </div>
@@ -206,7 +206,7 @@ if (!event) {
                             <h2 className="text-lg font-semibold text-white mb-4">Group B</h2>
                             <ol className="list-decimal list-inside space-y-1">
                               {groupB.map((r, i) => (
-                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                                <li key={i} className="text-gray-300 text-sm uppercase">{r.registration.nickname}</li>
                               ))}
                             </ol>
                           </div>
@@ -216,7 +216,7 @@ if (!event) {
                             <h2 className="text-lg font-semibold text-white mb-4">Reserve</h2>
                             <ol className="list-decimal list-inside space-y-1">
                               {reserve.map((r, i) => (
-                                <li key={i} className="text-gray-300 text-sm">{r.registration.nickname}</li>
+                                <li key={i} className="text-gray-300 text-sm uppercase">{r.registration.nickname}</li>
                               ))}
                             </ol>
                           </div>

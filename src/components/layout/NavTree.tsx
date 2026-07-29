@@ -93,7 +93,7 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
                     className={linkClass}
                     onClick={onNavigate}
                   >
-                    General Classification
+                    Season Classification
                   </NavLink>
                 )}
                 {season.events.map((event) =>

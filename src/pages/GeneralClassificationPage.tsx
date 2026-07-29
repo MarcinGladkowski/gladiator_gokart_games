@@ -9,7 +9,7 @@ export function GeneralClassificationPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-white mb-2">General Classification {yearNum}</h1>
+      <h1 className="text-2xl font-bold text-white mb-2">Season Classification {yearNum}</h1>
       <p className="text-gray-400 text-sm mb-6">
         Groups A &amp; B — best 6 races count per driver
       </p>

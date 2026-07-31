@@ -63,5 +63,8 @@
   { "nickname": "WIND",                 "member_id": null },
   { "nickname": "WISNIEWSKI",           "member_id": 4314 },
   { "nickname": "WOJT",                 "member_id": 900006735 },
-  { "nickname": "ZGUD",                 "member_id": 3866 }
+  { "nickname": "ZGUD",                 "member_id": 3866 },
+{"nickname":"SEBPAT","member_id":900009111},
+{"nickname":"DAAWIDEK","member_id":900012000},
+{"nickname":"PAWLASSS","member_id":900012032}
 ]

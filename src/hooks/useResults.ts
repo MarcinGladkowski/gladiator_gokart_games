@@ -42,8 +42,7 @@ const BEST_N = 6
 
 export function parseLapTimeToMs(lapTime: string): number {
   const colonIdx = lapTime.indexOf(':')
-  if (colonIdx === -1) return Infinity
-  const minutes = parseInt(lapTime.slice(0, colonIdx), 10)
+  const minutes = colonIdx !== -1 ? parseInt(lapTime.slice(0, colonIdx), 10) : 0
   const rest = lapTime.slice(colonIdx + 1)
   const dotIdx = rest.indexOf('.')
   const seconds = parseInt(dotIdx === -1 ? rest : rest.slice(0, dotIdx), 10)
@@ -71,6 +70,7 @@ export function useGeneralClassification(year: number): ClassificationEntry[] {
       let fastestDriver = ''
       for (const entry of entries) {
         const t = parseLapTimeToMs(entry.bestLap)
+
         if (t < fastestTime) {
           fastestTime = t
           fastestDriver = entry.driver

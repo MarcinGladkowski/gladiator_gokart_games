@@ -17,12 +17,13 @@ const args = Object.fromEntries(
     })
 );
 
-const memberId = args['member-id'];
-const round    = args['round'];
-const runType  = args['run-type'];
+const memberId       = args['member-id'];
+const round          = args['round'];
+const runType        = args['run-type'];
+const knownSessionId = args['session-id'];
 
 if (!memberId || !round || !runType) {
-  console.error('Usage: tsx scripts/extract-race.ts --member-id=<id> --round=<n:YYYY-MM-DD> --run-type="Race A: Závod, sk. A"');
+  console.error('Usage: tsx scripts/extract-race.ts --member-id=<id> --round=<n:YYYY-MM-DD> --run-type="Race A: Závod, sk. A" [--session-id=<id>]');
   process.exit(1);
 }
 
@@ -55,6 +56,55 @@ async function fetchMemberSessions(id: string): Promise<string> {
   return res.text();
 }
 
+// ── Extraction ────────────────────────────────────────────────────────────────
+
+/**
+ * Extracts the raw JSON text assigned to `var <varName> = {...};` inside an
+ * HTML page's <script> section. Walks brace/bracket depth (string-aware) so
+ * it works regardless of surrounding HTML or trailing statements.
+ */
+function extractVarJson(html: string, varName: string): string {
+  const marker = new RegExp(`var\\s+${varName}\\s*=\\s*`).exec(html);
+  if (!marker) {
+    throw new Error(`Variable "${varName}" not found in response`);
+  }
+
+  const start = marker.index + marker[0].length;
+  if (html[start] !== '{' && html[start] !== '[') {
+    throw new Error(`Variable "${varName}" is not followed by a JSON value`);
+  }
+
+  let depth = 0;
+  let inString = false;
+  let stringChar = '';
+  let escaped = false;
+  let i = start;
+
+  for (; i < html.length; i++) {
+    const ch = html[i];
+
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === stringChar) inString = false;
+      continue;
+    }
+
+    if (ch === '"' || ch === "'") { inString = true; stringChar = ch; continue; }
+    if (ch === '{' || ch === '[') depth++;
+    else if (ch === '}' || ch === ']') {
+      depth--;
+      if (depth === 0) { i++; break; }
+    }
+  }
+
+  if (depth !== 0) {
+    throw new Error(`Unbalanced JSON value for variable "${varName}"`);
+  }
+
+  return html.slice(start, i);
+}
+
 async function fetchRaceDetails(sessionId: string): Promise<string> {
   const res = await fetch('https://www.apex-timing.com/gokarts/functions/request_member_profile.php', {
     method: 'POST', headers: HEADERS, body: `type=session_results&center_id=120&session_id=${sessionId}`,
@@ -77,15 +127,37 @@ async function askClaude(prompt: string): Promise<string> {
 async function main() {
   console.log(`[extract-race] member=${memberId} round=${roundNumber} date=${date} run_type=${runType}`);
 
-  // Phase 1: find session_id
-  console.log('[extract-race] Fetching member sessions...');
-  const sessionsData = await fetchMemberSessions(memberId);
+  // Phase 1: find session_id (skipped when provided via --session-id)
+  let sessionId: string;
+  if (knownSessionId) {
+    sessionId = knownSessionId.trim().replaceAll(/\D/g, '');
+    if (!/^\d{5,6}$/.test(sessionId)) {
+      console.error(`[extract-race] Invalid --session-id: "${knownSessionId}"`);
+      process.exit(1);
+    }
+    console.log(`[extract-race] Using provided session_id: ${sessionId}`);
+  } else {
+    console.log('[extract-race] Fetching member sessions...');
+    const sessionsData     = await fetchMemberSessions(memberId);
+    const graphicAllDataJson = extractVarJson(sessionsData, 'graphic_all_data');
 
-  const sessionIdRaw = await askClaude(`
-From the JavaScript response below, extract the \`var graphic_all_data\` variable and find
-the entry that matches ALL of the following criteria:
+    const sessionIdRaw = await askClaude(`
+From the \`graphic_all_data\` JSON below, find the entry that matches ALL of the following
+criteria:
 - race_name contains: ${runTypeValue}
 - date field matches year ${year} and month ${month}
+
+Be aware that race have format
+
+For race
+<exmaple>
+"race_name":"Z\u00e1vod, sk. A - 18:26" 
+</exmaple>
+
+For qualifications
+<exmaple>
+"race_name":"M\u011a\u0158\u00c1K - 19:15"
+</exmaple>
 
 The date field uses Czech month abbreviations:
 01=led, 02=úno, 03=bře, 04=dub, 05=kvě, 06=čer, 07=čvc, 08=srp, 09=zář, 10=říj, 11=lis, 12=pro
@@ -93,19 +165,20 @@ The date field uses Czech month abbreviations:
 Return ONLY the session_id as a plain number with no additional text.
 
 Data:
-${sessionsData}
+${graphicAllDataJson}
 `);
 
-  if (process.env.DEBUG) {
-    console.log(sessionsData)
+    if (process.env.DEBUG) {
+      console.log(JSON.stringify(JSON.parse(graphicAllDataJson), null, 2));
+    }
+
+    sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
+    if (!/^\d{5,6}$/.test(sessionId)) {
+      console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
+      process.exit(1);
+    }
+    console.log(`[extract-race] session_id: ${sessionId}`);
   }
- 
-  const sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
-  if (!/^\d{5,6}$/.test(sessionId)) {
-    console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
-    process.exit(1);
-  }
-  console.log(`[extract-race] session_id: ${sessionId}`);
 
   // Phase 2: fetch race details and extract results
   console.log('[extract-race] Fetching race details...');

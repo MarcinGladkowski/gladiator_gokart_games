@@ -52,7 +52,7 @@ if (!event) {
           </p>
           {enrollment && enrollOpenDateTime && (() => {
             const { grid, reserve } = drivers
-              ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff).partition(drivers)
+              ? new DriversGridService(26, enrollOpenDateTime, leagueStandings, config.staff, config.externalNicknames).partition(drivers)
               : { grid: [], reserve: [] }
             return (
             <div className="space-y-6">

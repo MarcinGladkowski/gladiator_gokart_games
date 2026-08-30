@@ -9,6 +9,7 @@ export interface Registration {
   registrationDateTime: Date
   resignedAt?: Date
   isStaff?: boolean
+  isExternal?: boolean
 }
 
 export type LapTime = string;

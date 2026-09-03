@@ -181,6 +181,38 @@ describe('DriversGridService', () => {
     expect(reserve[1].registration.nickname).toBe('DRIVER3')
   })
 
+  it('registered external drivers in 24 hours window are not prioritized and should be placed at the back', () => {
+    const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 25 hours ago
+    const service = new DriversGridService(
+      2,
+      enrollOpenDateTime,
+      [
+        { nickname: 'DRIVER1', position: 10, score: 0.70, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER2', position: 1, score: 0.90, entriesCount: 10, scores: [] },
+        { nickname: 'DRIVER3', position: 12, score: 0.65, entriesCount: 10, scores: [] },
+        { nickname: 'LOLOBERCIK', position: 2, score: 0.85, entriesCount: 10, scores: [] },
+      ],
+      [],
+      ['LOLOBERCIK']
+    )
+
+    const registrations: Registration[] = [
+      makeRegistration('DRIVER1', 90), // on time
+      makeRegistration('DRIVER2', 90), // on time
+      makeRegistration('DRIVER3', 90), // on time
+      makeRegistration('LOLOBERCIK', 90), // on time
+    ]
+
+    const { grid, reserve } = service.partition(registrations)
+
+    expect(grid).toHaveLength(2)
+    expect(grid[0].registration.nickname).toBe('DRIVER2')
+    expect(grid[1].registration.nickname).toBe('DRIVER1')
+    expect(reserve).toHaveLength(2)
+    expect(reserve[0].registration.nickname).toBe('DRIVER3')
+    expect(reserve[1].registration.nickname).toBe('LOLOBERCIK')
+  })
+
 
   it('fill up starting grid with reserve drivers while is not full', () => {
     const enrollOpenDateTime = new Date(Date.now() - 60 * 60 * 25 * 1000) // 25 hours ago

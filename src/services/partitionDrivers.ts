@@ -7,14 +7,17 @@ export class DriversGridService {
   private readonly enrollCloseDateTime: Date
   private readonly gridSize: number
   private readonly staffSet: Set<string>
+  private readonly externalSet: Set<string>
 
   constructor(
     gridSize: number,
     enrollOpenDateTime: Date,
     leagueStandings: TotalResultEntry[],
     staff: string[] = [],
+    external: string[] = []
   ) {
     this.staffSet = new Set(staff.map((staffName) => staffName.trim().toLowerCase()))
+    this.externalSet = new Set(external.map(externalName => externalName.trim().toLowerCase()))
     this.leagueStandings = leagueStandings
     this.enrollCloseDateTime = new Date(enrollOpenDateTime.getTime() + ENROLL_WINDOW_MS)
     this.gridSize = gridSize
@@ -28,7 +31,8 @@ export class DriversGridService {
     const events: GridEvent[] = registrations.map((registration) => ({
       registration: {
         ...registration,
-        isStaff: this.staffSet.has(registration.nickname.trim().toLowerCase())
+        isStaff: this.staffSet.has(registration.nickname.trim().toLowerCase()),
+        isExternal: this.externalSet.has(registration.nickname.trim().toLowerCase()),
       },
       standing: this.leagueStandings.find(
         (standing) => standing.nickname.trim().toLowerCase() === registration.nickname.trim().toLowerCase()
@@ -113,6 +117,12 @@ export class DriversGridService {
   }
   
   sortingByPositionAsc = (a: GridEntry, b: GridEntry) => {
+    const aIsExternal = a.registration.isExternal === true;
+    const bIsExternal = b.registration.isExternal === true;
+
+    if (aIsExternal !== bIsExternal) {
+      return aIsExternal ? 1 : -1;
+    }
     return (a.standing?.position ?? Infinity) - (b.standing?.position ?? Infinity);
   }
 

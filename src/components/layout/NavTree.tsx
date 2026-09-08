@@ -131,19 +131,18 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
 
                       {openDates.has(event.date) && (
                         <div className="ml-4 space-y-0.5">
-                          {event.sessions.map((session) => {
-                            const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
-                            return (
+                          {(['qualifications', 'race'] as const)
+                            .filter((type) => event.sessions.some((s) => s.type === type))
+                            .map((type) => (
                               <NavLink
-                                key={`${session.group}-${session.type}`}
-                                to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
+                                key={type}
+                                to={`/season/${season.year}/${event.date}/${type}`}
                                 className={linkClass}
                                 onClick={onNavigate}
                               >
-                                {label}
+                                {type === 'qualifications' ? 'Qualifications' : 'Race'}
                               </NavLink>
-                            )
-                          })}
+                            ))}
                         </div>
                       )}
                     </div>

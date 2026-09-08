@@ -20,15 +20,13 @@ export function useRaceEvent(year: number, date: string): RaceEvent | undefined 
   return useSeason(year)?.events.find((e) => e.date === date)
 }
 
-export function useSession(
+export function useSessionsByType(
   year: number,
   date: string,
-  group: string,
   type: string,
-): Session | undefined {
-  return useRaceEvent(year, date)?.sessions.find(
-    (s) => s.group === group && s.type === type,
-  )
+): Session[] {
+  const sessions = useRaceEvent(year, date)?.sessions.filter((s) => s.type === type) ?? []
+  return [...sessions].sort((a, b) => a.group.localeCompare(b.group))
 }
 
 export function useTotalResults(): TotalResultEntry[] {

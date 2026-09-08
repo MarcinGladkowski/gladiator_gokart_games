@@ -231,19 +231,26 @@ if (!event) {
         </>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
-          {event.sessions.map((session) => {
-            const label = `${session.type === 'qualifications' ? 'Qualifications' : 'Race'} ${session.group.toUpperCase()}`
-            return (
-              <Link
-                key={`${session.group}-${session.type}`}
-                to={`/season/${year}/${date}/${session.group}/${session.type}`}
-                className="block rounded-lg border border-gray-700 bg-gray-900 p-4 hover:border-red-700 hover:bg-gray-800 transition-colors"
-              >
-                <h2 className="text-lg font-semibold text-gray-100">{label}</h2>
-                <p className="text-sm text-gray-500 mt-1">{session.entries.length} drivers</p>
-              </Link>
-            )
-          })}
+          {(['qualifications', 'race'] as const)
+            .map((type) => ({
+              type,
+              sessions: event.sessions.filter((s) => s.type === type),
+            }))
+            .filter(({ sessions }) => sessions.length > 0)
+            .map(({ type, sessions }) => {
+              const label = type === 'qualifications' ? 'Qualifications' : 'Race'
+              const driverCount = sessions.reduce((sum, s) => sum + s.entries.length, 0)
+              return (
+                <Link
+                  key={type}
+                  to={`/season/${year}/${date}/${type}`}
+                  className="block rounded-lg border border-gray-700 bg-gray-900 p-4 hover:border-red-700 hover:bg-gray-800 transition-colors"
+                >
+                  <h2 className="text-lg font-semibold text-gray-100">{label}</h2>
+                  <p className="text-sm text-gray-500 mt-1">{driverCount} drivers</p>
+                </Link>
+              )
+            })}
         </div>
       )}
     </div>

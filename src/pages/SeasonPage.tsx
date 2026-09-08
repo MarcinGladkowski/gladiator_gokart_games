@@ -33,16 +33,17 @@ export function SeasonPage() {
               </p>
             ) : (
               <div className="flex flex-wrap gap-2">
-                {event.sessions.map((session) => (
-                  <Link
-                    key={`${session.group}-${session.type}`}
-                    to={`/season/${season.year}/${event.date}/${session.group}/${session.type}`}
-                    className="px-3 py-1.5 rounded bg-gray-800 text-sm text-gray-300 hover:bg-red-900/40 hover:text-red-400 transition-colors"
-                  >
-                    {session.type === 'qualifications' ? 'Qualifications' : 'Race'}{' '}
-                    {session.group.toUpperCase()}
-                  </Link>
-                ))}
+                {(['qualifications', 'race'] as const)
+                  .filter((type) => event.sessions.some((s) => s.type === type))
+                  .map((type) => (
+                    <Link
+                      key={type}
+                      to={`/season/${season.year}/${event.date}/${type}`}
+                      className="px-3 py-1.5 rounded bg-gray-800 text-sm text-gray-300 hover:bg-red-900/40 hover:text-red-400 transition-colors"
+                    >
+                      {type === 'qualifications' ? 'Qualifications' : 'Race'}
+                    </Link>
+                  ))}
               </div>
             )}
           </div>

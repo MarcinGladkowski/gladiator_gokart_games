@@ -4,7 +4,7 @@ import { HomePage } from './pages/HomePage'
 import { TotalResultsPage } from './pages/TotalResultsPage'
 import { SeasonPage } from './pages/SeasonPage'
 import { RaceDatePage } from './pages/RaceDatePage'
-import { GroupSessionPage } from './pages/GroupSessionPage'
+import { SessionTypePage } from './pages/SessionTypePage'
 import { GeneralClassificationPage } from './pages/GeneralClassificationPage'
 
 export function AppRouter() {
@@ -17,7 +17,7 @@ export function AppRouter() {
           <Route path="season/:year" element={<SeasonPage />} />
           <Route path="season/:year/classification" element={<GeneralClassificationPage />} />
           <Route path="season/:year/:date" element={<RaceDatePage />} />
-          <Route path="season/:year/:date/:group/:type" element={<GroupSessionPage />} />
+          <Route path="season/:year/:date/:type" element={<SessionTypePage />} />
         </Route>
       </Routes>
     </HashRouter>

@@ -1,0 +1,114 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "17_09_2026",
+    "run_type": "Měřák, sk. B",
+    "session_id": "11927"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "DOBRA PIANA",
+      "laps": null,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.921",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 2,
+      "driver": "PIOTR 90+",
+      "laps": null,
+      "difference_to_leader": "+0.081",
+      "best_lap_time": "1:12.002",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "MAREK BK",
+      "laps": null,
+      "difference_to_leader": "+0.248",
+      "best_lap_time": "1:12.169",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "NORMAN POWER",
+      "laps": null,
+      "difference_to_leader": "+0.407",
+      "best_lap_time": "1:12.328",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "MLODY93",
+      "laps": null,
+      "difference_to_leader": "+0.476",
+      "best_lap_time": "1:12.397",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 6,
+      "driver": "WIND",
+      "laps": null,
+      "difference_to_leader": "+0.492",
+      "best_lap_time": "1:12.413",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "ZGUD",
+      "laps": null,
+      "difference_to_leader": "+0.599",
+      "best_lap_time": "1:12.520",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "GRZECH",
+      "laps": null,
+      "difference_to_leader": "+0.825",
+      "best_lap_time": "1:12.746",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "TPBODEK",
+      "laps": null,
+      "difference_to_leader": "+1.078",
+      "best_lap_time": "1:12.999",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "LOLOBERCIK",
+      "laps": null,
+      "difference_to_leader": "+1.156",
+      "best_lap_time": "1:13.077",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "TIM7",
+      "laps": null,
+      "difference_to_leader": "+1.573",
+      "best_lap_time": "1:13.494",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "MARCINBTM",
+      "laps": null,
+      "difference_to_leader": "+2.137",
+      "best_lap_time": "1:14.058",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "MALEC_KUBA",
+      "laps": null,
+      "difference_to_leader": "+2.389",
+      "best_lap_time": "1:14.310",
+      "best_lap_time_race": false
+    }
+  ]
+}

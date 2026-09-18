@@ -32,7 +32,6 @@ if (!memberId || !round || !runType) {
 const [roundNumber, date] = round.split(':');
 const [year, month, day]  = date.split('-');
 const dateFormatted        = `${day}_${month}_${year}`;
-const runTypeValue         = runType.split(':').slice(1).join(':').trim();
 
 const RESULT_FILES: Record<string, string> = {
   'Race A':           'group_a_race_result.json',
@@ -40,7 +39,14 @@ const RESULT_FILES: Record<string, string> = {
   'Qualifications A': 'group_a_qualifications_result.json',
   'Qualifications B': 'group_b_qualifications_result.json',
 };
-const resultFile = Object.entries(RESULT_FILES).find(([k]) => runType.startsWith(k))?.[1] ?? 'result.json';
+
+// --run-type accepts either "<Prefix>: <value>" or "<Prefix> - <value>";
+// strip the recognized prefix and whatever separator follows it.
+const runTypePrefix = Object.keys(RESULT_FILES).find(k => runType.startsWith(k));
+const runTypeValue  = runTypePrefix
+  ? runType.slice(runTypePrefix.length).replace(/^[\s:-]+/, '').trim()
+  : runType.split(':').slice(1).join(':').trim();
+const resultFile = runTypePrefix ? RESULT_FILES[runTypePrefix] : 'result.json';
 
 // ── HTTP ──────────────────────────────────────────────────────────────────────
 

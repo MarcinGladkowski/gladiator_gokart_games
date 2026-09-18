@@ -112,7 +112,3 @@
     }
   ]
 }
-
-**Notes:**
-- `best_lap_time_race: true` → **SZLACHTA BARTŁOMIEJ** with **1:11.630** (fastest across all 13 drivers)
-- `laps` and `difference_to_leader` are `null` — the source data only provides finishing rank and best lap times; no lap counts or time gaps to leader were included in the HTML table

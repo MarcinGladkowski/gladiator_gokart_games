@@ -50,59 +50,51 @@ const HEADERS = {
 };
 
 async function fetchMemberSessions(id: string): Promise<string> {
-  const res = await fetch('https://www.apex-timing.com/gokarts/functions/request_member_graphic.php', {
-    method: 'POST', headers: HEADERS, body: `center_id=120&member_id=${id}`,
+  const res = await fetch('https://www.apex-timing.com/gokarts/functions/request_member_profile.php', {
+    method: 'POST', headers: HEADERS, body: `center_id=120&type=member_results&member_id=${id}&start=1&count=100`,
   });
-  return res.text();
+  const { html } = await res.json() as { html: string };
+  return html;
 }
 
 // ── Extraction ────────────────────────────────────────────────────────────────
 
+// Server localizes the date cell depending on locale: English ("Sept. 17, 2026")
+// or Czech ("zář. 2026", no day). Both use a 3-letter month abbreviation.
+const MONTHS: Record<string, string> = {
+  jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06',
+  jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12',
+  led: '01', úno: '02', bře: '03', dub: '04', kvě: '05', čer: '06',
+  čvc: '07', srp: '08', zář: '09', říj: '10', lis: '11', pro: '12',
+};
+
+type SessionRow = { sessionId: string; raceName: string; year: string; month: string };
+
 /**
- * Extracts the raw JSON text assigned to `var <varName> = {...};` inside an
- * HTML page's <script> section. Walks brace/bracket depth (string-aware) so
- * it works regardless of surrounding HTML or trailing statements.
+ * Parses the `member_results` table HTML into one row per session, reading
+ * session_id straight off each `<tr data-session_id="...">` and the race
+ * name/date out of that row's `<span class="name">`/`<td class="date">`.
  */
-function extractVarJson(html: string, varName: string): string {
-  const marker = new RegExp(`var\\s+${varName}\\s*=\\s*`).exec(html);
-  if (!marker) {
-    throw new Error(`Variable "${varName}" not found in response`);
+function parseMemberResults(html: string): SessionRow[] {
+  const rows: SessionRow[] = [];
+
+  for (const trMatch of html.matchAll(/<tr[^>]*\bdata-session_id="(\d+)"[^>]*>([\s\S]*?)<\/tr>/g)) {
+    const [, sessionId, block] = trMatch;
+    const nameMatch = /<span class="name">\s*([^<]+?)\s*<\/span>/.exec(block);
+    const dateMatch = /<td class="date">\s*([^<]+?)\s*<\/td>/.exec(block);
+    if (!nameMatch || !dateMatch) continue;
+
+    const yearMatch  = /(\d{4})/.exec(dateMatch[1]);
+    const monthMatch = /[A-Za-zÀ-ž]+/.exec(dateMatch[1]);
+    if (!yearMatch || !monthMatch) continue;
+
+    const month = MONTHS[monthMatch[0].toLowerCase().slice(0, 3)];
+    if (!month) continue;
+
+    rows.push({ sessionId, raceName: nameMatch[1].trim(), year: yearMatch[1], month });
   }
 
-  const start = marker.index + marker[0].length;
-  if (html[start] !== '{' && html[start] !== '[') {
-    throw new Error(`Variable "${varName}" is not followed by a JSON value`);
-  }
-
-  let depth = 0;
-  let inString = false;
-  let stringChar = '';
-  let escaped = false;
-  let i = start;
-
-  for (; i < html.length; i++) {
-    const ch = html[i];
-
-    if (inString) {
-      if (escaped) escaped = false;
-      else if (ch === '\\') escaped = true;
-      else if (ch === stringChar) inString = false;
-      continue;
-    }
-
-    if (ch === '"' || ch === "'") { inString = true; stringChar = ch; continue; }
-    if (ch === '{' || ch === '[') depth++;
-    else if (ch === '}' || ch === ']') {
-      depth--;
-      if (depth === 0) { i++; break; }
-    }
-  }
-
-  if (depth !== 0) {
-    throw new Error(`Unbalanced JSON value for variable "${varName}"`);
-  }
-
-  return html.slice(start, i);
+  return rows;
 }
 
 async function fetchRaceDetails(sessionId: string): Promise<string> {
@@ -122,6 +114,37 @@ async function askClaude(prompt: string): Promise<string> {
   throw new Error('No result received from Claude');
 }
 
+/**
+ * Finds the session_id for a given member/run-type/round by fetching the
+ * member's recent sessions and matching the row whose race name contains
+ * runTypeValue and whose date falls in the requested year/month.
+ */
+async function findSessionId(memberId: string, runTypeValue: string, year: string, month: string): Promise<string> {
+  console.log('[extract-race] Fetching member sessions...');
+  const sessionsHtml = await fetchMemberSessions(memberId);
+  const rows         = parseMemberResults(sessionsHtml);
+
+  if (process.env.DEBUG) {
+    console.log(JSON.stringify(rows, null, 2));
+  }
+
+  const matches = rows.filter(row => row.raceName.includes(runTypeValue) && row.year === year && row.month === month);
+
+  if (matches.length === 0) {
+    throw new Error(`No session found for run_type "${runTypeValue}" in ${year}-${month}`);
+  }
+  if (matches.length > 1) {
+    throw new Error(
+      `Ambiguous session for run_type "${runTypeValue}" in ${year}-${month}: ` +
+      matches.map(m => m.sessionId).join(', ')
+    );
+  }
+
+  const sessionId = matches[0].sessionId;
+  console.log(`[extract-race] session_id: ${sessionId}`);
+  return sessionId;
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -137,47 +160,12 @@ async function main() {
     }
     console.log(`[extract-race] Using provided session_id: ${sessionId}`);
   } else {
-    console.log('[extract-race] Fetching member sessions...');
-    const sessionsData     = await fetchMemberSessions(memberId);
-    const graphicAllDataJson = extractVarJson(sessionsData, 'graphic_all_data');
-
-    const sessionIdRaw = await askClaude(`
-From the \`graphic_all_data\` JSON below, find the entry that matches ALL of the following
-criteria:
-- race_name contains: ${runTypeValue}
-- date field matches year ${year} and month ${month}
-
-Be aware that race have format
-
-For race
-<exmaple>
-"race_name":"Z\u00e1vod, sk. A - 18:26" 
-</exmaple>
-
-For qualifications
-<exmaple>
-"race_name":"M\u011a\u0158\u00c1K - 19:15"
-</exmaple>
-
-The date field uses Czech month abbreviations:
-01=led, 02=úno, 03=bře, 04=dub, 05=kvě, 06=čer, 07=čvc, 08=srp, 09=zář, 10=říj, 11=lis, 12=pro
-
-Return ONLY the session_id as a plain number with no additional text.
-
-Data:
-${graphicAllDataJson}
-`);
-
-    if (process.env.DEBUG) {
-      console.log(JSON.stringify(JSON.parse(graphicAllDataJson), null, 2));
-    }
-
-    sessionId = sessionIdRaw.trim().replaceAll(/\D/g, '');
-    if (!/^\d{5,6}$/.test(sessionId)) {
-      console.error(`[extract-race] Invalid session_id: "${sessionId}"`);
+    try {
+      sessionId = await findSessionId(memberId, runTypeValue, year, month);
+    } catch (err) {
+      console.error(`[extract-race] ${(err as Error).message}`);
       process.exit(1);
     }
-    console.log(`[extract-race] session_id: ${sessionId}`);
   }
 
   // Phase 2: fetch race details and extract results

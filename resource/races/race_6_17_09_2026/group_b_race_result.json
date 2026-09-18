@@ -1,0 +1,118 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "17_09_2026",
+    "run_type": "Závod, sk. A",
+    "session_id": "11928"
+  },
+  "general_results": [
+    {
+      "rank": 1,
+      "driver": "KUBAG",
+      "laps": null,
+      "difference_to_leader": "Leader",
+      "best_lap_time": "1:11.801",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 2,
+      "driver": "KAMINSKI JAKUB",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:11.969",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 3,
+      "driver": "FILIP BUCHWALD",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:11.748",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 4,
+      "driver": "PAWELTGB",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.079",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 5,
+      "driver": "SZLACHTA BARTŁOMIEJ",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:11.630",
+      "best_lap_time_race": true
+    },
+    {
+      "rank": 6,
+      "driver": "NORMAN POWER",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:11.831",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 7,
+      "driver": "BIEG KAROL",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.523",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 8,
+      "driver": "LUCKY LUKE",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.367",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 9,
+      "driver": "PIOTR 90+",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:11.962",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 10,
+      "driver": "KREWETA",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.537",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 11,
+      "driver": "MAREK BK",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.206",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 12,
+      "driver": "DOBRA PIANA",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.091",
+      "best_lap_time_race": false
+    },
+    {
+      "rank": 13,
+      "driver": "SLAWEK KAJZAR",
+      "laps": null,
+      "difference_to_leader": null,
+      "best_lap_time": "1:12.010",
+      "best_lap_time_race": false
+    }
+  ]
+}
+
+**Notes:**
+- `best_lap_time_race: true` is set only for **SZLACHTA BARTŁOMIEJ** with the fastest lap of **1:11.630** across all 13 drivers.
+- `laps` and `difference_to_leader` are `null` because the source data only provides ranking positions and best lap times — no total lap counts or time gaps to leader were included in the HTML.

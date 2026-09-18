@@ -12,6 +12,13 @@ const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
 export function GeneralClassificationTable({ entries }: Props) {
   const { query, setQuery, filtered } = useDriverFilter(entries)
 
+  // Points of the driver directly above, keyed by position, for the "gap to previous" column
+  const pointsByPosition = useMemo(() => {
+    const map = new Map<number, number>()
+    for (const e of entries) map.set(e.position, e.totalPoints)
+    return map
+  }, [entries])
+
   // Collect all race dates in chronological order
   const raceSlots = useMemo(() => {
     const seen = new Set<string>()
@@ -38,6 +45,7 @@ export function GeneralClassificationTable({ entries }: Props) {
               <th className="px-4 py-3 text-right">Pos</th>
               <th className="px-4 py-3 text-left">Driver</th>
               <th className="px-4 py-3 text-right">Points</th>
+              <th className="px-4 py-3 text-right">Gap</th>
               <th className="px-4 py-3 text-right">Races</th>
               {raceSlots.map((slot) => (
                 <th key={slot.date} className="px-3 py-3 text-right whitespace-nowrap">
@@ -49,6 +57,8 @@ export function GeneralClassificationTable({ entries }: Props) {
           <tbody>
             {filtered.map((entry) => {
               const color = PODIUM[entry.position - 1] ?? ''
+              const previousPoints = pointsByPosition.get(entry.position - 1)
+              const gap = previousPoints === undefined ? null : previousPoints - entry.totalPoints
               const scoresByDate = new Map<string, typeof entry.raceScores>()
               for (const s of entry.raceScores) {
                 const existing = scoresByDate.get(s.date)
@@ -66,6 +76,7 @@ export function GeneralClassificationTable({ entries }: Props) {
                   <td className={`px-4 py-3 text-right font-bold ${color}`}>{entry.position}</td>
                   <td className={`px-4 py-3 font-medium uppercase ${color}`}>{entry.driver}</td>
                   <td className="px-4 py-3 text-right text-green-400 font-bold">{entry.totalPoints}</td>
+                  <td className="px-4 py-3 text-right text-gray-500">{gap === null ? '—' : `-${gap}`}</td>
                   <td className="px-4 py-3 text-right text-gray-300">{entry.racesCount}</td>
                   {raceSlots.map((slot) => {
                     const scores = scoresByDate.get(slot.date)

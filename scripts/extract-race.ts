@@ -103,6 +103,48 @@ function parseMemberResults(html: string): SessionRow[] {
   return rows;
 }
 
+/**
+ * Extracts the first balanced top-level `{...}` object out of free-form
+ * text (Claude sometimes wraps JSON in a code fence and/or adds trailing
+ * commentary after it).
+ */
+function extractJsonObject(text: string): string {
+  const start = text.indexOf('{');
+  if (start === -1) {
+    throw new Error('No JSON object found in response');
+  }
+
+  let depth = 0;
+  let inString = false;
+  let stringChar = '';
+  let escaped = false;
+  let i = start;
+
+  for (; i < text.length; i++) {
+    const ch = text[i];
+
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === stringChar) inString = false;
+      continue;
+    }
+
+    if (ch === '"' || ch === "'") { inString = true; stringChar = ch; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') {
+      depth--;
+      if (depth === 0) { i++; break; }
+    }
+  }
+
+  if (depth !== 0) {
+    throw new Error('Unbalanced JSON object in response');
+  }
+
+  return text.slice(start, i);
+}
+
 async function fetchRaceDetails(sessionId: string): Promise<string> {
   const res = await fetch('https://www.apex-timing.com/gokarts/functions/request_member_profile.php', {
     method: 'POST', headers: HEADERS, body: `type=session_results&center_id=120&session_id=${sessionId}`,
@@ -219,7 +261,8 @@ ${raceData}
   const raceDir    = join(ROOT, 'resource', 'races', `race_${roundNumber}_${dateFormatted}`);
   const outputPath = join(raceDir, resultFile);
   mkdirSync(raceDir, { recursive: true });
-  const cleanJson = raceResultRaw.replace(/^```[a-z]*\n?/gm, '').replace(/^```\n?$/gm, '').trim();
+  const cleanJson = extractJsonObject(raceResultRaw);
+  JSON.parse(cleanJson); // fail fast if Claude's response wasn't valid JSON
   writeFileSync(outputPath, cleanJson);
   console.log(`[extract-race] Saved → ${outputPath}`);
 }

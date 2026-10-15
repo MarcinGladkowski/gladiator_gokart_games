@@ -1,10 +1,17 @@
 [
   {
     "nickname": "KUBAG",
-    "entriesCount": 21,
-    "score": 0.8068,
+    "entriesCount": 22,
+    "score": 0.8156,
     "position": 1,
     "scores": [
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 1
+      },
       {
         "value": 0.92,
         "betterResultsCount": 2,
@@ -155,11 +162,152 @@
     ]
   },
   {
-    "nickname": "NIEMIEC",
-    "entriesCount": 25,
-    "score": 0.7968,
+    "nickname": "HONKI",
+    "entriesCount": 18,
+    "score": 0.7915,
     "position": 2,
     "scores": [
+      {
+        "value": 0.5,
+        "betterResultsCount": 12,
+        "allResultsCount": 25,
+        "date": "2026-07-16",
+        "positionAbsolute": 13
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 26,
+        "date": "2026-04-23",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 26,
+        "date": "2025-09-11",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 0.9459,
+        "betterResultsCount": 2,
+        "allResultsCount": 38,
+        "date": "2025-08-21",
+        "positionAbsolute": 3
+      },
+      {
+        "value": 0.96,
+        "betterResultsCount": 1,
+        "allResultsCount": 26,
+        "date": "2025-07-24",
+        "positionAbsolute": 2
+      },
+      {
+        "value": 0.76,
+        "betterResultsCount": 6,
+        "allResultsCount": 26,
+        "date": "2025-06-12",
+        "positionAbsolute": 7
+      },
+      {
+        "value": 0.5135,
+        "betterResultsCount": 18,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 19
+      },
+      {
+        "value": 0.5588,
+        "betterResultsCount": 15,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 16
+      },
+      {
+        "value": 0.8,
+        "betterResultsCount": 5,
+        "allResultsCount": 26,
+        "date": "2024-09-19",
+        "positionAbsolute": 6
+      },
+      {
+        "value": 0.8,
+        "betterResultsCount": 5,
+        "allResultsCount": 26,
+        "date": "2024-08-22",
+        "positionAbsolute": 6
+      },
+      {
+        "value": 0.7429,
+        "betterResultsCount": 9,
+        "allResultsCount": 36,
+        "date": "2024-07-11",
+        "positionAbsolute": 10
+      },
+      {
+        "value": 0.8,
+        "betterResultsCount": 5,
+        "allResultsCount": 26,
+        "date": "2024-06-06",
+        "positionAbsolute": 6
+      },
+      {
+        "value": 0.8696,
+        "betterResultsCount": 3,
+        "allResultsCount": 24,
+        "date": "2024-04-18",
+        "positionAbsolute": 4
+      },
+      {
+        "value": 0.9545,
+        "betterResultsCount": 1,
+        "allResultsCount": 23,
+        "date": "2024-03-21",
+        "positionAbsolute": 2
+      },
+      {
+        "value": 0.8182,
+        "betterResultsCount": 4,
+        "allResultsCount": 23,
+        "date": "2023-11-16",
+        "positionAbsolute": 5
+      },
+      {
+        "value": 0.913,
+        "betterResultsCount": 2,
+        "allResultsCount": 24,
+        "date": "2023-10-12",
+        "positionAbsolute": 3
+      },
+      {
+        "value": 0.5714,
+        "betterResultsCount": 9,
+        "allResultsCount": 22,
+        "date": "2023-09-21",
+        "positionAbsolute": 10
+      },
+      {
+        "value": 0.7391,
+        "betterResultsCount": 6,
+        "allResultsCount": 24,
+        "date": "2023-07-06",
+        "positionAbsolute": 7
+      }
+    ]
+  },
+  {
+    "nickname": "NIEMIEC",
+    "entriesCount": 26,
+    "score": 0.7815,
+    "position": 3,
+    "scores": [
+      {
+        "value": 0.4,
+        "betterResultsCount": 15,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 16
+      },
       {
         "value": 0.7083,
         "betterResultsCount": 7,
@@ -338,145 +486,138 @@
     ]
   },
   {
-    "nickname": "HONKI",
-    "entriesCount": 18,
-    "score": 0.7915,
-    "position": 3,
+    "nickname": "CHLEBEK",
+    "entriesCount": 16,
+    "score": 0.774,
+    "position": 4,
     "scores": [
       {
-        "value": 0.5,
-        "betterResultsCount": 12,
-        "allResultsCount": 25,
-        "date": "2026-07-16",
-        "positionAbsolute": 13
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
+        "value": 0.24,
+        "betterResultsCount": 19,
         "allResultsCount": 26,
-        "date": "2026-04-23",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 26,
-        "date": "2025-09-11",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 0.9459,
-        "betterResultsCount": 2,
-        "allResultsCount": 38,
-        "date": "2025-08-21",
-        "positionAbsolute": 3
-      },
-      {
-        "value": 0.96,
-        "betterResultsCount": 1,
-        "allResultsCount": 26,
-        "date": "2025-07-24",
-        "positionAbsolute": 2
+        "date": "2025-10-16",
+        "positionAbsolute": 20
       },
       {
         "value": 0.76,
         "betterResultsCount": 6,
         "allResultsCount": 26,
-        "date": "2025-06-12",
+        "date": "2025-09-11",
         "positionAbsolute": 7
       },
       {
-        "value": 0.5135,
-        "betterResultsCount": 18,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 19
-      },
-      {
-        "value": 0.5588,
-        "betterResultsCount": 15,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 16
-      },
-      {
-        "value": 0.8,
-        "betterResultsCount": 5,
+        "value": 0.48,
+        "betterResultsCount": 13,
         "allResultsCount": 26,
-        "date": "2024-09-19",
-        "positionAbsolute": 6
+        "date": "2025-07-24",
+        "positionAbsolute": 14
       },
       {
-        "value": 0.8,
-        "betterResultsCount": 5,
+        "value": 0.48,
+        "betterResultsCount": 13,
         "allResultsCount": 26,
-        "date": "2024-08-22",
-        "positionAbsolute": 6
+        "date": "2025-06-12",
+        "positionAbsolute": 14
       },
       {
-        "value": 0.7429,
-        "betterResultsCount": 9,
-        "allResultsCount": 36,
-        "date": "2024-07-11",
-        "positionAbsolute": 10
-      },
-      {
-        "value": 0.8,
-        "betterResultsCount": 5,
-        "allResultsCount": 26,
-        "date": "2024-06-06",
-        "positionAbsolute": 6
-      },
-      {
-        "value": 0.8696,
-        "betterResultsCount": 3,
-        "allResultsCount": 24,
-        "date": "2024-04-18",
-        "positionAbsolute": 4
-      },
-      {
-        "value": 0.9545,
+        "value": 0.9737,
         "betterResultsCount": 1,
-        "allResultsCount": 23,
-        "date": "2024-03-21",
+        "allResultsCount": 39,
+        "date": "2025-05-14",
         "positionAbsolute": 2
       },
       {
-        "value": 0.8182,
+        "value": 0.4865,
+        "betterResultsCount": 19,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 20
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 25,
+        "date": "2025-03-13",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 0.84,
         "betterResultsCount": 4,
-        "allResultsCount": 23,
-        "date": "2023-11-16",
+        "allResultsCount": 26,
+        "date": "2024-06-06",
         "positionAbsolute": 5
       },
       {
-        "value": 0.913,
-        "betterResultsCount": 2,
+        "value": 0.6522,
+        "betterResultsCount": 8,
+        "allResultsCount": 24,
+        "date": "2024-05-16",
+        "positionAbsolute": 9
+      },
+      {
+        "value": 0.8636,
+        "betterResultsCount": 3,
+        "allResultsCount": 23,
+        "date": "2024-03-21",
+        "positionAbsolute": 4
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 23,
+        "date": "2023-11-16",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
         "allResultsCount": 24,
         "date": "2023-10-12",
-        "positionAbsolute": 3
+        "positionAbsolute": 1
       },
       {
-        "value": 0.5714,
-        "betterResultsCount": 9,
-        "allResultsCount": 22,
-        "date": "2023-09-21",
-        "positionAbsolute": 10
-      },
-      {
-        "value": 0.7391,
-        "betterResultsCount": 6,
+        "value": 0.7826,
+        "betterResultsCount": 5,
         "allResultsCount": 24,
         "date": "2023-07-06",
-        "positionAbsolute": 7
+        "positionAbsolute": 6
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 24,
+        "date": "2023-06-15",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 0.8261,
+        "betterResultsCount": 4,
+        "allResultsCount": 24,
+        "date": "2023-04-21",
+        "positionAbsolute": 5
       }
     ]
   },
   {
     "nickname": "SLAWEK KAJZAR",
-    "entriesCount": 26,
-    "score": 0.7741,
-    "position": 4,
+    "entriesCount": 27,
+    "score": 0.7647,
+    "position": 5,
     "scores": [
+      {
+        "value": 0.52,
+        "betterResultsCount": 12,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 13
+      },
       {
         "value": 0.48,
         "betterResultsCount": 13,
@@ -662,131 +803,18 @@
     ]
   },
   {
-    "nickname": "CHLEBEK",
-    "entriesCount": 16,
-    "score": 0.774,
-    "position": 5,
+    "nickname": "BIEG KAROL",
+    "entriesCount": 26,
+    "score": 0.7541,
+    "position": 6,
     "scores": [
-      {
-        "value": 0.24,
-        "betterResultsCount": 19,
-        "allResultsCount": 26,
-        "date": "2025-10-16",
-        "positionAbsolute": 20
-      },
       {
         "value": 0.76,
         "betterResultsCount": 6,
         "allResultsCount": 26,
-        "date": "2025-09-11",
+        "date": "2026-09-17",
         "positionAbsolute": 7
       },
-      {
-        "value": 0.48,
-        "betterResultsCount": 13,
-        "allResultsCount": 26,
-        "date": "2025-07-24",
-        "positionAbsolute": 14
-      },
-      {
-        "value": 0.48,
-        "betterResultsCount": 13,
-        "allResultsCount": 26,
-        "date": "2025-06-12",
-        "positionAbsolute": 14
-      },
-      {
-        "value": 0.9737,
-        "betterResultsCount": 1,
-        "allResultsCount": 39,
-        "date": "2025-05-14",
-        "positionAbsolute": 2
-      },
-      {
-        "value": 0.4865,
-        "betterResultsCount": 19,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 20
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 25,
-        "date": "2025-03-13",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 0.84,
-        "betterResultsCount": 4,
-        "allResultsCount": 26,
-        "date": "2024-06-06",
-        "positionAbsolute": 5
-      },
-      {
-        "value": 0.6522,
-        "betterResultsCount": 8,
-        "allResultsCount": 24,
-        "date": "2024-05-16",
-        "positionAbsolute": 9
-      },
-      {
-        "value": 0.8636,
-        "betterResultsCount": 3,
-        "allResultsCount": 23,
-        "date": "2024-03-21",
-        "positionAbsolute": 4
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 23,
-        "date": "2023-11-16",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 24,
-        "date": "2023-10-12",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 0.7826,
-        "betterResultsCount": 5,
-        "allResultsCount": 24,
-        "date": "2023-07-06",
-        "positionAbsolute": 6
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 24,
-        "date": "2023-06-15",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 0.8261,
-        "betterResultsCount": 4,
-        "allResultsCount": 24,
-        "date": "2023-04-21",
-        "positionAbsolute": 5
-      }
-    ]
-  },
-  {
-    "nickname": "BIEG KAROL",
-    "entriesCount": 25,
-    "score": 0.7539,
-    "position": 6,
-    "scores": [
       {
         "value": 1,
         "betterResultsCount": 0,
@@ -966,10 +994,17 @@
   },
   {
     "nickname": "KREWETA",
-    "entriesCount": 24,
-    "score": 0.7364,
+    "entriesCount": 25,
+    "score": 0.7325,
     "position": 7,
     "scores": [
+      {
+        "value": 0.64,
+        "betterResultsCount": 9,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 10
+      },
       {
         "value": 0.8,
         "betterResultsCount": 5,
@@ -1141,10 +1176,109 @@
     ]
   },
   {
+    "nickname": "FILIP BUCHWALD",
+    "entriesCount": 13,
+    "score": 0.7264,
+    "position": 8,
+    "scores": [
+      {
+        "value": 0.92,
+        "betterResultsCount": 2,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 3
+      },
+      {
+        "value": 0.88,
+        "betterResultsCount": 3,
+        "allResultsCount": 26,
+        "date": "2026-08-13",
+        "positionAbsolute": 4
+      },
+      {
+        "value": 0.9167,
+        "betterResultsCount": 2,
+        "allResultsCount": 25,
+        "date": "2026-07-16",
+        "positionAbsolute": 3
+      },
+      {
+        "value": 0.48,
+        "betterResultsCount": 13,
+        "allResultsCount": 26,
+        "date": "2026-06-18",
+        "positionAbsolute": 14
+      },
+      {
+        "value": 0.92,
+        "betterResultsCount": 2,
+        "allResultsCount": 26,
+        "date": "2026-05-14",
+        "positionAbsolute": 3
+      },
+      {
+        "value": 0.96,
+        "betterResultsCount": 1,
+        "allResultsCount": 26,
+        "date": "2026-04-23",
+        "positionAbsolute": 2
+      },
+      {
+        "value": 0.6,
+        "betterResultsCount": 10,
+        "allResultsCount": 26,
+        "date": "2025-09-11",
+        "positionAbsolute": 11
+      },
+      {
+        "value": 0.68,
+        "betterResultsCount": 8,
+        "allResultsCount": 26,
+        "date": "2025-06-12",
+        "positionAbsolute": 9
+      },
+      {
+        "value": 0.7895,
+        "betterResultsCount": 8,
+        "allResultsCount": 39,
+        "date": "2025-05-14",
+        "positionAbsolute": 9
+      },
+      {
+        "value": 0.5405,
+        "betterResultsCount": 17,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 18
+      },
+      {
+        "value": 0.7941,
+        "betterResultsCount": 7,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 8
+      },
+      {
+        "value": 0.5714,
+        "betterResultsCount": 15,
+        "allResultsCount": 36,
+        "date": "2024-07-11",
+        "positionAbsolute": 16
+      },
+      {
+        "value": 0.3913,
+        "betterResultsCount": 14,
+        "allResultsCount": 24,
+        "date": "2024-05-16",
+        "positionAbsolute": 15
+      }
+    ]
+  },
+  {
     "nickname": "WASEK",
     "entriesCount": 10,
     "score": 0.7213,
-    "position": 8,
+    "position": 9,
     "scores": [
       {
         "value": 0.92,
@@ -1222,7 +1356,7 @@
     "nickname": "WIKTOR KALUZA",
     "entriesCount": 21,
     "score": 0.7163,
-    "position": 9,
+    "position": 10,
     "scores": [
       {
         "value": 0.64,
@@ -1374,98 +1508,6 @@
     ]
   },
   {
-    "nickname": "FILIP BUCHWALD",
-    "entriesCount": 12,
-    "score": 0.7103,
-    "position": 10,
-    "scores": [
-      {
-        "value": 0.88,
-        "betterResultsCount": 3,
-        "allResultsCount": 26,
-        "date": "2026-08-13",
-        "positionAbsolute": 4
-      },
-      {
-        "value": 0.9167,
-        "betterResultsCount": 2,
-        "allResultsCount": 25,
-        "date": "2026-07-16",
-        "positionAbsolute": 3
-      },
-      {
-        "value": 0.48,
-        "betterResultsCount": 13,
-        "allResultsCount": 26,
-        "date": "2026-06-18",
-        "positionAbsolute": 14
-      },
-      {
-        "value": 0.92,
-        "betterResultsCount": 2,
-        "allResultsCount": 26,
-        "date": "2026-05-14",
-        "positionAbsolute": 3
-      },
-      {
-        "value": 0.96,
-        "betterResultsCount": 1,
-        "allResultsCount": 26,
-        "date": "2026-04-23",
-        "positionAbsolute": 2
-      },
-      {
-        "value": 0.6,
-        "betterResultsCount": 10,
-        "allResultsCount": 26,
-        "date": "2025-09-11",
-        "positionAbsolute": 11
-      },
-      {
-        "value": 0.68,
-        "betterResultsCount": 8,
-        "allResultsCount": 26,
-        "date": "2025-06-12",
-        "positionAbsolute": 9
-      },
-      {
-        "value": 0.7895,
-        "betterResultsCount": 8,
-        "allResultsCount": 39,
-        "date": "2025-05-14",
-        "positionAbsolute": 9
-      },
-      {
-        "value": 0.5405,
-        "betterResultsCount": 17,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 18
-      },
-      {
-        "value": 0.7941,
-        "betterResultsCount": 7,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 8
-      },
-      {
-        "value": 0.5714,
-        "betterResultsCount": 15,
-        "allResultsCount": 36,
-        "date": "2024-07-11",
-        "positionAbsolute": 16
-      },
-      {
-        "value": 0.3913,
-        "betterResultsCount": 14,
-        "allResultsCount": 24,
-        "date": "2024-05-16",
-        "positionAbsolute": 15
-      }
-    ]
-  },
-  {
     "nickname": "BODEK",
     "entriesCount": 8,
     "score": 0.6961,
@@ -1531,10 +1573,17 @@
   },
   {
     "nickname": "SZLACHTA BARTŁOMIEJ",
-    "entriesCount": 27,
-    "score": 0.6844,
+    "entriesCount": 28,
+    "score": 0.6899,
     "position": 12,
     "scores": [
+      {
+        "value": 0.84,
+        "betterResultsCount": 4,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 5
+      },
       {
         "value": 0.96,
         "betterResultsCount": 1,
@@ -1742,82 +1791,18 @@
     ]
   },
   {
-    "nickname": "KKLAUDEK",
-    "entriesCount": 9,
-    "score": 0.6634,
+    "nickname": "KAMINSKI JAKUB",
+    "entriesCount": 22,
+    "score": 0.671,
     "position": 14,
     "scores": [
       {
-        "value": 0.3824,
-        "betterResultsCount": 21,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 22
-      },
-      {
-        "value": 0.48,
-        "betterResultsCount": 13,
+        "value": 0.96,
+        "betterResultsCount": 1,
         "allResultsCount": 26,
-        "date": "2024-09-19",
-        "positionAbsolute": 14
+        "date": "2026-09-17",
+        "positionAbsolute": 2
       },
-      {
-        "value": 0.56,
-        "betterResultsCount": 11,
-        "allResultsCount": 26,
-        "date": "2024-08-22",
-        "positionAbsolute": 12
-      },
-      {
-        "value": 0.8857,
-        "betterResultsCount": 4,
-        "allResultsCount": 36,
-        "date": "2024-07-11",
-        "positionAbsolute": 5
-      },
-      {
-        "value": 0.6,
-        "betterResultsCount": 10,
-        "allResultsCount": 26,
-        "date": "2024-06-06",
-        "positionAbsolute": 11
-      },
-      {
-        "value": 0.6957,
-        "betterResultsCount": 7,
-        "allResultsCount": 24,
-        "date": "2024-05-16",
-        "positionAbsolute": 8
-      },
-      {
-        "value": 1,
-        "betterResultsCount": 0,
-        "allResultsCount": 24,
-        "date": "2024-04-18",
-        "positionAbsolute": 1
-      },
-      {
-        "value": 0.6522,
-        "betterResultsCount": 8,
-        "allResultsCount": 24,
-        "date": "2023-10-12",
-        "positionAbsolute": 9
-      },
-      {
-        "value": 0.7143,
-        "betterResultsCount": 6,
-        "allResultsCount": 22,
-        "date": "2023-09-21",
-        "positionAbsolute": 7
-      }
-    ]
-  },
-  {
-    "nickname": "KAMINSKI JAKUB",
-    "entriesCount": 21,
-    "score": 0.6573,
-    "position": 15,
-    "scores": [
       {
         "value": 0.84,
         "betterResultsCount": 4,
@@ -1968,6 +1953,77 @@
     ]
   },
   {
+    "nickname": "KKLAUDEK",
+    "entriesCount": 9,
+    "score": 0.6634,
+    "position": 15,
+    "scores": [
+      {
+        "value": 0.3824,
+        "betterResultsCount": 21,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 22
+      },
+      {
+        "value": 0.48,
+        "betterResultsCount": 13,
+        "allResultsCount": 26,
+        "date": "2024-09-19",
+        "positionAbsolute": 14
+      },
+      {
+        "value": 0.56,
+        "betterResultsCount": 11,
+        "allResultsCount": 26,
+        "date": "2024-08-22",
+        "positionAbsolute": 12
+      },
+      {
+        "value": 0.8857,
+        "betterResultsCount": 4,
+        "allResultsCount": 36,
+        "date": "2024-07-11",
+        "positionAbsolute": 5
+      },
+      {
+        "value": 0.6,
+        "betterResultsCount": 10,
+        "allResultsCount": 26,
+        "date": "2024-06-06",
+        "positionAbsolute": 11
+      },
+      {
+        "value": 0.6957,
+        "betterResultsCount": 7,
+        "allResultsCount": 24,
+        "date": "2024-05-16",
+        "positionAbsolute": 8
+      },
+      {
+        "value": 1,
+        "betterResultsCount": 0,
+        "allResultsCount": 24,
+        "date": "2024-04-18",
+        "positionAbsolute": 1
+      },
+      {
+        "value": 0.6522,
+        "betterResultsCount": 8,
+        "allResultsCount": 24,
+        "date": "2023-10-12",
+        "positionAbsolute": 9
+      },
+      {
+        "value": 0.7143,
+        "betterResultsCount": 6,
+        "allResultsCount": 22,
+        "date": "2023-09-21",
+        "positionAbsolute": 7
+      }
+    ]
+  },
+  {
     "nickname": "PILSON",
     "entriesCount": 7,
     "score": 0.6245,
@@ -2026,10 +2082,17 @@
   },
   {
     "nickname": "MARCIN GŁADKOWSKI",
-    "entriesCount": 11,
-    "score": 0.6213,
+    "entriesCount": 12,
+    "score": 0.6062,
     "position": 17,
     "scores": [
+      {
+        "value": 0.44,
+        "betterResultsCount": 14,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 15
+      },
       {
         "value": 0.4,
         "betterResultsCount": 15,
@@ -2230,11 +2293,54 @@
     ]
   },
   {
-    "nickname": "WILCZU",
-    "entriesCount": 9,
-    "score": 0.6034,
+    "nickname": "SEBA01",
+    "entriesCount": 4,
+    "score": 0.5757,
     "position": 19,
     "scores": [
+      {
+        "value": 0.12,
+        "betterResultsCount": 22,
+        "allResultsCount": 26,
+        "date": "2026-08-13",
+        "positionAbsolute": 23
+      },
+      {
+        "value": 0.64,
+        "betterResultsCount": 9,
+        "allResultsCount": 26,
+        "date": "2025-10-16",
+        "positionAbsolute": 10
+      },
+      {
+        "value": 0.84,
+        "betterResultsCount": 4,
+        "allResultsCount": 26,
+        "date": "2025-09-11",
+        "positionAbsolute": 5
+      },
+      {
+        "value": 0.7027,
+        "betterResultsCount": 11,
+        "allResultsCount": 38,
+        "date": "2025-08-21",
+        "positionAbsolute": 12
+      }
+    ]
+  },
+  {
+    "nickname": "WILCZU",
+    "entriesCount": 10,
+    "score": 0.5711,
+    "position": 20,
+    "scores": [
+      {
+        "value": 0.28,
+        "betterResultsCount": 18,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 19
+      },
       {
         "value": 0.48,
         "betterResultsCount": 13,
@@ -2301,42 +2407,6 @@
     ]
   },
   {
-    "nickname": "SEBA01",
-    "entriesCount": 4,
-    "score": 0.5757,
-    "position": 20,
-    "scores": [
-      {
-        "value": 0.12,
-        "betterResultsCount": 22,
-        "allResultsCount": 26,
-        "date": "2026-08-13",
-        "positionAbsolute": 23
-      },
-      {
-        "value": 0.64,
-        "betterResultsCount": 9,
-        "allResultsCount": 26,
-        "date": "2025-10-16",
-        "positionAbsolute": 10
-      },
-      {
-        "value": 0.84,
-        "betterResultsCount": 4,
-        "allResultsCount": 26,
-        "date": "2025-09-11",
-        "positionAbsolute": 5
-      },
-      {
-        "value": 0.7027,
-        "betterResultsCount": 11,
-        "allResultsCount": 38,
-        "date": "2025-08-21",
-        "positionAbsolute": 12
-      }
-    ]
-  },
-  {
     "nickname": "WATOLA PRZEMYSLAW",
     "entriesCount": 5,
     "score": 0.5645,
@@ -2381,10 +2451,17 @@
   },
   {
     "nickname": "LUCKY LUKE",
-    "entriesCount": 14,
-    "score": 0.5394,
+    "entriesCount": 15,
+    "score": 0.5514,
     "position": 22,
     "scores": [
+      {
+        "value": 0.72,
+        "betterResultsCount": 7,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 8
+      },
       {
         "value": 0.2917,
         "betterResultsCount": 17,
@@ -2486,40 +2563,18 @@
     ]
   },
   {
-    "nickname": "SIMBA",
-    "entriesCount": 3,
-    "score": 0.529,
+    "nickname": "PAWELTGB",
+    "entriesCount": 16,
+    "score": 0.5464,
     "position": 23,
     "scores": [
       {
-        "value": 0.6316,
-        "betterResultsCount": 14,
-        "allResultsCount": 39,
-        "date": "2025-05-14",
-        "positionAbsolute": 15
+        "value": 0.88,
+        "betterResultsCount": 3,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 4
       },
-      {
-        "value": 0.8378,
-        "betterResultsCount": 6,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 7
-      },
-      {
-        "value": 0.1176,
-        "betterResultsCount": 30,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 31
-      }
-    ]
-  },
-  {
-    "nickname": "PAWELTGB",
-    "entriesCount": 15,
-    "score": 0.5242,
-    "position": 24,
-    "scores": [
       {
         "value": 0.4583,
         "betterResultsCount": 13,
@@ -2624,6 +2679,35 @@
         "allResultsCount": 36,
         "date": "2024-07-11",
         "positionAbsolute": 15
+      }
+    ]
+  },
+  {
+    "nickname": "SIMBA",
+    "entriesCount": 3,
+    "score": 0.529,
+    "position": 24,
+    "scores": [
+      {
+        "value": 0.6316,
+        "betterResultsCount": 14,
+        "allResultsCount": 39,
+        "date": "2025-05-14",
+        "positionAbsolute": 15
+      },
+      {
+        "value": 0.8378,
+        "betterResultsCount": 6,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 7
+      },
+      {
+        "value": 0.1176,
+        "betterResultsCount": 30,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 31
       }
     ]
   },
@@ -2828,10 +2912,53 @@
     ]
   },
   {
+    "nickname": "PIOTR 90+",
+    "entriesCount": 5,
+    "score": 0.511,
+    "position": 29,
+    "scores": [
+      {
+        "value": 0.68,
+        "betterResultsCount": 8,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 9
+      },
+      {
+        "value": 0.44,
+        "betterResultsCount": 14,
+        "allResultsCount": 26,
+        "date": "2026-08-13",
+        "positionAbsolute": 15
+      },
+      {
+        "value": 0.72,
+        "betterResultsCount": 7,
+        "allResultsCount": 26,
+        "date": "2026-06-18",
+        "positionAbsolute": 8
+      },
+      {
+        "value": 0.28,
+        "betterResultsCount": 18,
+        "allResultsCount": 26,
+        "date": "2026-05-14",
+        "positionAbsolute": 19
+      },
+      {
+        "value": 0.4348,
+        "betterResultsCount": 13,
+        "allResultsCount": 24,
+        "date": "2023-04-21",
+        "positionAbsolute": 14
+      }
+    ]
+  },
+  {
     "nickname": "MIEDDES#39",
     "entriesCount": 2,
     "score": 0.4988,
-    "position": 29,
+    "position": 30,
     "scores": [
       {
         "value": 0.4324,
@@ -2851,10 +2978,17 @@
   },
   {
     "nickname": "ZGUD",
-    "entriesCount": 22,
-    "score": 0.4957,
-    "position": 30,
+    "entriesCount": 23,
+    "score": 0.4951,
+    "position": 31,
     "scores": [
+      {
+        "value": 0.48,
+        "betterResultsCount": 13,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 14
+      },
       {
         "value": 0.72,
         "betterResultsCount": 7,
@@ -3013,10 +3147,17 @@
   },
   {
     "nickname": "NORMAN POWER",
-    "entriesCount": 22,
-    "score": 0.4807,
-    "position": 31,
+    "entriesCount": 23,
+    "score": 0.4946,
+    "position": 32,
     "scores": [
+      {
+        "value": 0.8,
+        "betterResultsCount": 5,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 6
+      },
       {
         "value": 0.32,
         "betterResultsCount": 17,
@@ -3170,42 +3311,6 @@
         "allResultsCount": 22,
         "date": "2023-09-21",
         "positionAbsolute": 16
-      }
-    ]
-  },
-  {
-    "nickname": "PIOTR 90+",
-    "entriesCount": 4,
-    "score": 0.4687,
-    "position": 32,
-    "scores": [
-      {
-        "value": 0.44,
-        "betterResultsCount": 14,
-        "allResultsCount": 26,
-        "date": "2026-08-13",
-        "positionAbsolute": 15
-      },
-      {
-        "value": 0.72,
-        "betterResultsCount": 7,
-        "allResultsCount": 26,
-        "date": "2026-06-18",
-        "positionAbsolute": 8
-      },
-      {
-        "value": 0.28,
-        "betterResultsCount": 18,
-        "allResultsCount": 26,
-        "date": "2026-05-14",
-        "positionAbsolute": 19
-      },
-      {
-        "value": 0.4348,
-        "betterResultsCount": 13,
-        "allResultsCount": 24,
-        "date": "2023-04-21",
-        "positionAbsolute": 14
       }
     ]
   },
@@ -3366,10 +3471,17 @@
   },
   {
     "nickname": "GRZECH",
-    "entriesCount": 15,
-    "score": 0.3868,
+    "entriesCount": 16,
+    "score": 0.3826,
     "position": 34,
     "scores": [
+      {
+        "value": 0.32,
+        "betterResultsCount": 17,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 18
+      },
       {
         "value": 0.24,
         "betterResultsCount": 19,
@@ -3564,10 +3676,17 @@
   },
   {
     "nickname": "MLODY93",
-    "entriesCount": 27,
-    "score": 0.3498,
+    "entriesCount": 28,
+    "score": 0.3445,
     "position": 36,
     "scores": [
+      {
+        "value": 0.2,
+        "betterResultsCount": 20,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 21
+      },
       {
         "value": 0.28,
         "betterResultsCount": 18,
@@ -3761,10 +3880,17 @@
   },
   {
     "nickname": "MAREK BK",
-    "entriesCount": 12,
-    "score": 0.3217,
+    "entriesCount": 13,
+    "score": 0.3431,
     "position": 37,
     "scores": [
+      {
+        "value": 0.6,
+        "betterResultsCount": 10,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 11
+      },
       {
         "value": 0.76,
         "betterResultsCount": 6,
@@ -3852,10 +3978,88 @@
     ]
   },
   {
+    "nickname": "DOBRA PIANA",
+    "entriesCount": 10,
+    "score": 0.322,
+    "position": 38,
+    "scores": [
+      {
+        "value": 0.56,
+        "betterResultsCount": 11,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 12
+      },
+      {
+        "value": 0.6,
+        "betterResultsCount": 10,
+        "allResultsCount": 26,
+        "date": "2026-08-13",
+        "positionAbsolute": 11
+      },
+      {
+        "value": 0.7917,
+        "betterResultsCount": 5,
+        "allResultsCount": 25,
+        "date": "2026-07-16",
+        "positionAbsolute": 6
+      },
+      {
+        "value": 0.56,
+        "betterResultsCount": 11,
+        "allResultsCount": 26,
+        "date": "2026-06-18",
+        "positionAbsolute": 12
+      },
+      {
+        "value": 0.04,
+        "betterResultsCount": 24,
+        "allResultsCount": 26,
+        "date": "2026-05-14",
+        "positionAbsolute": 25
+      },
+      {
+        "value": 0.28,
+        "betterResultsCount": 18,
+        "allResultsCount": 26,
+        "date": "2026-03-12",
+        "positionAbsolute": 19
+      },
+      {
+        "value": 0.04,
+        "betterResultsCount": 24,
+        "allResultsCount": 26,
+        "date": "2025-09-11",
+        "positionAbsolute": 25
+      },
+      {
+        "value": 0.1351,
+        "betterResultsCount": 32,
+        "allResultsCount": 38,
+        "date": "2025-08-21",
+        "positionAbsolute": 33
+      },
+      {
+        "value": 0.1316,
+        "betterResultsCount": 33,
+        "allResultsCount": 39,
+        "date": "2025-05-14",
+        "positionAbsolute": 34
+      },
+      {
+        "value": 0.0811,
+        "betterResultsCount": 34,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 35
+      }
+    ]
+  },
+  {
     "nickname": "WOJT",
     "entriesCount": 14,
     "score": 0.3175,
-    "position": 38,
+    "position": 39,
     "scores": [
       {
         "value": 0.04,
@@ -3961,7 +4165,7 @@
     "nickname": "WISNIEWSKI",
     "entriesCount": 2,
     "score": 0.3044,
-    "position": 39,
+    "position": 40,
     "scores": [
       {
         "value": 0.5652,
@@ -3983,7 +4187,7 @@
     "nickname": "SSSOII",
     "entriesCount": 7,
     "score": 0.2998,
-    "position": 40,
+    "position": 41,
     "scores": [
       {
         "value": 0.0417,
@@ -4033,77 +4237,6 @@
         "allResultsCount": 22,
         "date": "2023-09-21",
         "positionAbsolute": 20
-      }
-    ]
-  },
-  {
-    "nickname": "DOBRA PIANA",
-    "entriesCount": 9,
-    "score": 0.2955,
-    "position": 41,
-    "scores": [
-      {
-        "value": 0.6,
-        "betterResultsCount": 10,
-        "allResultsCount": 26,
-        "date": "2026-08-13",
-        "positionAbsolute": 11
-      },
-      {
-        "value": 0.7917,
-        "betterResultsCount": 5,
-        "allResultsCount": 25,
-        "date": "2026-07-16",
-        "positionAbsolute": 6
-      },
-      {
-        "value": 0.56,
-        "betterResultsCount": 11,
-        "allResultsCount": 26,
-        "date": "2026-06-18",
-        "positionAbsolute": 12
-      },
-      {
-        "value": 0.04,
-        "betterResultsCount": 24,
-        "allResultsCount": 26,
-        "date": "2026-05-14",
-        "positionAbsolute": 25
-      },
-      {
-        "value": 0.28,
-        "betterResultsCount": 18,
-        "allResultsCount": 26,
-        "date": "2026-03-12",
-        "positionAbsolute": 19
-      },
-      {
-        "value": 0.04,
-        "betterResultsCount": 24,
-        "allResultsCount": 26,
-        "date": "2025-09-11",
-        "positionAbsolute": 25
-      },
-      {
-        "value": 0.1351,
-        "betterResultsCount": 32,
-        "allResultsCount": 38,
-        "date": "2025-08-21",
-        "positionAbsolute": 33
-      },
-      {
-        "value": 0.1316,
-        "betterResultsCount": 33,
-        "allResultsCount": 39,
-        "date": "2025-05-14",
-        "positionAbsolute": 34
-      },
-      {
-        "value": 0.0811,
-        "betterResultsCount": 34,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 35
       }
     ]
   },
@@ -4366,11 +4499,33 @@
     ]
   },
   {
-    "nickname": "TIM7",
-    "entriesCount": 16,
-    "score": 0.2657,
+    "nickname": "SZYMON RUCKI",
+    "entriesCount": 1,
+    "score": 0.2647,
     "position": 48,
     "scores": [
+      {
+        "value": 0.2647,
+        "betterResultsCount": 25,
+        "allResultsCount": 35,
+        "date": "2024-10-10",
+        "positionAbsolute": 26
+      }
+    ]
+  },
+  {
+    "nickname": "TIM7",
+    "entriesCount": 17,
+    "score": 0.2642,
+    "position": 49,
+    "scores": [
+      {
+        "value": 0.24,
+        "betterResultsCount": 19,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 20
+      },
       {
         "value": 0.125,
         "betterResultsCount": 21,
@@ -4486,48 +4641,18 @@
     ]
   },
   {
-    "nickname": "SZYMON RUCKI",
-    "entriesCount": 1,
-    "score": 0.2647,
-    "position": 49,
-    "scores": [
-      {
-        "value": 0.2647,
-        "betterResultsCount": 25,
-        "allResultsCount": 35,
-        "date": "2024-10-10",
-        "positionAbsolute": 26
-      }
-    ]
-  },
-  {
-    "nickname": "IRDEK",
-    "entriesCount": 2,
-    "score": 0.2619,
+    "nickname": "MARCINBTM",
+    "entriesCount": 18,
+    "score": 0.2638,
     "position": 50,
     "scores": [
       {
-        "value": 0.5238,
-        "betterResultsCount": 10,
-        "allResultsCount": 22,
-        "date": "2023-09-21",
-        "positionAbsolute": 11
+        "value": 0.36,
+        "betterResultsCount": 16,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 17
       },
-      {
-        "value": 0,
-        "betterResultsCount": 23,
-        "allResultsCount": 24,
-        "date": "2023-04-21",
-        "positionAbsolute": 24
-      }
-    ]
-  },
-  {
-    "nickname": "MARCINBTM",
-    "entriesCount": 17,
-    "score": 0.2581,
-    "position": 51,
-    "scores": [
       {
         "value": 0.2,
         "betterResultsCount": 20,
@@ -4646,6 +4771,28 @@
         "allResultsCount": 26,
         "date": "2024-08-22",
         "positionAbsolute": 21
+      }
+    ]
+  },
+  {
+    "nickname": "IRDEK",
+    "entriesCount": 2,
+    "score": 0.2619,
+    "position": 51,
+    "scores": [
+      {
+        "value": 0.5238,
+        "betterResultsCount": 10,
+        "allResultsCount": 22,
+        "date": "2023-09-21",
+        "positionAbsolute": 11
+      },
+      {
+        "value": 0,
+        "betterResultsCount": 23,
+        "allResultsCount": 24,
+        "date": "2023-04-21",
+        "positionAbsolute": 24
       }
     ]
   },
@@ -4994,11 +5141,40 @@
     ]
   },
   {
-    "nickname": "TPBODEK",
-    "entriesCount": 14,
-    "score": 0.091,
     "position": 60,
+    "nickname": "LOLOBERCIK",
+    "score": 0.1,
+    "entriesCount": 2,
     "scores": [
+      {
+        "value": 0.12,
+        "betterResultsCount": 22,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 23
+      },
+      {
+        "value": 0.08,
+        "betterResultsCount": 23,
+        "allResultsCount": 26,
+        "date": "2026-08-13",
+        "positionAbsolute": 24
+      }
+    ]
+  },
+  {
+    "nickname": "TPBODEK",
+    "entriesCount": 15,
+    "score": 0.0876,
+    "position": 61,
+    "scores": [
+      {
+        "value": 0.04,
+        "betterResultsCount": 24,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 25
+      },
       {
         "value": 0.16,
         "betterResultsCount": 21,
@@ -5103,7 +5279,7 @@
     "nickname": "MATEUSZ WOLNY",
     "entriesCount": 1,
     "score": 0.0857,
-    "position": 61,
+    "position": 62,
     "scores": [
       {
         "value": 0.0857,
@@ -5115,8 +5291,8 @@
     ]
   },
   {
-    "position": 62,
-    "nickname": "LOLOBERCIK",
+    "position": 63,
+    "nickname": "MALEC_KUBA",
     "score": 0.08,
     "entriesCount": 1,
     "scores": [
@@ -5124,46 +5300,24 @@
         "value": 0.08,
         "betterResultsCount": 23,
         "allResultsCount": 26,
-        "date": "2026-08-13",
+        "date": "2026-09-17",
         "positionAbsolute": 24
       }
     ]
   },
   {
-    "nickname": "MBOY",
-    "entriesCount": 3,
-    "score": 0.0536,
-    "position": 63,
-    "scores": [
-      {
-        "value": 0.1081,
-        "betterResultsCount": 33,
-        "allResultsCount": 38,
-        "date": "2025-08-21",
-        "positionAbsolute": 34
-      },
-      {
-        "value": 0.0526,
-        "betterResultsCount": 36,
-        "allResultsCount": 39,
-        "date": "2025-05-14",
-        "positionAbsolute": 37
-      },
-      {
-        "value": 0,
-        "betterResultsCount": 37,
-        "allResultsCount": 38,
-        "date": "2025-04-17",
-        "positionAbsolute": 38
-      }
-    ]
-  },
-  {
     "nickname": "WIND",
-    "entriesCount": 5,
-    "score": 0.0478,
+    "entriesCount": 6,
+    "score": 0.0665,
     "position": 64,
     "scores": [
+      {
+        "value": 0.16,
+        "betterResultsCount": 21,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
+        "positionAbsolute": 22
+      },
       {
         "value": 0,
         "betterResultsCount": 25,
@@ -5202,10 +5356,39 @@
     ]
   },
   {
+    "nickname": "MBOY",
+    "entriesCount": 3,
+    "score": 0.0536,
+    "position": 65,
+    "scores": [
+      {
+        "value": 0.1081,
+        "betterResultsCount": 33,
+        "allResultsCount": 38,
+        "date": "2025-08-21",
+        "positionAbsolute": 34
+      },
+      {
+        "value": 0.0526,
+        "betterResultsCount": 36,
+        "allResultsCount": 39,
+        "date": "2025-05-14",
+        "positionAbsolute": 37
+      },
+      {
+        "value": 0,
+        "betterResultsCount": 37,
+        "allResultsCount": 38,
+        "date": "2025-04-17",
+        "positionAbsolute": 38
+      }
+    ]
+  },
+  {
     "nickname": "TRUSZEK",
     "entriesCount": 3,
     "score": 0.0391,
-    "position": 65,
+    "position": 66,
     "scores": [
       {
         "value": 0.0263,
@@ -5234,7 +5417,7 @@
     "nickname": "KAMINSKI PIOTR",
     "entriesCount": 2,
     "score": 0.0135,
-    "position": 66,
+    "position": 67,
     "scores": [
       {
         "value": 0,
@@ -5253,7 +5436,7 @@
     ]
   },
   {
-    "position": 67,
+    "position": 68,
     "nickname": "JACOSZKOWY",
     "score": 0,
     "entriesCount": 1,
@@ -5263,6 +5446,21 @@
         "betterResultsCount": 25,
         "allResultsCount": 26,
         "date": "2026-06-18",
+        "positionAbsolute": 26
+      }
+    ]
+  },
+  {
+    "position": 69,
+    "nickname": "WISZCZOR MICHAL",
+    "score": 0,
+    "entriesCount": 1,
+    "scores": [
+      {
+        "value": 0,
+        "betterResultsCount": 25,
+        "allResultsCount": 26,
+        "date": "2026-09-17",
         "positionAbsolute": 26
       }
     ]

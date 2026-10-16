@@ -1,0 +1,23 @@
+{
+  "race_details": {
+    "name": "Závod",
+    "date": "14_05_2026",
+    "run_type": "Měřák, sk. B",
+    "session_id": "11347"
+  },
+  "general_results": [
+    {"rank": 1, "driver": "NORMAN POWER", "laps": null, "difference_to_leader": "Leader", "best_lap_time": "1:12.116", "best_lap_time_race": true},
+    {"rank": 2, "driver": "WOJT", "laps": null, "difference_to_leader": "+0.141", "best_lap_time": "1:12.257", "best_lap_time_race": false},
+    {"rank": 3, "driver": "MLODY93", "laps": null, "difference_to_leader": "+0.473", "best_lap_time": "1:12.589", "best_lap_time_race": false},
+    {"rank": 4, "driver": "HENIEK", "laps": null, "difference_to_leader": "+0.517", "best_lap_time": "1:12.633", "best_lap_time_race": false},
+    {"rank": 5, "driver": "WIDUCHKACPER", "laps": null, "difference_to_leader": "+0.694", "best_lap_time": "1:12.810", "best_lap_time_race": false},
+    {"rank": 6, "driver": "DOBRA PIANA", "laps": null, "difference_to_leader": "+0.742", "best_lap_time": "1:12.858", "best_lap_time_race": false},
+    {"rank": 7, "driver": "GRZECH", "laps": null, "difference_to_leader": "+0.908", "best_lap_time": "1:13.024", "best_lap_time_race": false},
+    {"rank": 8, "driver": "PIOTR 90+", "laps": null, "difference_to_leader": "+0.926", "best_lap_time": "1:13.042", "best_lap_time_race": false},
+    {"rank": 9, "driver": "ADMICH", "laps": null, "difference_to_leader": "+1.107", "best_lap_time": "1:13.223", "best_lap_time_race": false},
+    {"rank": 10, "driver": "TIM7", "laps": null, "difference_to_leader": "+1.142", "best_lap_time": "1:13.258", "best_lap_time_race": false},
+    {"rank": 11, "driver": "MARCINBTM", "laps": null, "difference_to_leader": "+1.143", "best_lap_time": "1:13.259", "best_lap_time_race": false},
+    {"rank": 12, "driver": "SHEEPEK", "laps": null, "difference_to_leader": "+1.240", "best_lap_time": "1:13.356", "best_lap_time_race": false},
+    {"rank": 13, "driver": "BALU", "laps": null, "difference_to_leader": "+1.342", "best_lap_time": "1:13.458", "best_lap_time_race": false}
+  ]
+}

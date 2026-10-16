@@ -96,6 +96,15 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
                     Season Classification
                   </NavLink>
                 )}
+                {isCurrent && (
+                  <NavLink
+                    to={`/season/${season.year}/stats`}
+                    className={linkClass}
+                    onClick={onNavigate}
+                  >
+                    Stats &amp; Records
+                  </NavLink>
+                )}
                 {season.events.map((event) =>
                   event.upcoming ? (
                     <NavLink

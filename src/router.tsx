@@ -6,6 +6,7 @@ import { SeasonPage } from './pages/SeasonPage'
 import { RaceDatePage } from './pages/RaceDatePage'
 import { SessionTypePage } from './pages/SessionTypePage'
 import { GeneralClassificationPage } from './pages/GeneralClassificationPage'
+import { StatsRecordsPage } from './pages/StatsRecordsPage'
 
 export function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export function AppRouter() {
           <Route path="total" element={<TotalResultsPage />} />
           <Route path="season/:year" element={<SeasonPage />} />
           <Route path="season/:year/classification" element={<GeneralClassificationPage />} />
+          <Route path="season/:year/stats" element={<StatsRecordsPage />} />
           <Route path="season/:year/:date" element={<RaceDatePage />} />
           <Route path="season/:year/:date/:type" element={<SessionTypePage />} />
         </Route>

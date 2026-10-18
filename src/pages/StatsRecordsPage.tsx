@@ -1,12 +1,14 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSeason } from '../hooks/useResults'
-import { computeSeasonStats, MIN_ROUNDS, type SeasonStats, type GroupFilter, type Tally } from '../services/seasonStats'
+import { computeSeasonStats, type SeasonStats, type GroupFilter, type Tally } from '../services/seasonStats'
 
 const TOP_N = 5
 const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
 
 type StatsByGroup = Record<GroupFilter, SeasonStats>
+
+const GROUPS: Array<[Exclude<GroupFilter, 'all'>, string]> = [['a', 'Group A'], ['b', 'Group B']]
 
 function Card({
   title,
@@ -19,15 +21,27 @@ function Card({
   facts: StatsByGroup
   children: (facts: SeasonStats) => ReactNode
 }) {
-  const [group, setGroup] = useState<GroupFilter>('all')
   return (
     <section className="rounded-lg border border-gray-700 bg-gray-900 p-4">
-      <h2 className="text-lg font-semibold text-gray-100">{title}</h2>
+      <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
       {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
-      <div className="mt-3">
-        <GroupTabs value={group} onChange={setGroup} />
-        {children(facts[group])}
+      <div className="mt-3 grid gap-4 sm:grid-cols-2">
+        {GROUPS.map(([key, label]) => (
+          <div key={key} className="min-w-0">
+            <h4 className="mb-2 text-xs font-medium uppercase text-red-400">{label}</h4>
+            {children(facts[key])}
+          </div>
+        ))}
       </div>
+    </section>
+  )
+}
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="mb-8">
+      <h2 className="text-xl font-bold text-white mb-3">{title}</h2>
+      <div className="grid gap-4 xl:grid-cols-2">{children}</div>
     </section>
   )
 }
@@ -57,27 +71,6 @@ function Ranking<T>({
   )
 }
 
-function GroupTabs({ value, onChange }: { value: GroupFilter; onChange: (g: GroupFilter) => void }) {
-  const tabs: Array<[GroupFilter, string]> = [['all', 'All'], ['a', 'Group A'], ['b', 'Group B']]
-  return (
-    <div className="flex gap-1 mb-3">
-      {tabs.map(([key, label]) => (
-        <button
-          key={key}
-          onClick={() => onChange(key)}
-          className={`px-2.5 py-1 rounded text-xs transition-colors ${
-            value === key ? 'bg-red-900/40 text-red-400 font-medium' : 'bg-gray-800 text-gray-400 hover:text-gray-100'
-          }`}
-        >
-          {label}
-        </button>
-      ))}
-    </div>
-  )
-}
-
-const pct = (v: number) => `${v.toFixed(2)}%`
-
 export function StatsRecordsPage() {
   const { year } = useParams<{ year: string }>()
   const yearNum = parseInt(year ?? '0', 10)
@@ -103,11 +96,10 @@ export function StatsRecordsPage() {
     <div>
       <h1 className="text-2xl font-bold text-white mb-2">Stats &amp; Records {yearNum}</h1>
       <p className="text-gray-400 text-sm mb-6">
-        {facts.all.racesCount} races so far. Lap-time stats compare each driver's best race lap with the fastest race
-        lap of that round (or of that group, when a group is selected), so rounds on different layouts are comparable.
+        {facts.all.racesCount} races so far, shown separately for group A and group B.
       </p>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <Section title="Races">
         <Card title="Most wins" facts={facts}>
           {(f) => <Ranking<Tally> rows={f.wins} driver={(t) => t.driver} value={(t) => t.count} />}
         </Card>
@@ -162,33 +154,9 @@ export function StatsRecordsPage() {
             )
           }
         </Card>
+      </Section>
 
-        <Card
-          title="Fastest on average"
-          subtitle={`Average gap to the fastest lap · min. ${MIN_ROUNDS} rounds`}
-          facts={facts}
-        >
-          {(f) => <Ranking rows={f.pace} driver={(p) => p.driver} value={(p) => `+${pct(p.avgGapPct)}`} />}
-        </Card>
-
-        <Card
-          title="Most consistent"
-          subtitle={`Smallest spread of that gap across rounds · min. ${MIN_ROUNDS} rounds`}
-          facts={facts}
-        >
-          {(f) => <Ranking rows={f.consistency} driver={(p) => p.driver} value={(p) => `±${pct(p.stdDevPct)}`} />}
-        </Card>
-
-        <Card title="Most improved" subtitle="Gap to fastest lap: first 2 rounds vs last 2 rounds" facts={facts}>
-          {(f) => (
-            <Ranking
-              rows={f.improvement.filter((e) => e.improvementPct > 0)}
-              driver={(e) => e.driver}
-              value={(e) => <span title={`${pct(e.startGapPct)} → ${pct(e.endGapPct)}`}>−{pct(e.improvementPct)}</span>}
-            />
-          )}
-        </Card>
-
+      <Section title="Qualifying">
         <Card title="Most pole positions" subtitle="P1 in a qualifying group" facts={facts}>
           {(f) => (
             <Ranking<Tally>
@@ -251,7 +219,7 @@ export function StatsRecordsPage() {
             )
           }
         </Card>
-      </div>
+      </Section>
     </div>
   )
 }

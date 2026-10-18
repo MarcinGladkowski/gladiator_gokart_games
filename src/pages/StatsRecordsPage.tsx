@@ -145,7 +145,17 @@ export function StatsRecordsPage() {
 
       <Section title="Races">
         <Card title="Most wins" facts={facts}>
-          {(f) => <Ranking rows={f.wins} />}
+          {(f) => (
+            <Ranking
+              rows={f.wins}
+              detail={(driver) =>
+                f.raceWins
+                  .filter((w) => w.driver === driver)
+                  .map((w) => w.round.split(' - ')[0])
+                  .join(', ')
+              }
+            />
+          )}
         </Card>
 
         <Card title="Most podiums" facts={facts}>

@@ -14,6 +14,12 @@ export interface Tally {
 // 'all' covers both groups; 'a' / 'b' restrict to sessions of that group
 export type GroupFilter = 'all' | 'a' | 'b'
 
+export interface RaceWin {
+  round: string
+  group: string
+  driver: string
+}
+
 export interface BackToBackWin {
   driver: string
   rounds: string[]
@@ -63,6 +69,8 @@ export interface ClosestQuali {
 export interface SeasonStats {
   racesCount: number
   wins: Tally[]
+  // Every race win in date order
+  raceWins: RaceWin[]
   podiums: Tally[]
   distinctWinners: number
   backToBackWins: BackToBackWin[]
@@ -126,6 +134,7 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
     .sort((x, y) => x.date.localeCompare(y.date))
 
   const wins = new Map<string, number>()
+  const raceWins: RaceWin[] = []
   const podiums = new Map<string, number>()
   const fastestLaps = new Map<string, number>()
   const fastestLapRaces: FastestLapRace[] = []
@@ -148,6 +157,7 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
       for (const entry of race.entries) {
         if (entry.position === 1) {
           increment(wins, entry.driver)
+          raceWins.push({ round: event.label, group: race.group, driver: entry.driver })
           roundWinners.add(entry.driver)
         }
         if (entry.position <= 3) increment(podiums, entry.driver)
@@ -244,6 +254,7 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
   return {
     racesCount,
     wins: toTallies(wins),
+    raceWins,
     podiums: toTallies(podiums),
     distinctWinners: allWinners.size,
     backToBackWins,

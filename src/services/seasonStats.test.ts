@@ -51,6 +51,11 @@ describe('computeSeasonStats', () => {
 
     expect(facts.racesCount).toBe(3)
     expect(facts.wins[0]).toEqual({ driver: 'Ann', count: 2 })
+    expect(facts.raceWins).toEqual([
+      { round: 'Race 1', group: 'a', driver: 'Ann' },
+      { round: 'Race 1', group: 'b', driver: 'Eve' },
+      { round: 'Race 2', group: 'b', driver: 'Ann' },
+    ])
     expect(facts.podiums.find((t) => t.driver === 'Eve')?.count).toBe(2)
     expect(facts.podiums.find((t) => t.driver === 'Dan')?.count).toBe(1)
     expect(facts.distinctWinners).toBe(2)

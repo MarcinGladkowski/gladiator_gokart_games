@@ -53,7 +53,11 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   )
 }
 
-// Shows the top TOP_N drivers plus anyone tied with the last of them; tied drivers share a position
+// Ties at the cutoff only get their own rows while the list stays at most this long
+const MAX_ROWS = TOP_N * 2
+
+// Shows the top TOP_N drivers plus anyone tied with the last of them; tied drivers share a position.
+// A tie too large to list is collapsed into a single row naming the drivers.
 function Ranking({
   rows,
   detail,
@@ -65,23 +69,36 @@ function Ranking({
 }) {
   if (rows.length === 0) return <p className="text-sm text-gray-500">{empty}</p>
   const cutoff = rows[Math.min(TOP_N, rows.length) - 1].count
+  const shown = rows.filter((t) => t.count >= cutoff)
+  const collapsed = shown.length > MAX_ROWS ? shown.filter((t) => t.count === cutoff) : []
+  const rankOf = (count: number) => rows.findIndex((r) => r.count === count)
+  const rankCell = (rank: number) => (
+    <span className={`w-5 text-right font-bold ${PODIUM[rank] ?? 'text-gray-500'}`}>{rank + 1}</span>
+  )
   return (
     <ol className="space-y-1 text-sm">
-      {rows
-        .filter((t) => t.count >= cutoff)
-        .map((t) => {
-          const rank = rows.findIndex((r) => r.count === t.count)
-          return (
-            <li key={t.driver}>
-              <div className="flex items-center gap-3">
-                <span className={`w-5 text-right font-bold ${PODIUM[rank] ?? 'text-gray-500'}`}>{rank + 1}</span>
-                <span className="text-gray-200">{t.driver}</span>
-                <span className="ml-auto font-mono text-green-400">{t.count}</span>
-              </div>
-              {detail && <div className="ml-8 text-xs text-gray-500">{detail(t.driver)}</div>}
-            </li>
-          )
-        })}
+      {shown
+        .filter((t) => !collapsed.includes(t))
+        .map((t) => (
+          <li key={t.driver}>
+            <div className="flex items-center gap-3">
+              {rankCell(rankOf(t.count))}
+              <span className="text-gray-200">{t.driver}</span>
+              <span className="ml-auto font-mono text-green-400">{t.count}</span>
+            </div>
+            {detail && <div className="ml-8 text-xs text-gray-500">{detail(t.driver)}</div>}
+          </li>
+        ))}
+      {collapsed.length > 0 && (
+        <li>
+          <div className="flex items-center gap-3">
+            {rankCell(rankOf(cutoff))}
+            <span className="text-gray-200">{collapsed.length} drivers tied</span>
+            <span className="ml-auto font-mono text-green-400">{cutoff}</span>
+          </div>
+          <div className="ml-8 text-xs text-gray-500">{collapsed.map((t) => t.driver).join(', ')}</div>
+        </li>
+      )}
     </ol>
   )
 }

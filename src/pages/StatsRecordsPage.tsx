@@ -229,7 +229,7 @@ export function StatsRecordsPage() {
           {(f) => <Ranking rows={f.poles} empty="No qualifying sessions yet." />}
         </Card>
 
-        <Card title="Pole to win" subtitle="How the pole sitter finished the race" facts={facts}>
+        <Card title="Pole position final race result" subtitle="How the pole sitter finished the race" facts={facts}>
           {(f) => {
             if (f.poleConversions.length === 0)
               return <p className="text-sm text-gray-500">No qualifying sessions yet.</p>

@@ -14,25 +14,32 @@ function Card({
   title,
   subtitle,
   facts,
+  combined = false,
   children,
 }: {
   title: string
   subtitle?: string
   facts: StatsByGroup
+  // Show one list for both groups together instead of a column per group
+  combined?: boolean
   children: (facts: SeasonStats) => ReactNode
 }) {
   return (
     <section className="rounded-lg border border-gray-700 bg-gray-900 p-4">
       <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
       {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
-      <div className="mt-3 grid gap-4 sm:grid-cols-2">
-        {GROUPS.map(([key, label]) => (
-          <div key={key} className="min-w-0">
-            <h4 className="mb-2 text-xs font-medium uppercase text-red-400">{label}</h4>
-            {children(facts[key])}
-          </div>
-        ))}
-      </div>
+      {combined ? (
+        <div className="mt-3">{children(facts.all)}</div>
+      ) : (
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          {GROUPS.map(([key, label]) => (
+            <div key={key} className="min-w-0">
+              <h4 className="mb-2 text-xs font-medium uppercase text-red-400">{label}</h4>
+              {children(facts[key])}
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   )
 }
@@ -46,29 +53,49 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   )
 }
 
-function Ranking<T>({
+// Shows the top TOP_N drivers plus anyone tied with the last of them; tied drivers share a position
+function Ranking({
   rows,
-  driver,
-  value,
+  detail,
   empty = 'No data yet.',
 }: {
-  rows: T[]
-  driver: (row: T) => string
-  value: (row: T) => ReactNode
+  rows: Tally[]
+  detail?: (driver: string) => ReactNode
   empty?: string
 }) {
   if (rows.length === 0) return <p className="text-sm text-gray-500">{empty}</p>
+  const cutoff = rows[Math.min(TOP_N, rows.length) - 1].count
   return (
     <ol className="space-y-1 text-sm">
-      {rows.slice(0, TOP_N).map((row, i) => (
-        <li key={driver(row)} className="flex items-center gap-3">
-          <span className={`w-5 text-right font-bold ${PODIUM[i] ?? 'text-gray-500'}`}>{i + 1}</span>
-          <span className="text-gray-200">{driver(row)}</span>
-          <span className="ml-auto font-mono text-green-400">{value(row)}</span>
-        </li>
-      ))}
+      {rows
+        .filter((t) => t.count >= cutoff)
+        .map((t) => {
+          const rank = rows.findIndex((r) => r.count === t.count)
+          return (
+            <li key={t.driver}>
+              <div className="flex items-center gap-3">
+                <span className={`w-5 text-right font-bold ${PODIUM[rank] ?? 'text-gray-500'}`}>{rank + 1}</span>
+                <span className="text-gray-200">{t.driver}</span>
+                <span className="ml-auto font-mono text-green-400">{t.count}</span>
+              </div>
+              {detail && <div className="ml-8 text-xs text-gray-500">{detail(t.driver)}</div>}
+            </li>
+          )
+        })}
     </ol>
   )
+}
+
+// "Race 2 · P1 · 1:11.224" for every race where the driver set the fastest lap
+function fastestLapRaces(f: SeasonStats, driver: string, withGroup: boolean) {
+  return f.fastestLapRaces
+    .filter((x) => x.driver === driver)
+    .map((x) =>
+      [x.round.split(' - ')[0], withGroup && x.group.toUpperCase(), `P${x.position}`, x.bestLap]
+        .filter(Boolean)
+        .join(' · '),
+    )
+    .join(', ')
 }
 
 export function StatsRecordsPage() {
@@ -101,11 +128,11 @@ export function StatsRecordsPage() {
 
       <Section title="Races">
         <Card title="Most wins" facts={facts}>
-          {(f) => <Ranking<Tally> rows={f.wins} driver={(t) => t.driver} value={(t) => t.count} />}
+          {(f) => <Ranking rows={f.wins} />}
         </Card>
 
         <Card title="Most podiums" facts={facts}>
-          {(f) => <Ranking<Tally> rows={f.podiums} driver={(t) => t.driver} value={(t) => t.count} />}
+          {(f) => <Ranking rows={f.podiums} />}
         </Card>
 
         <Card title="Different winners" subtitle="Race winners and back-to-back wins" facts={facts}>
@@ -132,7 +159,16 @@ export function StatsRecordsPage() {
         </Card>
 
         <Card title="Most fastest laps ⚡" subtitle="Fastest lap of a race (bonus point)" facts={facts}>
-          {(f) => <Ranking<Tally> rows={f.fastestLaps} driver={(t) => t.driver} value={(t) => t.count} />}
+          {(f) => <Ranking rows={f.fastestLaps} detail={(driver) => fastestLapRaces(f, driver, false)} />}
+        </Card>
+
+        <Card
+          title="Most fastest laps in total ⚡"
+          subtitle="Fastest laps across group A and group B races"
+          facts={facts}
+          combined
+        >
+          {(f) => <Ranking rows={f.fastestLaps} detail={(driver) => fastestLapRaces(f, driver, true)} />}
         </Card>
 
         <Card title="Fast but unlucky" subtitle="Fastest lap of the race, but no podium" facts={facts}>
@@ -158,19 +194,13 @@ export function StatsRecordsPage() {
 
       <Section title="Qualifying">
         <Card title="Most pole positions" subtitle="P1 in a qualifying group" facts={facts}>
-          {(f) => (
-            <Ranking<Tally>
-              rows={f.poles}
-              driver={(t) => t.driver}
-              value={(t) => t.count}
-              empty="No qualifying sessions yet."
-            />
-          )}
+          {(f) => <Ranking rows={f.poles} empty="No qualifying sessions yet." />}
         </Card>
 
         <Card title="Pole to win" subtitle="How the pole sitter finished the race" facts={facts}>
           {(f) => {
-            if (f.poleConversions.length === 0) return <p className="text-sm text-gray-500">No qualifying sessions yet.</p>
+            if (f.poleConversions.length === 0)
+              return <p className="text-sm text-gray-500">No qualifying sessions yet.</p>
             const poleWins = f.poleConversions.filter((p) => p.racePosition === 1).length
             return (
               <>

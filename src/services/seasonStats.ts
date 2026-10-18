@@ -19,7 +19,7 @@ export interface BackToBackWin {
   rounds: string[]
 }
 
-export interface FastestLapNoPodium {
+export interface FastestLapRace {
   round: string
   group: string
   driver: string
@@ -67,7 +67,9 @@ export interface SeasonStats {
   distinctWinners: number
   backToBackWins: BackToBackWin[]
   fastestLaps: Tally[]
-  fastestLapNoPodium: FastestLapNoPodium[]
+  // Every race's fastest lap in date order
+  fastestLapRaces: FastestLapRace[]
+  fastestLapNoPodium: FastestLapRace[]
   pace: PaceEntry[]
   consistency: PaceEntry[]
   improvement: ImprovementEntry[]
@@ -126,7 +128,7 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
   const wins = new Map<string, number>()
   const podiums = new Map<string, number>()
   const fastestLaps = new Map<string, number>()
-  const fastestLapNoPodium: FastestLapNoPodium[] = []
+  const fastestLapRaces: FastestLapRace[] = []
   const winnersByRound: Array<{ round: string; winners: Set<string> }> = []
   // driver -> chronological list of gaps (%) to the round's fastest race lap
   const gapsByDriver = new Map<string, number[]>()
@@ -154,15 +156,13 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
       const fastest = fastestDriver(race.entries)
       if (fastest) {
         increment(fastestLaps, fastest.driver)
-        if (fastest.position > 3) {
-          fastestLapNoPodium.push({
-            round: event.label,
-            group: race.group,
-            driver: fastest.driver,
-            position: fastest.position,
-            bestLap: fastest.bestLap,
-          })
-        }
+        fastestLapRaces.push({
+          round: event.label,
+          group: race.group,
+          driver: fastest.driver,
+          position: fastest.position,
+          bestLap: fastest.bestLap,
+        })
       }
     }
     winnersByRound.push({ round: event.label, winners: roundWinners })
@@ -248,7 +248,8 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
     distinctWinners: allWinners.size,
     backToBackWins,
     fastestLaps: toTallies(fastestLaps),
-    fastestLapNoPodium,
+    fastestLapRaces,
+    fastestLapNoPodium: fastestLapRaces.filter((x) => x.position > 3),
     pace: [...pace].sort((x, y) => x.avgGapPct - y.avgGapPct),
     consistency: [...pace].sort((x, y) => x.stdDevPct - y.stdDevPct),
     improvement,

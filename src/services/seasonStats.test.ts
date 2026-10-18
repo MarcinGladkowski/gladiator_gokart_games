@@ -121,6 +121,10 @@ describe('computeSeasonStats', () => {
     )
 
     expect(facts.fastestLaps).toEqual([{ driver: 'Dan', count: 1 }, { driver: 'Eve', count: 1 }])
+    expect(facts.fastestLapRaces).toEqual([
+      { round: 'Race 1', group: 'a', driver: 'Dan', position: 4, bestLap: '1:10.100' },
+      { round: 'Race 1', group: 'b', driver: 'Eve', position: 1, bestLap: '1:11.000' },
+    ])
     expect(facts.fastestLapNoPodium).toEqual([
       { round: 'Race 1', group: 'a', driver: 'Dan', position: 4, bestLap: '1:10.100' },
     ])

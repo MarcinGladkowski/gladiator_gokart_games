@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import type { TotalResultEntry } from '../../types'
 import { DriverFilter } from '../filters/DriverFilter'
 import { useDriverFilter } from '../../hooks/useDriverFilter'
+import { DriverLink } from '../links/DriverLink'
 
 type SortKey = 'position' | 'nickname' | 'score' | 'entriesCount'
 type SortDir = 'asc' | 'desc'
@@ -98,7 +99,7 @@ export function TotalResultsTable({ entries }: Props) {
                   className="border-t border-gray-700 hover:bg-gray-800/50 transition-colors"
                 >
                   <td className={`px-4 py-3 text-right font-bold ${color}`}>{entry.position}</td>
-                  <td className={`px-4 py-3 font-medium uppercase ${color}`}>{entry.nickname}</td>
+                  <td className={`px-4 py-3 font-medium uppercase ${color}`}><DriverLink name={entry.nickname} /></td>
                   <td className="px-4 py-3 text-right text-green-400">{(entry.score * 100).toFixed(1)}%</td>
                   <td className="px-4 py-3 text-right text-gray-300">{entry.entriesCount}</td>
                   {raceDates.map((d) => {

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useSeasons, useGeneralClassification } from '../hooks/useResults'
 import type { RaceEvent, Season } from '../types'
 import { RegistrationCountdown } from '../components/RegistrationCountdown'
+import { DriverLink } from '../components/links/DriverLink'
 
 type EventWithYear = { event: RaceEvent; year: number }
 
@@ -84,7 +85,7 @@ export function HomePage() {
                 return (
                   <tr key={entry.driver} className="border-t border-gray-700 first:border-t-0">
                     <td className={`px-4 py-2 text-right font-bold w-8 ${podiumColor}`}>{entry.position}</td>
-                    <td className={`px-4 py-2 font-medium uppercase ${podiumColor}`}>{entry.driver}</td>
+                    <td className={`px-4 py-2 font-medium uppercase ${podiumColor}`}><DriverLink name={entry.driver} /></td>
                     <td className="px-4 py-2 text-right text-green-400 font-bold">{entry.totalPoints}</td>
                   </tr>
                 )

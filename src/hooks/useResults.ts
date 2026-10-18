@@ -29,6 +29,19 @@ export function useSessionsByType(
   return [...sessions].sort((a, b) => a.group.localeCompare(b.group))
 }
 
+// Everyone who appears in any session of any season
+export function useDriverNames(): string[] {
+  const names = new Set<string>()
+  for (const season of data.seasons) {
+    for (const event of season.events) {
+      for (const session of event.sessions) {
+        for (const entry of session.entries) names.add(entry.driver)
+      }
+    }
+  }
+  return [...names]
+}
+
 export function useTotalResults(): TotalResultEntry[] {
   return totalResultsData as TotalResultEntry[]
 }

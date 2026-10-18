@@ -111,7 +111,7 @@ function qualiSessions(event: RaceEvent, group: GroupFilter) {
 }
 
 // Same rule as the season classification: first driver in result order with the lowest best lap
-function fastestDriver(entries: RaceEntry[]): RaceEntry | undefined {
+export function fastestDriver(entries: RaceEntry[]): RaceEntry | undefined {
   let fastest: RaceEntry | undefined
   for (const entry of entries) {
     if (!fastest || parseLapTimeToMs(entry.bestLap) < parseLapTimeToMs(fastest.bestLap)) fastest = entry

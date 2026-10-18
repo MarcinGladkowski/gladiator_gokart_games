@@ -1,6 +1,7 @@
 import type { QualificationEntry } from '../../types'
 import { DriverFilter } from '../filters/DriverFilter'
 import { useDriverFilter } from '../../hooks/useDriverFilter'
+import { DriverLink } from '../links/DriverLink'
 
 const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
 
@@ -36,7 +37,7 @@ export function QualificationsTable({ entries }: Props) {
                 >
                   <td className={`px-4 py-3 text-right font-bold ${color}`}>{entry.position}</td>
                   <td className="px-4 py-3 text-right text-gray-400">{entry.kartNumber}</td>
-                  <td className={`px-4 py-3 font-medium uppercase ${color}`}>{entry.driver}</td>
+                  <td className={`px-4 py-3 font-medium uppercase ${color}`}><DriverLink name={entry.driver} /></td>
                   <td className="px-4 py-3 text-right font-mono text-green-400">{entry.bestLap}</td>
                   <td className="px-4 py-3 text-right text-gray-400 font-mono">{entry.gap ?? '—'}</td>
                   <td className="px-4 py-3 text-right font-mono text-gray-300">{entry.avgLap}</td>

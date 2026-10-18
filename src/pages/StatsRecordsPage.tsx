@@ -2,6 +2,7 @@ import { useMemo, type ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSeason } from '../hooks/useResults'
 import { computeSeasonStats, type SeasonStats, type GroupFilter, type Tally } from '../services/seasonStats'
+import { DriverLink } from '../components/links/DriverLink'
 
 const TOP_N = 5
 const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
@@ -83,7 +84,9 @@ function Ranking({
           <li key={t.driver}>
             <div className="flex items-center gap-3">
               {rankCell(rankOf(t.count))}
-              <span className="text-gray-200">{t.driver}</span>
+              <span className="text-gray-200">
+                <DriverLink name={t.driver} />
+              </span>
               <span className="ml-auto font-mono text-green-400">{t.count}</span>
             </div>
             {detail && <div className="ml-8 text-xs text-gray-500">{detail(t.driver)}</div>}
@@ -176,7 +179,7 @@ export function StatsRecordsPage() {
                 <ul className="space-y-1 text-sm">
                   {f.backToBackWins.map((b) => (
                     <li key={`${b.driver}-${b.rounds[0]}`} className="text-gray-200">
-                      {b.driver} <span className="text-gray-500">· {b.rounds.join(', ')}</span>
+                      <DriverLink name={b.driver} /> <span className="text-gray-500">· {b.rounds.join(', ')}</span>
                     </li>
                   ))}
                 </ul>
@@ -206,7 +209,9 @@ export function StatsRecordsPage() {
               <ul className="space-y-1 text-sm">
                 {f.fastestLapNoPodium.map((x) => (
                   <li key={`${x.round}-${x.group}`} className="flex gap-2">
-                    <span className="text-gray-200">{x.driver}</span>
+                    <span className="text-gray-200">
+                      <DriverLink name={x.driver} />
+                    </span>
                     <span className="text-gray-500">
                       {x.round.split(' - ')[0]} · {x.group.toUpperCase()} · P{x.position}
                     </span>
@@ -241,7 +246,9 @@ export function StatsRecordsPage() {
                       <span className="text-gray-500">
                         {p.round.split(' - ')[0]} · Q{p.qualiGroup.toUpperCase()}
                       </span>
-                      <span className="text-gray-200">{p.driver}</span>
+                      <span className="text-gray-200">
+                        <DriverLink name={p.driver} />
+                      </span>
                       <span
                         className={`ml-auto font-mono ${p.racePosition === 1 ? 'text-yellow-400' : 'text-gray-400'}`}
                       >

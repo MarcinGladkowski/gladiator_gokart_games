@@ -7,6 +7,7 @@ import { RaceDatePage } from './pages/RaceDatePage'
 import { SessionTypePage } from './pages/SessionTypePage'
 import { GeneralClassificationPage } from './pages/GeneralClassificationPage'
 import { StatsRecordsPage } from './pages/StatsRecordsPage'
+import { DriverPage } from './pages/DriverPage'
 
 export function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export function AppRouter() {
         <Route element={<AppShell />}>
           <Route index element={<HomePage />} />
           <Route path="total" element={<TotalResultsPage />} />
+          <Route path="driver/:name" element={<DriverPage />} />
           <Route path="season/:year" element={<SeasonPage />} />
           <Route path="season/:year/classification" element={<GeneralClassificationPage />} />
           <Route path="season/:year/stats" element={<StatsRecordsPage />} />

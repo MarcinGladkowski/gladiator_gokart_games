@@ -5,7 +5,6 @@ import { computeSeasonStats, type SeasonStats, type GroupFilter, type Tally } fr
 import { DriverLink } from '../components/links/DriverLink'
 
 const TOP_N = 5
-const PODIUM = ['text-yellow-400', 'text-gray-300', 'text-orange-400']
 
 type StatsByGroup = Record<GroupFilter, SeasonStats>
 
@@ -57,7 +56,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 // Ties at the cutoff only get their own rows while the list stays at most this long
 const MAX_ROWS = TOP_N * 2
 
-// Shows the top TOP_N drivers plus anyone tied with the last of them; tied drivers share a position.
+// Shows the top TOP_N drivers plus anyone tied with the last of them.
 // A tie too large to list is collapsed into a single row naming the drivers.
 function Ranking({
   rows,
@@ -72,10 +71,6 @@ function Ranking({
   const cutoff = rows[Math.min(TOP_N, rows.length) - 1].count
   const shown = rows.filter((t) => t.count >= cutoff)
   const collapsed = shown.length > MAX_ROWS ? shown.filter((t) => t.count === cutoff) : []
-  const rankOf = (count: number) => rows.findIndex((r) => r.count === count)
-  const rankCell = (rank: number) => (
-    <span className={`w-5 text-right font-bold ${PODIUM[rank] ?? 'text-gray-500'}`}>{rank + 1}</span>
-  )
   return (
     <ol className="space-y-1 text-sm">
       {shown
@@ -83,23 +78,21 @@ function Ranking({
         .map((t) => (
           <li key={t.driver}>
             <div className="flex items-center gap-3">
-              {rankCell(rankOf(t.count))}
               <span className="text-gray-200">
                 <DriverLink name={t.driver} />
               </span>
               <span className="ml-auto font-mono text-green-400">{t.count}</span>
             </div>
-            {detail && <div className="ml-8 text-xs text-gray-500">{detail(t.driver)}</div>}
+            {detail && <div className="text-xs text-gray-500">{detail(t.driver)}</div>}
           </li>
         ))}
       {collapsed.length > 0 && (
         <li>
           <div className="flex items-center gap-3">
-            {rankCell(rankOf(cutoff))}
             <span className="text-gray-200">{collapsed.length} drivers tied</span>
             <span className="ml-auto font-mono text-green-400">{cutoff}</span>
           </div>
-          <div className="ml-8 text-xs text-gray-500">{collapsed.map((t) => t.driver).join(', ')}</div>
+          <div className="text-xs text-gray-500">{collapsed.map((t) => t.driver).join(', ')}</div>
         </li>
       )}
     </ol>

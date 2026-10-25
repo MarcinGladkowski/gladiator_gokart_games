@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
-import { useSessionsByType } from '../hooks/useResults'
+import { useRaceEvent, useSessionsByType } from '../hooks/useResults'
+import { buildStartingGrid, startPositionsByDriver } from '../services/startingGrid'
 import type { QualificationEntry, RaceEntry } from '../types'
 import { QualificationsTable } from '../components/tables/QualificationsTable'
 import { RaceTable } from '../components/tables/RaceTable'
@@ -12,6 +13,8 @@ export function SessionTypePage() {
   }>()
 
   const sessions = useSessionsByType(Number(year), date ?? '', type ?? '')
+  const event = useRaceEvent(Number(year), date ?? '')
+  const grid = event ? buildStartingGrid(event.sessions) : null
 
   if (sessions.length === 0) {
     return <p className="text-gray-500">Session not found.</p>
@@ -45,7 +48,10 @@ export function SessionTypePage() {
             {session.type === 'qualifications' ? (
               <QualificationsTable entries={session.entries as QualificationEntry[]} />
             ) : (
-              <RaceTable entries={session.entries as RaceEntry[]} />
+              <RaceTable
+                entries={session.entries as RaceEntry[]}
+                startPositions={grid ? startPositionsByDriver(session.group.toLowerCase() === 'a' ? grid.a : grid.b) : undefined}
+              />
             )}
           </div>
         ))}

@@ -43,3 +43,13 @@ export function buildStartingGrid(sessions: Session[], groupSize = RACE_GROUP_SI
     b: toSlots(ranked.slice(groupSize)),
   }
 }
+
+// Start position keyed by lowercased driver name, as names may differ in case between sessions
+export function startPositionsByDriver(slots: StartingGridSlot[]): Map<string, number> {
+  return new Map(slots.map((slot) => [slot.driver.toLowerCase(), slot.position]))
+}
+
+// Positive when the driver finished ahead of where they started
+export function positionsGained(startPosition: number, finishPosition: number): number {
+  return startPosition - finishPosition
+}

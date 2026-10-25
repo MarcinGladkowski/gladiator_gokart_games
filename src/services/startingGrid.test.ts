@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildStartingGrid } from './startingGrid'
+import { buildStartingGrid, positionsGained, startPositionsByDriver } from './startingGrid'
 import type { Session } from '../types'
 
 const quali = (group: string, results: Array<[string, string]>): Session => ({
@@ -56,5 +56,27 @@ describe('buildStartingGrid', () => {
 
   it('returns null when the event lacks qualifications for both groups', () => {
     expect(buildStartingGrid([quali('a', [['A1', '1:11.000']])])).toBeNull()
+  })
+})
+
+describe('startPositionsByDriver', () => {
+  it('maps lowercased driver names to start positions', () => {
+    const grid = buildStartingGrid(
+      [quali('a', [['Wilczu', '1:12.000']]), quali('b', [['Kubag', '1:11.000']])],
+      2,
+    )
+
+    const positions = startPositionsByDriver(grid!.a)
+
+    expect(positions.get('kubag')).toBe(1)
+    expect(positions.get('wilczu')).toBe(2)
+  })
+})
+
+describe('positionsGained', () => {
+  it('is positive for gained, negative for lost and zero for held positions', () => {
+    expect(positionsGained(8, 3)).toBe(5)
+    expect(positionsGained(2, 6)).toBe(-4)
+    expect(positionsGained(4, 4)).toBe(0)
   })
 })

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSeasons } from '../../hooks/useResults'
 import statuteUrl from '../../assets/statute.pdf?url'
+import { buildStartingGrid } from '../../services/startingGrid'
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
@@ -140,16 +141,20 @@ export function NavTree({ onNavigate }: { onNavigate?: () => void }) {
 
                       {openDates.has(event.date) && (
                         <div className="ml-4 space-y-0.5">
-                          {(['qualifications', 'race'] as const)
-                            .filter((type) => event.sessions.some((s) => s.type === type))
-                            .map((type) => (
+                          {[
+                            { path: 'qualifications', label: 'Qualifications', show: event.sessions.some((s) => s.type === 'qualifications') },
+                            { path: 'grid', label: 'Starting Grid', show: buildStartingGrid(event.sessions) !== null },
+                            { path: 'race', label: 'Race', show: event.sessions.some((s) => s.type === 'race') },
+                          ]
+                            .filter(({ show }) => show)
+                            .map(({ path, label }) => (
                               <NavLink
-                                key={type}
-                                to={`/season/${season.year}/${event.date}/${type}`}
+                                key={path}
+                                to={`/season/${season.year}/${event.date}/${path}`}
                                 className={linkClass}
                                 onClick={onNavigate}
                               >
-                                {type === 'qualifications' ? 'Qualifications' : 'Race'}
+                                {label}
                               </NavLink>
                             ))}
                         </div>

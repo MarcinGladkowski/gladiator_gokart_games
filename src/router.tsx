@@ -8,6 +8,7 @@ import { SessionTypePage } from './pages/SessionTypePage'
 import { GeneralClassificationPage } from './pages/GeneralClassificationPage'
 import { StatsRecordsPage } from './pages/StatsRecordsPage'
 import { DriverPage } from './pages/DriverPage'
+import { StartingGridPage } from './pages/StartingGridPage'
 
 export function AppRouter() {
   return (
@@ -21,6 +22,7 @@ export function AppRouter() {
           <Route path="season/:year/classification" element={<GeneralClassificationPage />} />
           <Route path="season/:year/stats" element={<StatsRecordsPage />} />
           <Route path="season/:year/:date" element={<RaceDatePage />} />
+          <Route path="season/:year/:date/grid" element={<StartingGridPage />} />
           <Route path="season/:year/:date/:type" element={<SessionTypePage />} />
         </Route>
       </Routes>

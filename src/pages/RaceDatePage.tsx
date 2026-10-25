@@ -10,6 +10,7 @@ import { EnrollmentForm } from '../components/EnrollmentForm'
 import config from '../data/config.json'
 import { RegistrationCountdown } from '../components/RegistrationCountdown'
 import { DriversGridService } from '../services/partitionDrivers'
+import { buildStartingGrid } from '../services/startingGrid'
 import knownDrivers from '../data/drivers.json'
 import type { Driver } from '../types'
 
@@ -251,6 +252,15 @@ if (!event) {
                 </Link>
               )
             })}
+          {buildStartingGrid(event.sessions) && (
+            <Link
+              to={`/season/${year}/${date}/grid`}
+              className="block rounded-lg border border-gray-700 bg-gray-900 p-4 hover:border-red-700 hover:bg-gray-800 transition-colors"
+            >
+              <h2 className="text-lg font-semibold text-gray-100">🏁 Starting Grid</h2>
+              <p className="text-sm text-gray-500 mt-1">Race groups A and B by qualifying lap</p>
+            </Link>
+          )}
         </div>
       )}
     </div>

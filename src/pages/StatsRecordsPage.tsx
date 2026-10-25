@@ -1,7 +1,13 @@
 import { useMemo, type ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSeason } from '../hooks/useResults'
-import { computeSeasonStats, type SeasonStats, type GroupFilter, type Tally } from '../services/seasonStats'
+import {
+  computeSeasonStats,
+  type SeasonStats,
+  type GroupFilter,
+  type Tally,
+  type PositionChange,
+} from '../services/seasonStats'
 import { DriverLink } from '../components/links/DriverLink'
 
 const TOP_N = 5
@@ -62,10 +68,14 @@ function Ranking({
   rows,
   detail,
   empty = 'No data yet.',
+  format = String,
+  valueClassName = 'text-green-400',
 }: {
   rows: Tally[]
   detail?: (driver: string) => ReactNode
   empty?: string
+  format?: (count: number) => string
+  valueClassName?: string
 }) {
   if (rows.length === 0) return <p className="text-sm text-gray-500">{empty}</p>
   const cutoff = rows[Math.min(TOP_N, rows.length) - 1].count
@@ -81,7 +91,7 @@ function Ranking({
               <span className="text-gray-200">
                 <DriverLink name={t.driver} />
               </span>
-              <span className="ml-auto font-mono text-green-400">{t.count}</span>
+              <span className={`ml-auto font-mono ${valueClassName}`}>{format(t.count)}</span>
             </div>
             {detail && <div className="text-xs text-gray-500">{detail(t.driver)}</div>}
           </li>
@@ -90,12 +100,43 @@ function Ranking({
         <li>
           <div className="flex items-center gap-3">
             <span className="text-gray-200">{collapsed.length} drivers tied</span>
-            <span className="ml-auto font-mono text-green-400">{cutoff}</span>
+            <span className={`ml-auto font-mono ${valueClassName}`}>{format(cutoff)}</span>
           </div>
           <div className="text-xs text-gray-500">{collapsed.map((t) => t.driver).join(', ')}</div>
         </li>
       )}
     </ol>
+  )
+}
+
+// "Race 2 ▲5, Race 6 ▲2" for every race where the driver gained (or lost) positions
+function positionChangeRaces(f: SeasonStats, driver: string, gained: boolean) {
+  return f.positionChanges
+    .filter((c) => c.driver === driver && (gained ? c.change > 0 : c.change < 0))
+    .sort((x, y) => x.round.localeCompare(y.round, undefined, { numeric: true }))
+    .map((c) => `${c.round.split(' - ')[0]} ${gained ? '▲' : '▼'}${Math.abs(c.change)}`)
+    .join(', ')
+}
+
+function PositionChangeList({ changes, empty }: { changes: PositionChange[]; empty: string }) {
+  if (changes.length === 0) return <p className="text-sm text-gray-500">{empty}</p>
+  return (
+    <ul className="space-y-1 text-sm">
+      {changes.slice(0, TOP_N).map((c) => (
+        <li key={`${c.round}-${c.group}-${c.driver}`} className="flex gap-2">
+          <span className="text-gray-200">
+            <DriverLink name={c.driver} />
+          </span>
+          <span className="text-gray-500">
+            {c.round.split(' - ')[0]} · P{c.start} → P{c.finish}
+          </span>
+          <span className={`ml-auto font-mono ${c.change > 0 ? 'text-green-400' : 'text-red-500'}`}>
+            {c.change > 0 ? '▲' : '▼'}
+            {Math.abs(c.change)}
+          </span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -216,6 +257,85 @@ export function StatsRecordsPage() {
           }
         </Card>
       </Section>
+
+      {facts.all.positionChanges.length > 0 && (
+        <Section title="Overtakes">
+          <Card
+            title="Total overtakes"
+            subtitle="Pairs of drivers who finished in reverse order of the starting grid — the fewest passes that explain the result"
+            facts={facts}
+            combined
+          >
+            {(f) => (
+              <>
+                <p className="text-3xl font-bold text-white">
+                  {f.overtakes}
+                  <span className="text-base font-normal text-gray-400"> overtakes in {f.overtakesByRace.length} races</span>
+                </p>
+                <p className="mt-1 text-sm text-gray-400">
+                  Group A <span className="font-mono text-gray-200">{facts.a.overtakes}</span>
+                  {' · '}
+                  Group B <span className="font-mono text-gray-200">{facts.b.overtakes}</span>
+                </p>
+                <ul className="mt-4 space-y-1 text-sm">
+                  {[...new Set(f.overtakesByRace.map((r) => r.round))].map((round) => (
+                    <li key={round} className="flex gap-2">
+                      <span className="text-gray-500">{round.split(' - ')[0]}</span>
+                      <span className="ml-auto font-mono text-gray-300">
+                        {f.overtakesByRace
+                          .filter((r) => r.round === round)
+                          .map((r) => `${r.group.toUpperCase()} ${r.count}`)
+                          .join(' · ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </Card>
+
+          <Card title="Most positions gained ▲" subtitle="Season total of places gained from the starting grid" facts={facts}>
+            {(f) => (
+              <Ranking
+                rows={f.positionsGained}
+                format={(n) => `▲${n}`}
+                detail={(driver) => positionChangeRaces(f, driver, true)}
+                empty="Nobody has gained positions yet."
+              />
+            )}
+          </Card>
+
+          <Card title="Most positions lost ▼" subtitle="Season total of places lost from the starting grid" facts={facts}>
+            {(f) => (
+              <Ranking
+                rows={f.positionsLost}
+                format={(n) => `▼${n}`}
+                valueClassName="text-red-500"
+                detail={(driver) => positionChangeRaces(f, driver, false)}
+                empty="Nobody has lost positions yet."
+              />
+            )}
+          </Card>
+
+          <Card title="Biggest climbs" subtitle="Most places gained in a single race" facts={facts}>
+            {(f) => (
+              <PositionChangeList
+                changes={f.positionChanges.filter((c) => c.change > 0)}
+                empty="Nobody has gained positions yet."
+              />
+            )}
+          </Card>
+
+          <Card title="Biggest drops" subtitle="Most places lost in a single race" facts={facts}>
+            {(f) => (
+              <PositionChangeList
+                changes={f.positionChanges.filter((c) => c.change < 0).reverse()}
+                empty="Nobody has lost positions yet."
+              />
+            )}
+          </Card>
+        </Section>
+      )}
 
       <Section title="Qualifying">
         <Card title="Most pole positions" subtitle="P1 in a qualifying group" facts={facts}>

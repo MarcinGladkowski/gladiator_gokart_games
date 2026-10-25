@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { computeSeasonStats } from './seasonStats'
+import { computeSeasonStats, countOvertakes } from './seasonStats'
 import type { RaceEvent, Season, Session } from '../types'
 
 const race = (group: string, results: Array<[string, string]>): Session => ({
@@ -200,11 +200,55 @@ describe('computeSeasonStats', () => {
     expect(facts.closestQualis.map((q) => q.gapMs)).toEqual([19, 50])
   })
 
+  it('compares race finish with the qualifying grid for gains, losses and overtakes', () => {
+    // 14 drivers: the 13 fastest across both qualifying groups start race A, the slowest starts race B
+    const aDrivers = ['Ann', 'Bob', 'Cat', 'Dan', 'Eve', 'Fox', 'Gus']
+    const bDrivers = ['Hal', 'Ivy', 'Jon', 'Kim', 'Lou', 'Max', 'Ned']
+    const lap = (i: number) => `1:10.${String(i * 10).padStart(3, '0')}`
+    const s = season([
+      event(1, [
+        quali('a', aDrivers.map((d, i): [string, string] => [d, lap(i * 2)])),
+        quali('b', bDrivers.map((d, i): [string, string] => [d, lap(i * 2 + 1)])),
+        // grid A: Ann, Hal, Bob, Ivy, ... — Bob (P3) wins, Hal (P2) passed by Bob, Ann loses 2
+        race('a', [['Bob', ''], ['Hal', ''], ['Ann', ''], ...['Ivy', 'Cat', 'Jon', 'Dan', 'Kim', 'Eve', 'Lou', 'Fox', 'Max', 'Gus'].map((d): [string, string] => [d, ''])]),
+        race('b', [['Ned', '']]),
+      ]),
+    ])
+
+    const facts = computeSeasonStats(s)
+    expect(facts.positionChanges[0]).toEqual({ round: 'Race 1', group: 'a', driver: 'Bob', start: 3, finish: 1, change: 2 })
+    expect(facts.positionsGained).toEqual([{ driver: 'Bob', count: 2 }])
+    expect(facts.positionsLost).toEqual([{ driver: 'Ann', count: 2 }])
+    // Bob passed Ann and Hal, Hal passed Ann
+    expect(facts.overtakes).toBe(3)
+    expect(facts.overtakesByRace).toEqual([
+      { round: 'Race 1', group: 'a', count: 3 },
+      { round: 'Race 1', group: 'b', count: 0 },
+    ])
+    expect(facts.positionChanges.find((c) => c.driver === 'Ned')).toMatchObject({ group: 'b', start: 1, finish: 1 })
+    expect(computeSeasonStats(s, 'b').overtakes).toBe(0)
+  })
+
+  it('has no position changes without qualifying for both groups', () => {
+    const facts = computeSeasonStats(season([event(1, [race('a', [['Ann', '1:10.000'], ['Bob', '1:10.100']])])]))
+
+    expect(facts.positionChanges).toEqual([])
+    expect(facts.overtakes).toBe(0)
+  })
+
   it('skips upcoming events', () => {
     const facts = computeSeasonStats(
       season([event(1, [race('a', [['Ann', '1:10.000']])]), event(2, [], true)]),
     )
 
     expect(facts.racesCount).toBe(1)
+  })
+})
+
+describe('countOvertakes', () => {
+  it('counts pairs of drivers who swapped order between start and finish', () => {
+    expect(countOvertakes([{ start: 1, finish: 1 }, { start: 2, finish: 2 }])).toBe(0)
+    // full reversal of 4 drivers needs 6 passes
+    expect(countOvertakes([1, 2, 3, 4].map((start) => ({ start, finish: 5 - start })))).toBe(6)
   })
 })

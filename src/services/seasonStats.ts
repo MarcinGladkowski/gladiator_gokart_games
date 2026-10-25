@@ -1,5 +1,6 @@
 import type { Season, RaceEvent, QualificationEntry, RaceEntry } from '../types'
 import { parseLapTimeToMs } from '../hooks/useResults'
+import { buildStartingGrid, positionsGained, startPositionsByDriver } from './startingGrid'
 
 // Drivers need at least this many rounds to appear in pace / consistency / improvement rankings
 export const MIN_ROUNDS = 4
@@ -66,6 +67,22 @@ export interface ClosestQuali {
   gapMs: number
 }
 
+export interface PositionChange {
+  round: string
+  group: string
+  driver: string
+  start: number
+  finish: number
+  // Positive = positions gained during the race
+  change: number
+}
+
+export interface RaceOvertakes {
+  round: string
+  group: string
+  count: number
+}
+
 export interface SeasonStats {
   racesCount: number
   wins: Tally[]
@@ -84,6 +101,13 @@ export interface SeasonStats {
   poles: Tally[]
   poleConversions: PoleConversion[]
   closestQualis: ClosestQuali[]
+  // Start (qualifying grid) vs finish of every race driver, biggest gain first
+  positionChanges: PositionChange[]
+  // Season sum of positions gained / lost per driver
+  positionsGained: Tally[]
+  positionsLost: Tally[]
+  overtakes: number
+  overtakesByRace: RaceOvertakes[]
 }
 
 function toTallies(counts: Map<string, number>): Tally[] {
@@ -119,6 +143,19 @@ export function fastestDriver(entries: RaceEntry[]): RaceEntry | undefined {
   return fastest
 }
 
+// Pairs of drivers who finished in the reverse order of how they started — each needed at least one
+// pass, so this is the minimum number of overtakes in the race
+export function countOvertakes(drivers: Array<{ start: number; finish: number }>): number {
+  let count = 0
+  for (let i = 0; i < drivers.length; i++) {
+    for (let j = i + 1; j < drivers.length; j++) {
+      const [x, y] = [drivers[i], drivers[j]]
+      if ((x.start - y.start) * (x.finish - y.finish) < 0) count++
+    }
+  }
+  return count
+}
+
 function mean(values: number[]): number {
   return values.reduce((sum, v) => sum + v, 0) / values.length
 }
@@ -144,15 +181,36 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
   const poles = new Map<string, number>()
   const poleConversions: PoleConversion[] = []
   const closestQualis: ClosestQuali[] = []
+  const positionChanges: PositionChange[] = []
+  const gainedByDriver = new Map<string, number>()
+  const lostByDriver = new Map<string, number>()
+  const overtakesByRace: RaceOvertakes[] = []
   let racesCount = 0
 
   for (const event of events) {
     const races = raceSessions(event, group)
     const roundWinners = new Set<string>()
+    const grid = buildStartingGrid(event.sessions)
 
     for (const race of races) {
       if (race.entries.length === 0) continue
       racesCount++
+
+      if (grid) {
+        const startPositions = startPositionsByDriver(race.group === 'a' ? grid.a : grid.b)
+        const changes: PositionChange[] = race.entries.flatMap((entry) => {
+          const start = startPositions.get(entry.driver.toLowerCase())
+          if (start === undefined) return []
+          const change = positionsGained(start, entry.position)
+          return [{ round: event.label, group: race.group, driver: entry.driver, start, finish: entry.position, change }]
+        })
+        for (const c of changes) {
+          if (c.change > 0) gainedByDriver.set(c.driver, (gainedByDriver.get(c.driver) ?? 0) + c.change)
+          if (c.change < 0) lostByDriver.set(c.driver, (lostByDriver.get(c.driver) ?? 0) - c.change)
+        }
+        positionChanges.push(...changes)
+        overtakesByRace.push({ round: event.label, group: race.group, count: countOvertakes(changes) })
+      }
 
       for (const entry of race.entries) {
         if (entry.position === 1) {
@@ -267,5 +325,10 @@ export function computeSeasonStats(season: Season, group: GroupFilter = 'all'): 
     poles: toTallies(poles),
     poleConversions,
     closestQualis: closestQualis.sort((x, y) => x.gapMs - y.gapMs),
+    positionChanges: positionChanges.sort((x, y) => y.change - x.change),
+    positionsGained: toTallies(gainedByDriver),
+    positionsLost: toTallies(lostByDriver),
+    overtakes: overtakesByRace.reduce((sum, r) => sum + r.count, 0),
+    overtakesByRace,
   }
 }
